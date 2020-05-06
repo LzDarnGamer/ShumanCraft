@@ -3,7 +3,18 @@ guid: 9da89872c20697a4db057429656a51df
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - canvas: {fileID: 7960737888414247806, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
+      type: 3}
+  - PV: {instanceID: 0}
+  - cam: {fileID: 1374596839805319218, guid: 422bc07971120d749995962e29dda140, type: 3}
+  - inputSource: {fileID: 7922058828114047516, guid: 9d21f332ac50997428c8cb5436a1ae17,
+      type: 3}
+  - construction: {instanceID: 0}
+  - uiHealth: {instanceID: 0}
+  - uiStamina: {instanceID: 0}
+  - uiHunger: {instanceID: 0}
+  - uiThirst: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

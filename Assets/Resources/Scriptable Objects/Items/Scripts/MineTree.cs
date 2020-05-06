@@ -22,8 +22,11 @@ public class MineTree : MineObject {
             }
         }
         int pos = 0;
-        foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) { 
-            Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, transform.GetChild(randomLocation[pos]));
+        foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) {
+            for (int i = 0; i < entry.Value; i++) {
+                Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, transform.GetChild(randomLocation[pos]));
+            }
+            pos++;
         }
     }
 

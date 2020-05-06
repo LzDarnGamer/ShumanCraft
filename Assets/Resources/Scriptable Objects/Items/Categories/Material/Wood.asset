@@ -17,4 +17,8 @@ MonoBehaviour:
   itemID: 1
   isStackable: 1
   maxStackSize: 64
+  recipeItems: []
+  recipeAmount: 
+  inGameObject: {fileID: 154170532705503552, guid: ad64457bf3b78ea4ba8476b4baa5d8af,
+    type: 3}
   description: The most basic resource in this game, used for almost everything.

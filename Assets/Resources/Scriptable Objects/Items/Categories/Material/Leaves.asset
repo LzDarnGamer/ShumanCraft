@@ -19,4 +19,6 @@ MonoBehaviour:
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
+  inGameObject: {fileID: 1000011675638740, guid: 8f7f1e7839dfa41178cdaacd6cfeb838,
+    type: 3}
   description: Usually drops from trees

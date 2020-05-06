@@ -100,28 +100,28 @@ public class PlayerScript : MonoBehaviour
     void Start() {
         anim = this.gameObject.GetComponent<Animator>();
 
-        if (PV.IsMine) {
+        //if (PV.IsMine) {
             construction = this.gameObject.GetComponent<ConstructionController>();
             construction.SetHotKey(openConstructionkey);
             AddCamera();
-        } else {
-            Destroy(gameObject.GetComponent<ConstructionController>());
-            Destroy(this);
-            DestroyImmediate(canvas, true);
-        }
+       // } else {
+        //    Destroy(gameObject.GetComponent<ConstructionController>());
+        //    Destroy(this);
+        //    DestroyImmediate(canvas, true);
+        //}
     }
 
     void Update() {
-        if (PV.IsMine) {
+        //if (PV.IsMine) {
             if (Input.GetKeyUp(changeConstructionKey)) construction.increaseIndex();
             UIControl();
             Movement();
             Attributes();
             facing = cam.transform.eulerAngles.y;
-        } else if (!PV.IsMine) {
-            Destroy(instCam);
-            Destroy(instSource);
-        }
+        //} else if (!PV.IsMine) {
+        //    Destroy(instCam);
+        //    Destroy(instSource);
+        //}
     }
 
     private void AddCamera() {
