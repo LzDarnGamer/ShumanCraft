@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ed4060f7a302a408d805287a2e9861, type: 3}
+  m_Name: Iron Pickaxe
+  m_EditorClassIdentifier: 
+  icon: {fileID: -2248273014285675650, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  type: 1
+  itemID: 707
+  isStackable: 0
+  maxStackSize: 0
+  recipeItems:
+  - {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
+  - {fileID: 11400000, guid: 589ae03eb7762bb4f8ae363b2479db1d, type: 2}
+  - {fileID: 11400000, guid: 6409eebec7afee0499e78cc4f4634af5, type: 2}
+  recipeAmount: 030000000100000001000000
+  inGameObject: {fileID: 6209813316652310520, guid: 161c9d7ea1edb2e4c87d60a73d711c86,
+    type: 3}
+  description: 
+  durability: 64

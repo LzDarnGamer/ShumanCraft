@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dff3975678d8cc419cb8cfe5804c372, type: 3}
+  m_Name: Stick
+  m_EditorClassIdentifier: 
+  icon: {fileID: 6621252853494989987, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  type: 3
+  itemID: 2
+  isStackable: 1
+  maxStackSize: 64
+  recipeItems: []
+  recipeAmount: 
+  description: Used to craft the most basic tools.
