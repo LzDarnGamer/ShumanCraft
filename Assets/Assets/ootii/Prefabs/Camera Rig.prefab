@@ -172,7 +172,7 @@ MonoBehaviour:
   _AnchorOffset: {x: 0, y: 1.8, z: 0}
   _RotateAnchorOffset: 1
   _InvertPitch: 1
-  _ActiveMotorIndex: 1
+  _ActiveMotorIndex: 2
   MotorTestActivateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -227,14 +227,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   MotorDefinitions:
   - '{, "Type" : "com.ootii.Cameras.OrbitFollowMotor, ootii, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null", "Name" : "3rd Person Follow", "IsEnabled" : "True", "ActionAlias"
+    PublicKeyToken=null", "Name" : "Follow", "IsEnabled" : "True", "ActionAlias"
     : "", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset" : "(0, 0,
     0)", "Offset" : "(0, 0, 0)", "Distance" : "3.00000", "MaxDistance" : "3.00000",
     "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
     : "False", "FadeTransformIndexes" : "", "IsYawEnabled" : "True", "MinYaw" : "-180",
     "MaxYaw" : "180", "YawSpeed" : "120", "TargetRotationMultiplier" : "3", "IsPitchEnabled"
     : "True", "InvertPitch" : "True", "MinPitch" : "-60", "MaxPitch" : "60", "PitchSpeed"
-    : "45", "Smoothing" : "0.1"}'
+    : "45", "Smoothing" : "0.05"}'
   - '{, "Type" : "com.ootii.Cameras.OrbitFixedMotor, ootii, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null", "Name" : "3rd Person Fixed", "IsEnabled" : "True", "ActionAlias"
     : "", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset" : "(0, 0,
@@ -278,7 +278,7 @@ MonoBehaviour:
   StoredTransforms: []
   EditorShowDebug: 0
   EditorTabIndex: 1
-  EditorMotorIndex: 2
+  EditorMotorIndex: 0
   EditorRefresh: 0
   EditorCameraStyle: 1
   EditorUseAdventureStyle: 0

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 154170532705336822}
   - component: {fileID: 154170532702347294}
   - component: {fileID: 154170532703016784}
-  - component: {fileID: 154170532707654962}
   - component: {fileID: 154170532455629324}
+  - component: {fileID: 1588932654949221485}
+  - component: {fileID: 1921047605073525168}
   m_Layer: 0
   m_Name: wood
   m_TagString: Pickupable
@@ -82,19 +83,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &154170532707654962
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 154170532705503552}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.38391253, y: 0.3664305, z: 1.2312313}
-  m_Center: {x: -0.017816544, y: 0.1827126, z: 0}
 --- !u!114 &154170532455629324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +96,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: ae93273d4c2a41b4c803b9df5c506971, type: 2}
+--- !u!54 &1588932654949221485
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154170532705503552}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &1921047605073525168
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154170532705503552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: b3a43e74877f74a45a2bda11c946081f, type: 3}

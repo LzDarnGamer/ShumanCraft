@@ -10,6 +10,14 @@ public class MineTree : MineObject {
     [SerializeField]
     float maxTimeToRespawn;
 
+    
+    AudioSource aud;
+
+
+    private void Start() {
+        aud = GetComponent<AudioSource>();
+    }
+
     protected override void dropItems() {
         int[] randomLocation = new int[LootTable.TreeLootTable().Count];
         for (int i = 0; i < randomLocation.Length; i++) {
@@ -24,7 +32,9 @@ public class MineTree : MineObject {
         int pos = 0;
         foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) {
             for (int i = 0; i < entry.Value; i++) {
-                Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, transform.GetChild(randomLocation[pos]));
+                Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, 
+                    transform.GetChild(randomLocation[pos]).transform.position,
+                    Quaternion.identity);
             }
             pos++;
         }
@@ -37,21 +47,25 @@ public class MineTree : MineObject {
             switch (to.item.itemID) {
                 case 701:
                     if (CheckIfAliveAfterHit(1)) {
-                    RespawnCountDown(rt, gameObject);
+                        dropItems();
+                        RespawnCountDown(rt, gameObject);
                 }
                     break;
                 case 702:
                     if (CheckIfAliveAfterHit(2)) {
-                    RespawnCountDown(rt, gameObject);
+                        dropItems();
+                        RespawnCountDown(rt, gameObject);
                 }
                     break;
                 case 703:
                     if (CheckIfAliveAfterHit(3)) {
+                        dropItems();
                         RespawnCountDown(rt, gameObject);
                     }
                     break;
                 case 704:
                     if (CheckIfAliveAfterHit(4)) {
+                        dropItems();
                         RespawnCountDown(rt, gameObject);
                     }
                 break;

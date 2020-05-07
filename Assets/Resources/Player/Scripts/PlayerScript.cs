@@ -6,6 +6,7 @@ using Photon.Pun;
 using com.ootii.Cameras;
 using com.ootii.Input;
 using UnityEngine.TextCore;
+using System;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     private GameObject instCam, instSource;
 
     public ConstructionController construction;
+
+    public Interact interact;
 
     [Header("Movimentos")]
     private float x, y;
@@ -96,32 +99,48 @@ public class PlayerScript : MonoBehaviour
     private Image uiHunger;
     [SerializeField]
     private Image uiThirst;
-
+    [SerializeField]
+    private bool isOnline = false;
     void Start() {
-        anim = this.gameObject.GetComponent<Animator>();
-
-        //if (PV.IsMine) {
-            construction = this.gameObject.GetComponent<ConstructionController>();
+        anim = gameObject.GetComponent<Animator>();
+        if (isOnline) {
+            if (PV.IsMine) {
+                construction = gameObject.GetComponent<ConstructionController>();
+                construction.SetHotKey(openConstructionkey);
+                AddCamera();
+            } else {
+                Destroy(gameObject.GetComponent<ConstructionController>());
+                Destroy(canvas);
+                Destroy(gameObject.GetComponent<Interact>());
+                Destroy(this);
+            }
+        } else {
+            construction = gameObject.GetComponent<ConstructionController>();
             construction.SetHotKey(openConstructionkey);
             AddCamera();
-       // } else {
-        //    Destroy(gameObject.GetComponent<ConstructionController>());
-        //    Destroy(this);
-        //    DestroyImmediate(canvas, true);
-        //}
+        }
     }
 
     void Update() {
-        //if (PV.IsMine) {
+        if (isOnline) {
+            if (PV.IsMine) {
+                if (Input.GetKeyUp(changeConstructionKey)) construction.increaseIndex();
+                UIControl();
+                Movement();
+                Attributes();
+                facing = cam.transform.eulerAngles.y;
+            } else if (!PV.IsMine) {
+                Destroy(instCam);
+                Destroy(instSource);
+            }
+        } else {
+            facing = cam.transform.eulerAngles.y;
+            if (isCamFixed) { transform.eulerAngles = new Vector3(0, facing, 0); };
             if (Input.GetKeyUp(changeConstructionKey)) construction.increaseIndex();
             UIControl();
             Movement();
             Attributes();
-            facing = cam.transform.eulerAngles.y;
-        //} else if (!PV.IsMine) {
-        //    Destroy(instCam);
-        //    Destroy(instSource);
-        //}
+        }
     }
 
     private void AddCamera() {

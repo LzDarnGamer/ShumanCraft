@@ -3699,8 +3699,8 @@ MonoBehaviour:
   cancelButton: {fileID: 4462596263229679189}
   createButton: {fileID: 0}
   joinButton: {fileID: 0}
-  joinUI: {fileID: 1418473866}
-  content: {fileID: 1504396902}
+  joinUI: {fileID: 0}
+  content: {fileID: 0}
   roomObj: {fileID: 5206216310591333117, guid: e0767dcf5c887504e9bf6c161dad513e, type: 3}
   connectText: {fileID: 4462596263169839139}
 --- !u!1 &4462596263704890563

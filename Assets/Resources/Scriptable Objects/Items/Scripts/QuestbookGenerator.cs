@@ -122,7 +122,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(4).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = waterRestore;
         newObj.transform.GetChild(5).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = healthRestore;
 
-        newObj.transform.parent = contentFood;
+        newObj.transform.SetParent(contentFood);
     }
 
     private void fillMaterialInfo(GameObject obj, string name, string itemID, string description, Sprite icon) {
@@ -133,7 +133,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(1).gameObject.GetComponent<TMPro.TMP_Text>().text = name;
         newObj.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = icon;
 
-        newObj.transform.parent = contentMaterial;
+        newObj.transform.SetParent(contentMaterial);
     }
 
     private void fillToolInfo(GameObject obj, string name, string itemID, string durability,string description, Sprite icon) {
@@ -145,7 +145,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = icon;
         newObj.transform.GetChild(5).gameObject.GetComponent<TMPro.TMP_Text>().text = durability;
 
-        newObj.transform.parent = contentTool;
+        newObj.transform.SetParent(contentTool);
     }
     private void fillWeaponInfo(GameObject obj, string name, string itemID, string durability, string damage, string description, Sprite icon) {
         GameObject newObj = Instantiate(obj);
@@ -156,7 +156,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(3).gameObject.GetComponent<TMPro.TMP_Text>().text = durability;
         newObj.transform.GetChild(4).gameObject.GetComponent<TMPro.TMP_Text>().text = damage;
 
-        newObj.transform.parent = contentWeapon;
+        newObj.transform.SetParent(contentWeapon);
     }
 
     private void fillCreaftingInfo(GameObject obj, string name, string description, 
@@ -175,11 +175,11 @@ public class QuestbookGenerator : MonoBehaviour
             item.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = recipeItem[i].icon;
             item.transform.GetChild(2).gameObject.GetComponent<TMPro.TMP_Text>().text = amountItem[i].ToString();
             item.transform.GetChild(3).gameObject.GetComponent<TMPro.TMP_Text>().text = "#"+ recipeItem[i].itemID.ToString();
-            item.transform.parent = Recipe.transform;
+            item.transform.SetParent(Recipe.transform);
         }
         newObj.transform.GetChild(4).gameObject.GetComponent<Button>().interactable = false;
         newObj.transform.GetChild(5).name = itemID.ToString();
         Destroy(Item);
-        newObj.transform.parent = contentCraftings;
+        newObj.transform.SetParent(contentCraftings);
     }
 }
