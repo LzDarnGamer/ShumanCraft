@@ -172,7 +172,7 @@ MonoBehaviour:
   _AnchorOffset: {x: 0, y: 1.8, z: 0}
   _RotateAnchorOffset: 1
   _InvertPitch: 1
-  _ActiveMotorIndex: 2
+  _ActiveMotorIndex: 1
   MotorTestActivateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -278,7 +278,7 @@ MonoBehaviour:
   StoredTransforms: []
   EditorShowDebug: 0
   EditorTabIndex: 1
-  EditorMotorIndex: 0
+  EditorMotorIndex: 1
   EditorRefresh: 0
   EditorCameraStyle: 1
   EditorUseAdventureStyle: 0

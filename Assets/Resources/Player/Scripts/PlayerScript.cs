@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private GameObject cam;
     [SerializeField]
-    private bool isCamFixed;
+    private bool isCamFixed = true;
     private float facing;
     [SerializeField]
     private GameObject inputSource;
@@ -100,7 +100,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private Image uiThirst;
     [SerializeField]
-    private bool isOnline = false;
+    private bool isOnline = true;
     void Start() {
         anim = gameObject.GetComponent<Animator>();
         if (isOnline) {
@@ -121,14 +121,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void Update() {
+    void FixedUpdate() {
         if (isOnline) {
             if (PV.IsMine) {
+                if (instCam != null && isCamFixed) {
+                    facing = instCam.transform.eulerAngles.y;
+                    Debug.Log("ROTATING PLAYER: " + facing);
+                    transform.eulerAngles = new Vector3(0, facing, 0);
+                }
                 if (Input.GetKeyUp(changeConstructionKey)) construction.increaseIndex();
                 UIControl();
                 Movement();
                 Attributes();
-                facing = cam.transform.eulerAngles.y;
+                
             } else if (!PV.IsMine) {
                 Destroy(instCam);
                 Destroy(instSource);
@@ -147,10 +152,16 @@ public class PlayerScript : MonoBehaviour
         instCam = Instantiate(cam, this.gameObject.transform);
         instSource = Instantiate(inputSource, this.gameObject.transform);
 
-       // if (isCamFixed) gameObject.transform.eulerAngles = new Vector3( 0,facing, 0);
+        if (isCamFixed) gameObject.transform.eulerAngles = new Vector3( 0,facing, 0);
         CameraController controller = instCam.GetComponent<CameraController>();
+
         controller.Anchor = this.gameObject.transform;
         controller.InputSource = instSource.GetComponent<IInputSource>();
+
+        CameraMotor motor = controller.GetMotor("Targeting");
+        motor.UseRigAnchor = false;
+        motor.Anchor = gameObject.transform;
+        motor.AnchorOffset = new Vector3(0.0f, 1.3f, 0.0f);
     }
 
     public Camera getCamera() { return this.cam.GetComponentInChildren<Camera>(); }
@@ -185,14 +196,15 @@ public class PlayerScript : MonoBehaviour
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) this.isCrouched = !isCrouched;
 
-        this.x = Input.GetAxis("Horizontal");
-        this.y = Input.GetAxis("Vertical");
+        x = Input.GetAxis("Horizontal");
+        y = Input.GetAxis("Vertical");
+
 
         if (isWalking) {
             float newX = (float)(this.x * .5);
             float newY = (float)(this.y * .5);
-            this.x = newX;
-            this.y = newY;
+            x = newX;
+            y = newY;
         }
 
         // Set animator variables
@@ -209,7 +221,7 @@ public class PlayerScript : MonoBehaviour
         uiThirst.fillAmount = thirst / 100.0f;
     }
 
-    public void addHealth(float amount) { health += amount;}
+    public void addHealth(float amount) {health += amount;}
     public void addThirst(float amount) {thirst += amount;}
     public void addHunger(float amount) {hunger += amount;}
 
