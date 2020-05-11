@@ -190,7 +190,7 @@ MonoBehaviour:
   _CollisionRadius: 0.2
   _MinCollisionDistance: 0
   _CollisionRecoverySpeed: 5
-  _IsZoomEnabled: 1
+  _IsZoomEnabled: 0
   _ZoomActionAlias: Camera Zoom
   _ZoomResetOnRelease: 1
   _ZoomSpeed: 25

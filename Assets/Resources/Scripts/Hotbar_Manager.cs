@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,9 +41,7 @@ public class Hotbar_Manager : MonoBehaviour
         
     }
 
-    
     void Update() {
-        
         for (int i = 0; i < keyCodes.Length; i++) {
             if (Input.GetKeyDown(keyCodes[i])) {
                 if (i == 0) {
@@ -71,7 +70,7 @@ public class Hotbar_Manager : MonoBehaviour
             }
             hotbarslots[scrollPosition].transform.GetComponent<Image>().color = selectedColor;
         }
-
-        
     }
+
+    public int getIndex() { return scrollPosition; }
 }

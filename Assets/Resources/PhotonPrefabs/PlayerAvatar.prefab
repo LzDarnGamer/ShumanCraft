@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da89872c20697a4db057429656a51df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 874c695d1a43a924b89cb7d8f52770c6, type: 2}
   canvas: {fileID: 7960737888414247806, guid: 79f322fea8d1ab04fa44c7bc9fc8afec, type: 3}
   PV: {fileID: 4032757154349765184}
   cam: {fileID: 1374596839805319218, guid: 422bc07971120d749995962e29dda140, type: 3}
@@ -413,6 +414,7 @@ MonoBehaviour:
   openInventoryKey: 101
   openConstructionkey: 114
   changeConstructionKey: 116
+  useKey: 323
   uiHealth: {fileID: 1752333367499875725}
   uiStamina: {fileID: 1752333366647007164}
   uiHunger: {fileID: 1752333366472533078}
@@ -509,9 +511,14 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: CatchGround
+  - Type: 9
+    SynchronizeType: 0
+    Name: Use
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
 --- !u!1 &1978832534163065935
 GameObject:
   m_ObjectHideFlags: 0
