@@ -28,7 +28,7 @@ public class AchivementList : MonoBehaviour
     Sprite ach10;
 
 
-    public static List<Achivement> AchivementsList;
+    public static List<Achivement> AchivementsList = new List<Achivement>();
     private void Start() {
         AchivementsList.Add(
             new Achivement(
@@ -37,5 +37,26 @@ public class AchivementList : MonoBehaviour
                 new Dictionary<int, int>(){ { ItemsIndex.getItem(1).itemID, 20 } },
                 ach0
                 ));
+        AchivementsList.Add(
+      new Achivement(
+          "Collect Wood",
+          "Break trees to get wood",
+          new Dictionary<int, int>() { { ItemsIndex.getItem(1).itemID, 20 } },
+          ach0
+          ));
+        AchivementsList.Add(
+      new Achivement(
+          "Collect Wood",
+          "Break trees to get wood",
+          new Dictionary<int, int>() { { ItemsIndex.getItem(1).itemID, 20 } },
+          ach0
+          ));
+        AchivementsList.Add(
+      new Achivement(
+          "Collect Wood",
+          "Break trees to get wood",
+          new Dictionary<int, int>() { { ItemsIndex.getItem(1).itemID, 20 } },
+          ach0
+          ));
     }
 }
