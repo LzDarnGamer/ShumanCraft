@@ -8,6 +8,9 @@ public class UIManager : MonoBehaviour {
         KeyCode.Tab,
         KeyCode.Escape
     };
+
+    private KeyCode currentActive = KeyCode.Pipe;
+
     private bool isMouseActive;
     private bool isEscActive;
     private bool isQuestActive;
@@ -36,7 +39,9 @@ public class UIManager : MonoBehaviour {
                 isMouseActive = true;
                 BackgroundPanel.SetActive(true);
 
-                if (Input.GetKey(KeyCode.Escape)) {
+                if (Input.GetKey(KeyCode.Escape) && 
+                    (currentActive == KeyCode.Pipe || currentActive == KeyCode.Escape )) {
+                    currentActive = KeyCode.Escape;
                     isEscActive = !isEscActive;
                     if (isEscActive) {
                         EscPanel.SetActive(true);
@@ -45,9 +50,12 @@ public class UIManager : MonoBehaviour {
                         EscPanel.SetActive(false);
                         BackgroundPanel.SetActive(false);
                         isMouseActive = false;
+                        currentActive = KeyCode.Pipe;
                     }
                 }
-                if (Input.GetKey(KeyCode.E)) {
+                if (Input.GetKey(KeyCode.E) &&
+                    (currentActive == KeyCode.Pipe || currentActive == KeyCode.E)) {
+                    currentActive = KeyCode.E;
                     isInvEActive = !isInvEActive;
                     if (isInvEActive) {
                         InvPanel.SetActive(true);
@@ -56,9 +64,12 @@ public class UIManager : MonoBehaviour {
                         InvPanel.SetActive(false);
                         BackgroundPanel.SetActive(false);
                         isMouseActive = false;
+                        currentActive = KeyCode.Pipe;
                     }
                 }
-                if (Input.GetKey(KeyCode.Tab)) {
+                if (Input.GetKey(KeyCode.Tab) &&
+                    (currentActive == KeyCode.Pipe || currentActive == KeyCode.Tab)) {
+                    currentActive = KeyCode.Tab;
                     isQuestActive = !isQuestActive;
                     if (isQuestActive) {
                         QuestPanel.SetActive(true);
@@ -67,6 +78,7 @@ public class UIManager : MonoBehaviour {
                         QuestPanel.SetActive(false);
                         BackgroundPanel.SetActive(false);
                         isMouseActive = false;
+                        currentActive = KeyCode.Pipe;
                     }
                 }
             }
@@ -77,4 +89,5 @@ public class UIManager : MonoBehaviour {
             Cursor.visible = true;
         }
     }
+
 }

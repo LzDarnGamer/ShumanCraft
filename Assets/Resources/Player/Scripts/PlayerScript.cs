@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Hotbar_Manager hotbarManager;
     [SerializeField] private GameObject objectInHand;
     [SerializeField] private GameObject playerHand;
+    [SerializeField] private DisplayInventory displayInventory;
 
     [Header("Movimentos")]
     private float x, y;
@@ -71,7 +72,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiStamina;
     [SerializeField] private Image uiHunger;
     [SerializeField] private Image uiThirst;
-    [SerializeField] private bool isOnline = true;
+    [SerializeField] private bool isOnline = false;
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
@@ -209,6 +210,40 @@ public class PlayerScript : MonoBehaviour {
         uiHunger.fillAmount = hunger / 100.0f;
         uiThirst.fillAmount = thirst / 100.0f;
     }
+
+    private void PickUpItem() {
+        if (Input.anyKeyDown) {
+            if (Input.GetKeyDown(KeyCode.Mouse1)) {
+                if (Eat()) {
+                    displayInventory.UpdateDisplay();
+                } else if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray
+                     , 4)) {
+                    GameObject hitObj = ray.transform.gameObject;
+                    if (hitObj.CompareTag("Pickupable")) {
+                        if (displayInventory.PickupItem(ray.transform.GetComponent<Item>().item, 1))
+                            Destroy(hitObj);
+                    }
+
+                }
+            }
+
+        }
+    }
+
+    public bool Eat() {
+        if (inventory.getHotbar()[hotbarManager.scrollPosition].item != null && typeof(FoodObject).IsInstanceOfType
+              (inventory.getHotbar()[hotbarManager.scrollPosition].item)) {
+            FoodObject Foodobj = (FoodObject)inventory.getHotbar()[hotbarManager.scrollPosition].item;
+            addHealth(Foodobj.healthRestore);
+            addHunger(Foodobj.hungerRestore);
+            addThirst(Foodobj.thirstRestore);
+            inventory.getHotbar()[hotbarManager.scrollPosition].RemoveAmount(1);
+            Debug.Log("HERE");
+            return true;
+        }
+        return false;
+    }
+
 
     public void addHealth(float amount) {health += amount;}
     public void addThirst(float amount) {thirst += amount;}
