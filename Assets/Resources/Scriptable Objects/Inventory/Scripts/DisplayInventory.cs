@@ -3,14 +3,10 @@ using UnityEngine.UI;
 using System;
 
 public class DisplayInventory : MonoBehaviour {
-    [SerializeField]
-    MatrixInventory AbstractInventory;
-
-    [SerializeField]
-    GameObject inventorySlots;
-
-    [SerializeField]
-    GameObject hotbar;
+    [SerializeField] MatrixInventory AbstractInventory;
+    [SerializeField] GameObject inventorySlots;
+    [SerializeField] GameObject hotbarSlots;
+    [SerializeField] GameObject amountPanel;
 
     private FBConnector[][] RealInventory;
 
@@ -23,7 +19,7 @@ public class DisplayInventory : MonoBehaviour {
 
 
         for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
-            RealInventory[0][i] = new FBConnector(hotbar.transform.GetChild(i).gameObject, 
+            RealInventory[0][i] = new FBConnector(hotbarSlots.transform.GetChild(i).gameObject, 
                 AbstractInventory.getHotbar()[i]);
         }
         for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
@@ -51,21 +47,29 @@ public class DisplayInventory : MonoBehaviour {
         ReloadTextures();
 
         for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
-            if (RealInventory[0][i].ArraySlot.item != null)
+            if (RealInventory[0][i].ArraySlot.item != null) {
                 RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = AbstractInventory.getHotbar()[i].item.icon;
+                LoadAmount(i, AbstractInventory.getHotbar());
+            }
         }
 
         for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
             if (RealInventory[1][i].ArraySlot.item != null)
                 RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = AbstractInventory.getInventory()[i].item.icon;
+            LoadAmount(i, AbstractInventory.getInventory());
         }
 
 
  
     }
 
+    private void LoadAmount(int position, InventorySlot[] type) {
+        int amount = type[position].amount;
+        amountPanel.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
+        amountPanel.transform.SetParent(RealInventory[0][position].InGameSlot.transform);
+    }
 
     public void UpdatePostion(int PosOld, int PosNew) {
         if (PosOld < 10 && PosNew < 10) {

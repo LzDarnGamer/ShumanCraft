@@ -61,6 +61,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _InputSourceOwner: {fileID: 7922058828114047516}
   _AutoFindInputSource: 1
-  _IsCursorVisible: 1
+  _IsCursorVisible: 0
   _ShowCursorAlias: Cursor
   _EditorPauseAlias: 

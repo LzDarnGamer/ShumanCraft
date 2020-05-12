@@ -708,6 +708,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 470011025235362741, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: hotbarSlots
+      value: 
+      objectReference: {fileID: 1131187642}
     - target: {fileID: 470011025347429429, guid: 1eec842159614eb4ca5a8605a0f4eef3,
         type: 3}
       propertyPath: m_IsActive
@@ -1933,6 +1938,31 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1294836166715392432, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294836166715392432, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294836166715392432, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294836166715392432, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294836166715392432, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1942269284501022414, guid: 1eec842159614eb4ca5a8605a0f4eef3,
         type: 3}
       propertyPath: m_Enabled
@@ -1946,7 +1976,7 @@ PrefabInstance:
     - target: {fileID: 3076347728710368254, guid: 1eec842159614eb4ca5a8605a0f4eef3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3248457264302475833, guid: 1eec842159614eb4ca5a8605a0f4eef3,
         type: 3}
@@ -2028,6 +2058,11 @@ PrefabInstance:
       propertyPath: hotbarManager
       value: 
       objectReference: {fileID: 679951634}
+    - target: {fileID: 6934966467970974556, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+        type: 3}
+      propertyPath: displayInventory
+      value: 
+      objectReference: {fileID: 679951632}
     - target: {fileID: 7836194383598242313, guid: 1eec842159614eb4ca5a8605a0f4eef3,
         type: 3}
       propertyPath: m_Enabled
@@ -2035,6 +2070,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1eec842159614eb4ca5a8605a0f4eef3, type: 3}
+--- !u!1 &1131187642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 470011027133640252, guid: 1eec842159614eb4ca5a8605a0f4eef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124696406}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258418575
 GameObject:
   m_ObjectHideFlags: 0
