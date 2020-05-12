@@ -112,20 +112,34 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void PlayerManager() {
-        if (inventory.getHotbar()[hotbarManager.getIndex()].item != null) {
-            Debug.Log(inventory.getHotbar()[hotbarManager.getIndex()].item + " GOT IN");
-            objectInHand = inventory.getHotbar()[hotbarManager.getIndex()].item.inGameObject;
+
+        hotbarIndex = hotbarManager.getIndex();
+
+        if (inventory.getHotbar()[hotbarIndex].item != null) {
+            objectInHand = inventory.getHotbar()[hotbarIndex].item.inGameObject;
         }
 
-        Debug.Log(hotbarManager.getIndex() + " GOT OUT");
+        if (objectInHand != null && (prevHotbarIndex == -999 || hotbarIndex != prevHotbarIndex)) {
+            if (isOnline) {
+                instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, objectInHand.transform.rotation, 0);
+                Vector3 t = instantiatedObject.transform.position;
+                Quaternion t1 = instantiatedObject.transform.rotation;
+                Vector3 t2 = instantiatedObject.transform.localScale;
 
-        if (objectInHand != null) {
-            Debug.Log("OBJECT IN HAND");
-            Instantiate(objectInHand, playerHand.transform);
+                instantiatedObject.transform.SetParent(playerHand.transform);
+                //instantiatedObject.transform.position = t;
+                instantiatedObject.transform.localScale = t2;
+                instantiatedObject.transform.rotation = t1;
+
+            } else {
+                if (instantiatedObject != null) Destroy(instantiatedObject);
+                instantiatedObject = Instantiate(objectInHand, playerHand.transform);
+            }
+            prevHotbarIndex = hotbarIndex;
         }
 
         if (instCam != null && isCamFixed) { facing = instCam.transform.eulerAngles.y; transform.eulerAngles = new Vector3(0, facing, 0); }
-        if (Input.GetKeyUp(changeConstructionKey)) construction.increaseIndex();
+
         UIControl();
         Movement();
         Attributes();
@@ -142,7 +156,9 @@ public class PlayerScript : MonoBehaviour {
         instCam = Instantiate(cam, this.gameObject.transform);
         instSource = Instantiate(inputSource, this.gameObject.transform);
 
-        if (isCamFixed) gameObject.transform.eulerAngles = new Vector3( 0,facing, 0);
+        construction.setCamera(instCam.GetComponentInChildren<Camera>());
+
+        if (isCamFixed) gameObject.transform.eulerAngles = new Vector3(0, facing, 0);
         CameraController controller = instCam.GetComponent<CameraController>();
 
         controller.Anchor = this.gameObject.transform;

@@ -128,8 +128,8 @@ public class DisplayInventory : MonoBehaviour {
     }
 
     private void OnApplicationQuit() {
-        Array.Clear(AbstractInventory.getHotbar(), 0, AbstractInventory.getHotbar().Length);
-        Array.Clear(AbstractInventory.getInventory(), 0, AbstractInventory.getInventory().Length);
+        //Array.Clear(AbstractInventory.getHotbar(), 0, AbstractInventory.getHotbar().Length);
+        //Array.Clear(AbstractInventory.getInventory(), 0, AbstractInventory.getInventory().Length);
     }
 
 }
