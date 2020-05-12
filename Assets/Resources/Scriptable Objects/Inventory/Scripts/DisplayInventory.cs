@@ -68,8 +68,9 @@ public class DisplayInventory : MonoBehaviour {
 
     private void LoadAmount(int position, InventorySlot[] type, int inv) {
         int amount = type[position].amount;
-        amountPanel.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
-        amountPanel.transform.SetParent(RealInventory[inv][position].InGameSlot.transform);
+        GameObject amountpan = Instantiate(amountPanel);
+        amountpan.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
+        amountpan.transform.SetParent(RealInventory[inv][position].InGameSlot.transform.GetChild(0).transform, false);
     }
 
     public void UpdatePostion(int PosOld, int PosNew) {
