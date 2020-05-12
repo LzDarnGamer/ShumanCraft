@@ -1857,7 +1857,7 @@ GameObject:
   - component: {fileID: 2250814492544839389}
   - component: {fileID: 6537602355982244876}
   m_Layer: 0
-  m_Name: PlayerAvatar
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1940,7 +1940,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da89872c20697a4db057429656a51df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  PV: {fileID: 0}
+  cam: {fileID: 0}
+  isCamFixed: 0
+  inputSource: {fileID: 0}
   construction: {fileID: 0}
+  interact: {fileID: 0}
+  inventory: {fileID: 0}
+  hotbarManager: {fileID: 0}
+  hotbarIndex: 0
+  prevHotbarIndex: -999
+  objectInHand: {fileID: 0}
+  instantiatedObject: {fileID: 0}
+  playerHand: {fileID: 0}
   isWalking: 1
   isRunning: 0
   isCrouched: 0
@@ -1964,12 +1977,12 @@ MonoBehaviour:
   startKey: 112
   openChatKey: 116
   openInventoryKey: 101
-  openConstructionkey: 114
   changeConstructionKey: 116
   uiHealth: {fileID: 0}
   uiStamina: {fileID: 0}
   uiHunger: {fileID: 0}
   uiThirst: {fileID: 0}
+  isOnline: 0
 --- !u!114 &2250814492544839389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,12 +1995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea4879b0f0a53d47b841cb222afab92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 1000011923132058, guid: 02a9e534423e9420bb141e93b9df8214, type: 3}
-  - {fileID: 174086, guid: d68eddb8a44e25b44857e9e0c5f916e7, type: 3}
-  - {fileID: 1000011235679544, guid: d7a23874c72e5a34f95e076f8cdcf09c, type: 3}
-  - {fileID: 147880, guid: b2b39398f6848dc42a7b687287c18667, type: 3}
-  objectIndex: 0
+  objects: {fileID: 255578545082703532, guid: ececb4dd09898eb4c9ed348a74c76f77, type: 3}
   placeableObjectPrefab: {fileID: 0}
   newObjectHotKey: 97
 --- !u!114 &6537602355982244876
