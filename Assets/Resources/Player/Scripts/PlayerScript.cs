@@ -35,6 +35,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private GameObject objectInHand;
     [SerializeField] private GameObject instantiatedObject;
     [SerializeField] private GameObject playerHand;
+    [SerializeField] private bool isToolOn;
 
     [Header("Movimentos")]
     private float x, y;
@@ -73,7 +74,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiStamina;
     [SerializeField] private Image uiHunger;
     [SerializeField] private Image uiThirst;
-    [SerializeField] private bool isOnline = false;
+    [SerializeField] private bool isOnline = true;
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
@@ -115,28 +116,35 @@ public class PlayerScript : MonoBehaviour {
 
         hotbarIndex = hotbarManager.getIndex();
 
-        if (inventory.getHotbar()[hotbarIndex].item != null) {
+        if (inventory.getHotbar()[hotbarIndex].item != null)
             objectInHand = inventory.getHotbar()[hotbarIndex].item.inGameObject;
-        }
+        else objectInHand = null;
 
         if (objectInHand != null && (prevHotbarIndex == -999 || hotbarIndex != prevHotbarIndex)) {
+            isToolOn = true;
             if (isOnline) {
+                if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
                 instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, objectInHand.transform.rotation, 0);
-                Vector3 t = instantiatedObject.transform.position;
-                Quaternion t1 = instantiatedObject.transform.rotation;
-                Vector3 t2 = instantiatedObject.transform.localScale;
 
-                instantiatedObject.transform.SetParent(playerHand.transform);
-                //instantiatedObject.transform.position = t;
+                Vector3 t = objectInHand.transform.position;
+                Quaternion t1 = objectInHand.transform.rotation;
+                Vector3 t2 = objectInHand.transform.localScale;
+
+                //Debug.Log("pos= " + t + "; rotation= " + t1 + "; scale = " + t2);
+                instantiatedObject.transform.SetParent(playerHand.transform, true);
+
+                instantiatedObject.transform.localPosition = t;
                 instantiatedObject.transform.localScale = t2;
-                instantiatedObject.transform.rotation = t1;
+                instantiatedObject.transform.localRotation = t1;
 
             } else {
                 if (instantiatedObject != null) Destroy(instantiatedObject);
                 instantiatedObject = Instantiate(objectInHand, playerHand.transform);
             }
             prevHotbarIndex = hotbarIndex;
-        }
+        } else if (objectInHand == null) {
+            isToolOn = false;
+            if (instantiatedObject != null) DestroyImmediate(instantiatedObject); }
 
         if (instCam != null && isCamFixed) { facing = instCam.transform.eulerAngles.y; transform.eulerAngles = new Vector3(0, facing, 0); }
 
