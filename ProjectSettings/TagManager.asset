@@ -10,6 +10,8 @@ TagManager:
   - Pickupable
   - breakwithscissors
   - MainCanvas
+  - RoomUI
+  - Terrain
   layers:
   - Default
   - TransparentFX

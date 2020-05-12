@@ -54,8 +54,8 @@ MonoBehaviour:
   - item: {fileID: 0}
     amount: 0
   hotbar:
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 4bfc038bbcc8b2542bc6c3219e0283ee, type: 2}
+    amount: 1
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}

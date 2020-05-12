@@ -20,7 +20,7 @@ public class ConstructionController : MonoBehaviour {
     private GameObject currentPlaceableObject;
 
     private float angle = 0f;
-    private float angleInc = 2.2f;
+    private float angleInc = 2.2f; 
 
     void Update() {
         if (cam != null) {
@@ -58,7 +58,8 @@ public class ConstructionController : MonoBehaviour {
         currentPlaceableObject.transform.Rotate(Vector3.up, angle);
     }
 
-    private void MoveCurrentPlaceableObjectToMouse() {
+    private void MoveCurrentPlaceableObjectToMouse()
+    {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         Debug.DrawRay(cam.transform.position, ray.direction, Color.green);
@@ -79,7 +80,7 @@ public class ConstructionController : MonoBehaviour {
 
                 currentPlaceableObject = !isOnline ? Instantiate(placeableObjectPrefab) :
                     PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", placeableObjectPrefab.name), transform.position, Quaternion.identity, 0);
-
+                
                 SetColliders(false);
             } else {
                 Destroy(currentPlaceableObject);
