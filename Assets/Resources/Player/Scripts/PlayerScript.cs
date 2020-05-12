@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 using com.ootii.Cameras;
 using com.ootii.Input;
-using UnityEngine.TextCore;
-using System;
+using System.IO;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -31,9 +29,12 @@ public class PlayerScript : MonoBehaviour {
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
     [SerializeField] private Hotbar_Manager hotbarManager;
-    [SerializeField] private GameObject objectInHand;
-    [SerializeField] private GameObject playerHand;
     [SerializeField] private DisplayInventory displayInventory;
+    [SerializeField] private int hotbarIndex;
+    [SerializeField] private int prevHotbarIndex = -999;
+    [SerializeField] private GameObject objectInHand;
+    [SerializeField] private GameObject instantiatedObject;
+    [SerializeField] private GameObject playerHand;
 
     [Header("Movimentos")]
     private float x, y;
@@ -94,7 +95,6 @@ public class PlayerScript : MonoBehaviour {
 
         //hotbarManager = canvas.GetComponent<Hotbar_Manager>();
         construction = gameObject.GetComponent<ConstructionController>();
-        construction.SetHotKey(openConstructionkey);
         AddCamera();
     }
 
