@@ -50,25 +50,26 @@ public class DisplayInventory : MonoBehaviour {
             if (RealInventory[0][i].ArraySlot.item != null) {
                 RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = AbstractInventory.getHotbar()[i].item.icon;
-                LoadAmount(i, AbstractInventory.getHotbar());
+                LoadAmount(i, AbstractInventory.getHotbar(), 0);
             }
         }
 
         for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
-            if (RealInventory[1][i].ArraySlot.item != null)
+            if (RealInventory[1][i].ArraySlot.item != null) {
                 RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = AbstractInventory.getInventory()[i].item.icon;
-            LoadAmount(i, AbstractInventory.getInventory());
+                LoadAmount(i, AbstractInventory.getInventory(), 1);
+            }
         }
 
 
  
     }
 
-    private void LoadAmount(int position, InventorySlot[] type) {
+    private void LoadAmount(int position, InventorySlot[] type, int inv) {
         int amount = type[position].amount;
         amountPanel.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
-        amountPanel.transform.SetParent(RealInventory[0][position].InGameSlot.transform);
+        amountPanel.transform.SetParent(RealInventory[inv][position].InGameSlot.transform);
     }
 
     public void UpdatePostion(int PosOld, int PosNew) {
