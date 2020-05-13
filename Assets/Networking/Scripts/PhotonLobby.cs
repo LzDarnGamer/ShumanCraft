@@ -36,7 +36,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         connectText.text = "Connected";
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
-
+    /*
     public override void OnRoomListUpdate(List<RoomInfo> roomList) {
         Debug.Log("Room List Updated: " + roomList.ToArray().Length);
 
@@ -53,10 +53,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
                 
             }
         }
-    }
+    }*/
 
     public void OnCreateLobbyButtonClicked () {
-        
+        Debug.Log("Create Button was clicked");
+        CreateRoom();
     }
 
     public void OnJoinLobbyButtonClicked () {
@@ -68,6 +69,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         battleButton.GetComponent<Button>().interactable = true;
         cancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
+        //PhotonNetwork.JoinRoom("room1");
     }
 
     public void OnCancelButtonClicked() {
@@ -102,6 +104,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         int randomRoomName = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() {IsVisible = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers};
         PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        //PhotonNetwork.CreateRoom("room1", roomOps);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) {

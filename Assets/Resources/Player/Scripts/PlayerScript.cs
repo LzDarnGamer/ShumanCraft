@@ -82,10 +82,10 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 StartManager();
             } else {
-                Destroy(gameObject.GetComponent<ConstructionController>());
-                Destroy(canvas);
-                Destroy(gameObject.GetComponent<Interact>());
-                Destroy(this);
+                DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
+                DestroyImmediate(canvas, true);
+                DestroyImmediate(gameObject.GetComponent<Interact>(), true);
+                DestroyImmediate(this, true);
             }
         } else {
             StartManager();
@@ -104,8 +104,8 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 PlayerManager();
             } else if (!PV.IsMine) {
-                Destroy(instCam);
-                Destroy(instSource);
+                DestroyImmediate(instCam, true);
+                DestroyImmediate(instSource, true);
             }
         } else {
             PlayerManager();
@@ -125,18 +125,17 @@ public class PlayerScript : MonoBehaviour {
             if (isOnline) {
                 if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
                 instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, objectInHand.transform.rotation, 0);
-
+                
                 Vector3 t = objectInHand.transform.position;
                 Quaternion t1 = objectInHand.transform.rotation;
                 Vector3 t2 = objectInHand.transform.localScale;
 
-                //Debug.Log("pos= " + t + "; rotation= " + t1 + "; scale = " + t2);
+                Debug.Log("pos= " + t + "; rotation= " + t1 + "; scale = " + t2);
                 instantiatedObject.transform.SetParent(playerHand.transform, true);
 
                 instantiatedObject.transform.localPosition = t;
                 instantiatedObject.transform.localScale = t2;
                 instantiatedObject.transform.localRotation = t1;
-
             } else {
                 if (instantiatedObject != null) Destroy(instantiatedObject);
                 instantiatedObject = Instantiate(objectInHand, playerHand.transform);
@@ -144,7 +143,8 @@ public class PlayerScript : MonoBehaviour {
             prevHotbarIndex = hotbarIndex;
         } else if (objectInHand == null) {
             isToolOn = false;
-            if (instantiatedObject != null) DestroyImmediate(instantiatedObject); }
+            if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
+        }
 
         if (instCam != null && isCamFixed) { facing = instCam.transform.eulerAngles.y; transform.eulerAngles = new Vector3(0, facing, 0); }
 
@@ -268,6 +268,12 @@ public class PlayerScript : MonoBehaviour {
         return false;
     }
 
+    [PunRPC]
+    private void RPC_UpdateObject() {
+        if (objectInHand != null && instantiatedObject != null) {
+            
+        }
+    }
 
     public void addHealth(float amount) {health += amount;}
     public void addThirst(float amount) {thirst += amount;}

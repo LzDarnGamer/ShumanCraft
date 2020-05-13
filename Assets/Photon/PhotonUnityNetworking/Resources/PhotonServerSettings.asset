@@ -39,6 +39,7 @@ MonoBehaviour:
   - RPC_CreatePlayer
   - RPC_LoadedGameScene
   - RPC_InstantiateTool
+  - RPC_UpdateObject
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
