@@ -6,30 +6,24 @@ public class UIManager : MonoBehaviour {
     private KeyCode[] keys = {
         KeyCode.E,
         KeyCode.Tab,
-        KeyCode.Escape
+        KeyCode.Escape,
+        KeyCode.B,
     };
 
     private KeyCode currentActive = KeyCode.Pipe;
 
     private bool isMouseActive;
     private bool isEscActive;
-    private bool isQuestActive;
+    private bool isTabActive;
     private bool isInvEActive;
+    private bool isQuestBookActive;
 
-    [SerializeField]
-    GameObject QuestPanel;
-
-    [SerializeField]
-    GameObject BackgroundPanel;
-
-    [SerializeField]
-    GameObject EscPanel;
-
-    [SerializeField]
-    GameObject InvPanel;
-
-    [SerializeField]
-    Crafting crafting;
+    [SerializeField] GameObject Infobook;
+    [SerializeField] GameObject BackgroundPanel;
+    [SerializeField] GameObject EscPanel;
+    [SerializeField] GameObject InvPanel;
+    [SerializeField] Crafting crafting;
+    [SerializeField] GameObject QuestBookPanel;
 
 
     void Update() {
@@ -70,12 +64,26 @@ public class UIManager : MonoBehaviour {
                 if (Input.GetKey(KeyCode.Tab) &&
                     (currentActive == KeyCode.Pipe || currentActive == KeyCode.Tab)) {
                     currentActive = KeyCode.Tab;
-                    isQuestActive = !isQuestActive;
-                    if (isQuestActive) {
-                        QuestPanel.SetActive(true);
+                    isTabActive = !isTabActive;
+                    if (isTabActive) {
+                        Infobook.SetActive(true);
                         crafting.UpdateCratables();
                     } else {
-                        QuestPanel.SetActive(false);
+                        Infobook.SetActive(false);
+                        BackgroundPanel.SetActive(false);
+                        isMouseActive = false;
+                        currentActive = KeyCode.Pipe;
+                    }
+                }
+                if (Input.GetKey(KeyCode.B) &&
+                    (currentActive == KeyCode.Pipe || currentActive == KeyCode.B)) {
+                    currentActive = KeyCode.Tab;
+                    isQuestBookActive = !isQuestBookActive;
+                    if (isQuestBookActive) {
+                        QuestBookPanel.SetActive(true);
+                        crafting.UpdateCratables();
+                    } else {
+                        QuestBookPanel.SetActive(false);
                         BackgroundPanel.SetActive(false);
                         isMouseActive = false;
                         currentActive = KeyCode.Pipe;
