@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private GameObject instantiatedObject;
     [SerializeField] private GameObject playerHand;
     [SerializeField] private bool isToolOn;
+    [SerializeField] private PlayerAux auxRPC;
 
     [Header("Movimentos")]
     private float x, y;
@@ -56,8 +57,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float thirst           = 100.0f;
     [SerializeField] [Range(0, 100)] private float thirstLoss       = 1.5f;
     [SerializeField] [Range(0, 100)] private float thirstThreshold  = 30.0f;
-    [SerializeField] [Range(0, 100)] private float thirstDecay  = 5.0f;
-    [SerializeField] private bool needsWater = false;
+    [SerializeField] [Range(0, 100)] private float thirstDecay      = 5.0f;
+    [SerializeField] private bool needsWater                        = false;
 
     [Header("Controles")]
     public KeyCode walkRunKey = KeyCode.LeftShift;
@@ -78,6 +79,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
+        auxRPC = gameObject.GetComponent<PlayerAux>();
         if (isOnline) {
             if (PV.IsMine) {
                 StartManager();
@@ -93,8 +95,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void StartManager() {
-
-        //hotbarManager = canvas.GetComponent<Hotbar_Manager>();
         construction = gameObject.GetComponent<ConstructionController>();
         AddCamera();
     }
@@ -113,7 +113,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void PlayerManager() {
-
         hotbarIndex = hotbarManager.getIndex();
 
         if (inventory.getHotbar()[hotbarIndex].item != null)
@@ -123,19 +122,29 @@ public class PlayerScript : MonoBehaviour {
         if (objectInHand != null && (prevHotbarIndex == -999 || hotbarIndex != prevHotbarIndex)) {
             isToolOn = true;
             if (isOnline) {
-                if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
-                instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, objectInHand.transform.rotation, 0);
-                
-                Vector3 t = objectInHand.transform.position;
-                Quaternion t1 = objectInHand.transform.rotation;
-                Vector3 t2 = objectInHand.transform.localScale;
+                //if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
 
-                Debug.Log("pos= " + t + "; rotation= " + t1 + "; scale = " + t2);
-                instantiatedObject.transform.SetParent(playerHand.transform, true);
+                GameObject _instantiated = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
+                                                                        playerHand.transform.position,
+                                                                        Quaternion.identity, 0);
+                float[] p = {   
+                                objectInHand.transform.position.x,
+                                objectInHand.transform.position.y,
+                                objectInHand.transform.position.z
+                            };
 
-                instantiatedObject.transform.localPosition = t;
-                instantiatedObject.transform.localScale = t2;
-                instantiatedObject.transform.localRotation = t1;
+                float[] r = { 
+                                objectInHand.transform.rotation.x,
+                                objectInHand.transform.rotation.y,
+                                objectInHand.transform.rotation.z,
+                                objectInHand.transform.rotation.w
+                            };
+
+                auxRPC.runRPC(objectInHand.name,
+                                    playerHand.GetPhotonView().ViewID,
+                                    _instantiated.GetPhotonView().ViewID,
+                                    p,
+                                    r);
             } else {
                 if (instantiatedObject != null) Destroy(instantiatedObject);
                 instantiatedObject = Instantiate(objectInHand, playerHand.transform);
@@ -143,7 +152,7 @@ public class PlayerScript : MonoBehaviour {
             prevHotbarIndex = hotbarIndex;
         } else if (objectInHand == null) {
             isToolOn = false;
-            if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
+            //if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
         }
 
         if (instCam != null && isCamFixed) { facing = instCam.transform.eulerAngles.y; transform.eulerAngles = new Vector3(0, facing, 0); }
@@ -181,7 +190,7 @@ public class PlayerScript : MonoBehaviour {
     public Camera getCamera() { return this.cam.GetComponentInChildren<Camera>(); }
 
     private void Attributes() {
-        Debug.Log("Running Attributes");
+        //Debug.Log("Running Attributes");
         /* Stamina */
         isRunning = !isWalking;
         if (isRunning && (x != 0 || y != 0)) stamina -= staminaLoss * Time.deltaTime;
@@ -228,7 +237,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void UIControl() {
-        Debug.Log("UI CONTROL");
+        //Debug.Log("UI CONTROL");
         uiHealth.fillAmount = health / 100.0f;
         uiStamina.fillAmount = stamina / 100.0f;
         uiHunger.fillAmount = hunger / 100.0f;
@@ -262,18 +271,26 @@ public class PlayerScript : MonoBehaviour {
             addHunger(Foodobj.hungerRestore);
             addThirst(Foodobj.thirstRestore);
             inventory.getHotbar()[hotbarManager.scrollPosition].RemoveAmount(1);
-            Debug.Log("HERE");
+            //Debug.Log("HERE");
             return true;
         }
         return false;
     }
-
+    /*
     [PunRPC]
-    private void RPC_UpdateObject() {
-        if (objectInHand != null && instantiatedObject != null) {
-            
-        }
-    }
+    private void RPC_UpdateObject () {
+        GameObject i = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, objectInHand.transform.rotation, 0);
+
+        Vector3 pos = objectInHand.transform.position;
+        Quaternion rot = objectInHand.transform.rotation;
+        Vector3 scal = objectInHand.transform.localScale;
+
+        i.transform.SetParent(playerHand.transform, true);
+
+        i.transform.localPosition = pos;
+        i.transform.localRotation = rot;
+        i.transform.localScale = scal;
+    }*/
 
     public void addHealth(float amount) {health += amount;}
     public void addThirst(float amount) {thirst += amount;}

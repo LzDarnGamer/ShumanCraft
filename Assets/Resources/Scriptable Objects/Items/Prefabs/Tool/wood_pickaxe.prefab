@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 2383132299548289514}
   m_LocalRotation: {x: 0.16596152, y: -0.0028785428, z: -0.75567913, w: -0.63355947}
   m_LocalPosition: {x: -0.182, y: 0.391, z: 0.134}
-  m_LocalScale: {x: 1.7751224, y: 1.775122, z: 1.7751223}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 5230597818150118887}
