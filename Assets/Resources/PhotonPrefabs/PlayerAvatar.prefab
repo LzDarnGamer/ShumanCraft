@@ -314,7 +314,7 @@ Transform:
   m_LocalPosition: {x: -22.150093, y: -5.5778675, z: 3.5077953}
   m_LocalScale: {x: 0.22116782, y: 0.22116782, z: 0.22116782}
   m_Children:
-  - {fileID: 7566021429142764927}
+  - {fileID: 470011026111240325}
   - {fileID: 1530139241056310572}
   - {fileID: 3093414689992534207}
   m_Father: {fileID: 0}
@@ -390,8 +390,8 @@ MonoBehaviour:
   construction: {fileID: 0}
   interact: {fileID: 0}
   inventory: {fileID: 11400000, guid: 874c695d1a43a924b89cb7d8f52770c6, type: 2}
-  hotbarManager: {fileID: 7566021429142757661}
-  displayInventory: {fileID: 7566021429142757533}
+  hotbarManager: {fileID: 470011026111240332}
+  displayInventory: {fileID: 470011025235362741}
   hotbarIndex: 0
   prevHotbarIndex: -999
   objectInHand: {fileID: 0}
@@ -424,10 +424,10 @@ MonoBehaviour:
   openInventoryKey: 101
   openConstructionkey: 114
   changeConstructionKey: 116
-  uiHealth: {fileID: 7566021429142759411}
-  uiStamina: {fileID: 7566021429142757387}
-  uiHunger: {fileID: 7566021429142757385}
-  uiThirst: {fileID: 7566021429142757381}
+  uiHealth: {fileID: 1752333367499875725}
+  uiStamina: {fileID: 1752333366647007164}
+  uiHunger: {fileID: 1752333366472533078}
+  uiThirst: {fileID: 1752333366786186564}
   isOnline: 1
 --- !u!114 &-850957775284923032
 MonoBehaviour:
@@ -5494,13 +5494,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79f322fea8d1ab04fa44c7bc9fc8afec, type: 3}
---- !u!224 &7566021429142764927 stripped
+--- !u!224 &470011026111240325 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7960737888414247798, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
   m_PrefabInstance: {fileID: 7566021429142762483}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7566021429142759411 stripped
+--- !u!114 &1752333367499875725 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8119534444582852222, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
@@ -5512,7 +5512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7566021429142757387 stripped
+--- !u!114 &1752333366647007164 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8119534443259171919, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
@@ -5524,7 +5524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7566021429142757533 stripped
+--- !u!114 &470011025235362741 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7960737889282158662, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
@@ -5536,7 +5536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec88a645cf1c7f4aa920f222f3df02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7566021429142757385 stripped
+--- !u!114 &1752333366472533078 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8119534443454322597, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
@@ -5548,7 +5548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7566021429142757381 stripped
+--- !u!114 &1752333366786186564 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8119534443130449591, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
@@ -5560,7 +5560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7566021429142757661 stripped
+--- !u!114 &470011026111240332 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7960737888414247807, guid: 79f322fea8d1ab04fa44c7bc9fc8afec,
     type: 3}
