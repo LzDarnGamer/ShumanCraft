@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiStamina;
     [SerializeField] private Image uiHunger;
     [SerializeField] private Image uiThirst;
-    [SerializeField] private bool isOnline = true;
+    [SerializeField] private bool isOnline = false;
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
@@ -106,6 +106,7 @@ public class PlayerScript : MonoBehaviour {
             } else if (!PV.IsMine) {
                 DestroyImmediate(instCam, true);
                 DestroyImmediate(instSource, true);
+                
             }
         } else {
             PlayerManager();
@@ -172,6 +173,7 @@ public class PlayerScript : MonoBehaviour {
         Movement();
         Attributes();
         UseTool();
+        PickUpItem();
     }
 
     private void UseTool() {
