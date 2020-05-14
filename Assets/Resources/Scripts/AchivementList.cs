@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AchivementList : MonoBehaviour
 {
-
-    public List<Achivement> AchivementsList = new List<Achivement>();
+    public List<Achivement> AchivementsList { get; private set; }
     private void Start() {
+        AchivementsList = new List<Achivement>();
+
         AchivementsList.Add(
             new Achivement(
                 "Collect Wood",

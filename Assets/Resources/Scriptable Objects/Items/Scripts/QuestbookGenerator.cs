@@ -5,23 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 public class QuestbookGenerator : MonoBehaviour
 {
-    [SerializeField]
-    GameObject foodExamplePanel;
+    [Header("Infobook")]
+    [SerializeField] GameObject foodExamplePanel;
+    [SerializeField] GameObject armourExamplePanel;
+    [SerializeField] GameObject toolExamplePanel;
+    [SerializeField] GameObject weaponsExamplePanel;
+    [SerializeField] GameObject materialExamplePanel;
+    [SerializeField] GameObject craftingExamplePanel;
 
-    [SerializeField]
-    GameObject armourExamplePanel;
+    [Header("QuestBook")]
+    [SerializeField] Transform AchivementChapter;
+    [SerializeField] GameObject AchivementPage;
 
-    [SerializeField]
-    GameObject toolExamplePanel;
-
-    [SerializeField]
-    GameObject weaponsExamplePanel;
-
-    [SerializeField]
-    GameObject materialExamplePanel;
-
-    [SerializeField]
-    GameObject craftingExamplePanel;
+    [Header("Script")]
+    [SerializeField] AchivementList achivementList;
 
     private Transform contentFood;
     private Transform contentArmour;
@@ -29,8 +26,8 @@ public class QuestbookGenerator : MonoBehaviour
     private Transform contentWeapon;
     private Transform contentMaterial;
     private Transform contentCraftings;
+
     void Awake() {
-        
         FoodObject[] Fooditems = Resources.LoadAll<FoodObject>("Scriptable Objects/Items/Categories/Food");
         ArmourObject[] Armouritems = Resources.LoadAll<ArmourObject>("Scriptable Objects/Items/Categories/Armour");
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
@@ -97,6 +94,16 @@ public class QuestbookGenerator : MonoBehaviour
             }
             fillWeaponInfo(weaponsExamplePanel, name, itemID, durability, damage, description, icon);
         }
+
+        List<Achivement> list = achivementList.AchivementsList;
+        for (int i = 0; i < list.Count; i++) {
+            fillAchivements(AchivementPage, list[i], i==list.Count-1);
+        }
+
+
+
+
+
 
         contentFood.parent.gameObject.SetActive(false);
         contentArmour.parent.gameObject.SetActive(false);
@@ -181,5 +188,12 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(5).name = itemID.ToString();
         Destroy(Item);
         newObj.transform.SetParent(contentCraftings);
+    }
+
+
+    private void fillAchivements(GameObject obj, Achivement ach, bool isLast) {
+        GameObject newObj = Instantiate(obj);
+        GameObject leftPage = newObj.transform.GetChild(0).gameObject;
+        GameObject rightPage = newObj.transform.GetChild(1).gameObject;
     }
 }
