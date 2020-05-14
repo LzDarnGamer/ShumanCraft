@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +11,17 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public static PhotonLobby lobby;
 
     [SerializeField] private List<string> roomNames;
-    
-    [Header ("Buttons")]
-    public GameObject battleButton, cancelButton, createButton, joinButton;
 
-    [Header ("Lobby window")]
-    public GameObject joinUI, content, roomObj;
+    [Header("Buttons")]
+    public GameObject battleButton;
+    public GameObject cancelButton;
+    public GameObject createButton;
+    public GameObject joinButton;
+
+    [Header("Lobby window")]
+    public GameObject joinUI;
+    public GameObject content;
+    public GameObject roomObj;
 
     [Header ("Connecting Text")]
     public Text connectText;
@@ -32,11 +38,17 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public override void OnConnectedToMaster() {
         Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " Server");
         PhotonNetwork.AutomaticallySyncScene = true;
-        battleButton.GetComponent<Button>().interactable = true;
-        connectText.text = "Connected";
+        setOnlineUI();
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
-    /*
+
+    private void setOnlineUI() {
+        battleButton.GetComponent<Button>().interactable = true;
+        createButton.GetComponent<Button>().interactable = true;
+        joinButton.GetComponent<Button>().interactable = true;
+        connectText.text = "Connected";
+    }
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList) {
         Debug.Log("Room List Updated: " + roomList.ToArray().Length);
 
@@ -44,16 +56,24 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
             if (!roomNames.Contains(game.Name)) {
                 GameObject sala = Instantiate(roomObj) as GameObject;
                 sala.transform.parent = content.transform;
-                Text[] atributos = sala.GetComponentsInChildren<Text>();
+                TMP_Text[] atributos = sala.GetComponentsInChildren<TMP_Text>();
                 atributos[0].text = game.Name;
                 atributos[1].text = game.PlayerCount.ToString();
-                atributos[2].text = game.MaxPlayers.ToString();
                 roomNames.Add(game.Name);
+
+                Button btn = sala.GetComponent<Button>();
+
+                btn.onClick.AddListener(delegate { OnRoomButtonClicked(game.Name); });
             } else {
                 
             }
         }
-    }*/
+    }
+
+    public void OnRoomButtonClicked(string name) {
+        PhotonNetwork.JoinRoom(name);
+        Debug.Log("Room " + name + " clicked!");
+    }
 
     public void OnCreateLobbyButtonClicked () {
         Debug.Log("Create Button was clicked");
@@ -69,7 +89,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         battleButton.GetComponent<Button>().interactable = true;
         cancelButton.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
-        //PhotonNetwork.JoinRoom("room1");
     }
 
     public void OnCancelButtonClicked() {
@@ -104,7 +123,6 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         int randomRoomName = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() {IsVisible = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers};
         PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
-        //PhotonNetwork.CreateRoom("room1", roomOps);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) {
