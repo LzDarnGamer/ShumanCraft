@@ -5,6 +5,7 @@ using Photon.Pun;
 using com.ootii.Cameras;
 using com.ootii.Input;
 using System.IO;
+using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -77,9 +78,18 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiThirst;
     [SerializeField] private bool isOnline = false;
 
+    private IEnumerator staminaMinus, staminaPlus, hungerC, thirstC, healthCS, healthCT;
+
     void Start() {
         anim = gameObject.GetComponent<Animator>();
         auxRPC = gameObject.GetComponent<PlayerAux>();
+        staminaMinus = staminaCoroutineMinus();
+        staminaPlus = staminaCoroutineAdd();
+        hungerC = hungerCoroutine();
+        thirstC = thirstCoroutine();
+        healthCS = healthCoroutineStarving();
+        healthCT = healthCoroutineThirsth();
+
         if (isOnline) {
             if (PV.IsMine) {
                 StartManager();
@@ -206,25 +216,62 @@ public class PlayerScript : MonoBehaviour {
         //Debug.Log("Running Attributes");
         /* Stamina */
         isRunning = !isWalking;
-        if (isRunning && (x != 0 || y != 0)) stamina -= staminaLoss * Time.deltaTime;
-        else if ((!isRunning || (x == 0 || y == 0)) && stamina < 100f) stamina += (staminaLoss/2) * Time.deltaTime;
+        if (isRunning && (x != 0 || y != 0)) { StartCoroutine(staminaMinus); StopCoroutine(staminaPlus); } //stamina -= staminaLoss * Time.deltaTime;
+        else if ((!isRunning || (x == 0 || y == 0)) && stamina < 100f) { StartCoroutine(staminaPlus); StopCoroutine(staminaMinus); } //stamina += (staminaLoss / 2) * Time.deltaTime;
 
         /* Hunger */
         if (hunger < hungerThreshold) isStarving = true; else isStarving = false;
-        if (isStarving) healthDecay(starvingDecay);
-        hunger -= hungerLoss * Time.deltaTime;
+        if (isStarving) StartCoroutine(healthCS);
+        StartCoroutine (hungerC); //hunger -= hungerLoss * Time.deltaTime;
         // [FALTA] Mostrar Alerta no ecra
 
         /* Thirst */
         if (thirst < thirstThreshold) needsWater = true; else needsWater = false;
-        if (needsWater) healthDecay(thirstDecay);
-        thirst -= thirstLoss * Time.deltaTime;
+        if (needsWater) StartCoroutine(healthCT);
+        StartCoroutine (thirstC); //thirst -= thirstLoss * Time.deltaTime;
         // [FALTA] Mostrar Alerta no ecra
     }
 
-    // Tirar vida ao longo do tempo
-    private void healthDecay(float i) {
-        this.health -= i * Time.deltaTime;
+    private IEnumerator healthCoroutineStarving() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            health -= starvingDecay;
+        }
+    }
+
+    private IEnumerator healthCoroutineThirsth() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            health -= thirstDecay;
+        }
+    }
+
+    private IEnumerator staminaCoroutineAdd () {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            stamina += staminaLoss / 2;
+        }
+    }
+
+    private IEnumerator staminaCoroutineMinus() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            stamina -= staminaLoss;
+        }
+    }
+
+    private IEnumerator hungerCoroutine() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            hunger -= hungerLoss;
+        }
+    }
+
+    private IEnumerator thirstCoroutine() {
+        while (true) {
+            yield return new WaitForSeconds(1);
+            thirst -= thirstLoss;
+        }
     }
 
     private void Movement() {
