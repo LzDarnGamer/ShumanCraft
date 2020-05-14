@@ -129,6 +129,15 @@ public class DisplayInventory : MonoBehaviour {
         }
     }
 
+    public void updateAchivement() {
+
+    }
+
+
+
+
+
+
     private void OnApplicationQuit() {
         //Array.Clear(AbstractInventory.getHotbar(), 0, AbstractInventory.getHotbar().Length);
         //Array.Clear(AbstractInventory.getInventory(), 0, AbstractInventory.getInventory().Length);

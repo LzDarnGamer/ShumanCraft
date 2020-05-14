@@ -22,9 +22,9 @@ public class UIManager : MonoBehaviour {
     [SerializeField] GameObject BackgroundPanel;
     [SerializeField] GameObject EscPanel;
     [SerializeField] GameObject InvPanel;
-    [SerializeField] Crafting crafting;
     [SerializeField] GameObject QuestBookPanel;
-
+    [SerializeField] Crafting crafting;
+    [SerializeField] DisplayInventory displayInventory;
 
     void Update() {
 
@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour {
                     isQuestBookActive = !isQuestBookActive;
                     if (isQuestBookActive) {
                         QuestBookPanel.SetActive(true);
-                        crafting.UpdateCratables();
+                        displayInventory.updateAchivement();
                     } else {
                         QuestBookPanel.SetActive(false);
                         BackgroundPanel.SetActive(false);
