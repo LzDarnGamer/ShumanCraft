@@ -77,7 +77,7 @@ public class UIManager : MonoBehaviour {
                 }
                 if (Input.GetKey(KeyCode.B) &&
                     (currentActive == KeyCode.Pipe || currentActive == KeyCode.B)) {
-                    currentActive = KeyCode.Tab;
+                    currentActive = KeyCode.B;
                     isQuestBookActive = !isQuestBookActive;
                     if (isQuestBookActive) {
                         QuestBookPanel.SetActive(true);

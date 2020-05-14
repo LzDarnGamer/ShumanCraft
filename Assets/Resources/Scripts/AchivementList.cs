@@ -5,7 +5,7 @@ using UnityEngine;
 public class AchivementList : MonoBehaviour
 {
     public List<Achivement> AchivementsList { get; private set; }
-    private void Start() {
+    void Awake() {
         AchivementsList = new List<Achivement>();
 
         AchivementsList.Add(

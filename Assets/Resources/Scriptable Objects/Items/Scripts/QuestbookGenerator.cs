@@ -27,7 +27,7 @@ public class QuestbookGenerator : MonoBehaviour
     private Transform contentMaterial;
     private Transform contentCraftings;
 
-    void Awake() {
+    void Start() {
         FoodObject[] Fooditems = Resources.LoadAll<FoodObject>("Scriptable Objects/Items/Categories/Food");
         ArmourObject[] Armouritems = Resources.LoadAll<ArmourObject>("Scriptable Objects/Items/Categories/Armour");
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
@@ -195,5 +195,7 @@ public class QuestbookGenerator : MonoBehaviour
         GameObject newObj = Instantiate(obj);
         GameObject leftPage = newObj.transform.GetChild(0).gameObject;
         GameObject rightPage = newObj.transform.GetChild(1).gameObject;
+
+
     }
 }

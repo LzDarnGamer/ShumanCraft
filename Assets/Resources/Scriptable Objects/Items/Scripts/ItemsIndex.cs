@@ -6,7 +6,7 @@ public class ItemsIndex : MonoBehaviour
 {
     private static Dictionary<int, ItemObject> ITEMS;
 
-    public void Start() {
+    public void Awake() {
         ITEMS = new Dictionary<int, ItemObject>();
 
         FoodObject[] Fooditems = Resources.LoadAll<FoodObject>("Scriptable Objects/Items/Categories/Food");
