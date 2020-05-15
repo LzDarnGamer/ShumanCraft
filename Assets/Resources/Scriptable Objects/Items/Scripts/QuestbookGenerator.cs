@@ -96,14 +96,14 @@ public class QuestbookGenerator : MonoBehaviour
         }
 
         List<Achivement> list = achivementList.AchivementsList;
-        for (int i = 0; i < list.Count; i++) {
-            fillAchivements(AchivementPage, list[i], i==list.Count-1);
+        for (int i = 0; i < list.Count; i+=2) {
+            if(i == list.Count - 1) {
+                fillAchivements(AchivementPage, list[i], list[i], i == list.Count - 1);
+            } else {
+                fillAchivements(AchivementPage, list[i], list[i+1], i == list.Count - 1);
+            }
         }
-
-
-
-
-
+        AchivementChapter.parent.parent.gameObject.SetActive(false);
 
         contentFood.parent.gameObject.SetActive(false);
         contentArmour.parent.gameObject.SetActive(false);
@@ -191,11 +191,25 @@ public class QuestbookGenerator : MonoBehaviour
     }
 
 
-    private void fillAchivements(GameObject obj, Achivement ach, bool isLast) {
+    private void fillAchivements(GameObject obj, Achivement ach, Achivement ach1, bool isLast) {
+        
         GameObject newObj = Instantiate(obj);
-        GameObject leftPage = newObj.transform.GetChild(0).gameObject;
-        GameObject rightPage = newObj.transform.GetChild(1).gameObject;
+        GameObject leftPage = setPage(newObj.transform.GetChild(0).gameObject, ach);
+        GameObject rightPage = setPage(newObj.transform.GetChild(1).gameObject, ach1);
 
-
+        if (isLast) {
+            Destroy(rightPage);
+        }
+        newObj.transform.SetParent(AchivementChapter, false);
+        newObj.SetActive(false);
     }
+
+    private GameObject setPage(GameObject obj, Achivement ach) {
+        obj.transform.GetChild(0).GetComponent<Image>().sprite = ach.icon;
+        obj.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().text = ach.achName;
+        obj.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().text = ach.description;
+        obj.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().text = "Progress: 0/"  + ach.requirement[1];
+        return obj;
+    }
+
 }
