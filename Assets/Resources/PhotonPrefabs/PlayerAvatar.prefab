@@ -389,6 +389,7 @@ MonoBehaviour:
     type: 3}
   construction: {fileID: 0}
   interact: {fileID: 0}
+  achivementLog: {fileID: 0}
   inventory: {fileID: 11400000, guid: 874c695d1a43a924b89cb7d8f52770c6, type: 2}
   hotbarManager: {fileID: 470011026111240332}
   displayInventory: {fileID: 470011025235362741}
