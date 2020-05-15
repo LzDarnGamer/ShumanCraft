@@ -10,7 +10,7 @@ public class DisplayInventory : MonoBehaviour {
 
     private FBConnector[][] RealInventory;
 
-    void Awake() {
+    void Start() {
 
         RealInventory = new FBConnector[2][];
         RealInventory[0] = new FBConnector[10];

@@ -14,6 +14,7 @@ public class AchivementLog : MonoBehaviour {
     private Achivement[] keys;
     private int[] values;
     public void Start() {
+        achivementList = GameObject.Find("GameSetup").GetComponent<AchivementList>();
         ACHIVEMENT_LEVEL = 0;
         AchivementProgress = new OrderedDictionary();
 

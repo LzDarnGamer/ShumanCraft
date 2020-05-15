@@ -28,6 +28,8 @@ public class QuestbookGenerator : MonoBehaviour
     private Transform contentCraftings;
 
     void Start() {
+        achivementList = GameObject.Find("GameSetup").GetComponent<AchivementList>();
+
         FoodObject[] Fooditems = Resources.LoadAll<FoodObject>("Scriptable Objects/Items/Categories/Food");
         ArmourObject[] Armouritems = Resources.LoadAll<ArmourObject>("Scriptable Objects/Items/Categories/Armour");
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
