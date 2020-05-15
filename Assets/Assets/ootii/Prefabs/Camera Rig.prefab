@@ -256,7 +256,7 @@ MonoBehaviour:
     : "3", "IsPitchEnabled" : "True", "InvertPitch" : "True", "MinPitch" : "-60",
     "MaxPitch" : "60", "PitchSpeed" : "45", "Smoothing" : "0.1"}'
   - '{, "Type" : "com.ootii.Cameras.TransitionMotor, ootii, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null", "Name" : "Targeting In", "IsEnabled" : "True", "ActionAlias"
+    PublicKeyToken=null", "Name" : "Targeting In", "IsEnabled" : "False", "ActionAlias"
     : "Camera Aim", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset"
     : "(0, 0, 0)", "Offset" : "(0, 0, 0)", "Distance" : "0.00000", "MaxDistance"
     : "0.00000", "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
@@ -266,7 +266,7 @@ MonoBehaviour:
     : "False", "TestDistance" : "False", "ActorStances" : "", "InvertVerifyActorStances"
     : "False", "DistanceCompareType" : "0", "DistanceValue" : "0.5"}'
   - '{, "Type" : "com.ootii.Cameras.TransitionMotor, ootii, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null", "Name" : "Targeting Out", "IsEnabled" : "True", "ActionAlias"
+    PublicKeyToken=null", "Name" : "Targeting Out", "IsEnabled" : "False", "ActionAlias"
     : "Camera Aim", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset"
     : "(0, 0, 0)", "Offset" : "(0, 0, 0)", "Distance" : "0.00000", "MaxDistance"
     : "0.00000", "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
@@ -278,7 +278,7 @@ MonoBehaviour:
   StoredTransforms: []
   EditorShowDebug: 0
   EditorTabIndex: 1
-  EditorMotorIndex: 1
+  EditorMotorIndex: 3
   EditorRefresh: 0
   EditorCameraStyle: 1
   EditorUseAdventureStyle: 0

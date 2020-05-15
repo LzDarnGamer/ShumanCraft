@@ -6,6 +6,7 @@ using com.ootii.Cameras;
 using com.ootii.Input;
 using System.IO;
 using System.Collections;
+using com.ootii.Utilities.Debug;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -26,6 +27,9 @@ public class PlayerScript : MonoBehaviour {
     public ConstructionController construction;
 
     public Interact interact;
+
+    [Header("Achivement")]
+    [SerializeField] private AchivementLog achivementLog;
 
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
@@ -310,11 +314,14 @@ public class PlayerScript : MonoBehaviour {
                 if (Eat()) {
                     displayInventory.UpdateDisplay();
                 } else if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray
-                     , 4)) {
+                     , 5.5f)) {
                     GameObject hitObj = ray.transform.gameObject;
                     if (hitObj.CompareTag("Pickupable")) {
-                        if (displayInventory.PickupItem(ray.transform.GetComponent<Item>().item, 1))
+                        ItemObject it = ray.transform.GetComponent<Item>().item;
+                        if (displayInventory.PickupItem(it, 1)) {
+                            achivementLog.advanceAchivement(it);
                             Destroy(hitObj);
+                        }
                     }
 
                 }

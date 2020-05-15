@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class AchivementLog : MonoBehaviour {
@@ -9,25 +10,35 @@ public class AchivementLog : MonoBehaviour {
     [SerializeField] AchivementList achivementList;
     public int ACHIVEMENT_LEVEL { get; set; }
 
-    private Dictionary<Achivement, int> AchivementProgress;
+    private OrderedDictionary AchivementProgress;
+    private Achivement[] keys;
+    private int[] values;
     public void Start() {
         ACHIVEMENT_LEVEL = 0;
-        AchivementProgress = new Dictionary<Achivement, int>();
+        AchivementProgress = new OrderedDictionary();
 
         for (int i = 0; i < achivementList.AchivementsList.Count; i++) {
             AchivementProgress.Add(achivementList.AchivementsList[i], 0);
         }
 
+        ICollection k = AchivementProgress.Keys;
+        ICollection v = AchivementProgress.Values;
+
+        keys = new Achivement[AchivementProgress.Count];
+        values = new int[AchivementProgress.Count];
+        k.CopyTo(keys, 0);
+        v.CopyTo(values, 0);
     }
 
     public void advanceAchivement(ItemObject it) {
-        foreach (var item in AchivementProgress) {
-            if (!item.Key.isDone && item.Key.requirement[0] == it.itemID) {
-                AchivementProgress[item.Key] = item.Value + 1;
-                if(item.Value >= item.Key.requirement[1]) {
-                    AchivementProgress[item.Key] = item.Key.requirement[1];
+        for (int i = 0; i < AchivementProgress.Count; i++) {
+            if (!keys[i].isDone && keys[i].requirement[0] == it.itemID) {
+                values[i] += 1;
+                Debug.Log(values[i]);
+                if(values[i] >= keys[i].requirement[1]) {
+                    values[i] = keys[i].requirement[1];
                     ACHIVEMENT_LEVEL++;
-                    item.Key.isDone = true;
+                    keys[i].isDone = true;
                 }
             }
         }
