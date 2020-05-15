@@ -15,16 +15,21 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     [Header("Buttons")]
     public GameObject battleButton;
     public GameObject cancelButton;
-    public GameObject createButton;
-    public GameObject joinButton;
 
-    [Header("Lobby window")]
+    [Header("Join Lobby Window")]
     public GameObject joinUI;
     public GameObject content;
     public GameObject roomObj;
 
-    [Header ("Connecting Text")]
+    [Header("Connecting Text")]
     public Text connectText;
+    public GameObject joinButton;
+
+    [Header("Create Lobby Window")]
+    public GameObject createUI;
+    public GameObject createButton;
+    public TMP_InputField createField;
+    public GameObject createOKButton;
 
     private void Awake() {
         lobby = this;
@@ -52,6 +57,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public override void OnRoomListUpdate(List<RoomInfo> roomList) {
         Debug.Log("Room List Updated: " + roomList.ToArray().Length);
 
+        foreach (Transform child in content.transform) Destroy(child.gameObject);
+
         foreach (RoomInfo game in roomList) {
             if (!roomNames.Contains(game.Name)) {
                 GameObject sala = Instantiate(roomObj) as GameObject;
@@ -63,11 +70,17 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
                 Button btn = sala.GetComponent<Button>();
 
-                btn.onClick.AddListener(delegate { OnRoomButtonClicked(game.Name); });
+                if (game.PlayerCount != game.MaxPlayers)
+                    btn.onClick.AddListener(delegate { OnRoomButtonClicked(game.Name); });
             } else {
-                
+
             }
         }
+    }
+
+    public void OnCreateButtonOKClicked() {
+        string _roomName = createField.text;
+        CreateRoom(_roomName);
     }
 
     public void OnRoomButtonClicked(string name) {
@@ -77,10 +90,11 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     public void OnCreateLobbyButtonClicked () {
         Debug.Log("Create Button was clicked");
-        CreateRoom();
+        createUI.SetActive(true);
     }
 
     public void OnJoinLobbyButtonClicked () {
+        Debug.Log("Create Button was clicked");
         joinUI.SetActive(true);
     }
 
@@ -121,8 +135,9 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     private void CreateRoom (string roomName = null) { 
         Debug.Log("Trying to create room...");
         int randomRoomName = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() {IsVisible = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers};
-        PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers };
+        if (roomName == null) PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        else PhotonNetwork.CreateRoom(roomName, roomOps);
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) {
