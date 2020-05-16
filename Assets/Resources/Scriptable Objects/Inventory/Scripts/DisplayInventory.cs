@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections.Specialized;
 
 public class DisplayInventory : MonoBehaviour {
     [SerializeField] MatrixInventory AbstractInventory;
     [SerializeField] GameObject inventorySlots;
     [SerializeField] GameObject hotbarSlots;
     [SerializeField] GameObject amountPanel;
+
+
+    [SerializeField] GameObject achivementChapter;
+    [SerializeField] AchivementLog achivementLog;
 
     private FBConnector[][] RealInventory;
 
@@ -130,10 +135,21 @@ public class DisplayInventory : MonoBehaviour {
     }
 
     public void updateAchivement() {
+        Achivement[] keys = achivementLog.keys;
+        int[] values = achivementLog.values;
+        for (int i = 0; i < keys.Length; i++) {
+            for (int j = 0; j < achivementChapter.transform.GetChild(i).transform.childCount; j++) {
+                string text = updateText(values[i + j], keys[i + j].requirement[1]);
+                achivementChapter.transform.GetChild(i).GetChild(3).GetComponent<TMPro.TMP_Text>().text = text;
+            }
+        }
 
     }
 
 
+    private string updateText(int amount, int max) {
+        return "Progress: "+amount+ "/" + max;
+    }
 
 
 

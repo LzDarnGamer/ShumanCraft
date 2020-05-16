@@ -7,13 +7,15 @@ public class AchivementLog : MonoBehaviour {
     [SerializeField] AudioClip achivementDone;
     [SerializeField] GameObject achivementdonePanel;
 
-    [SerializeField] AchivementList achivementList;
+
     public int ACHIVEMENT_LEVEL { get; set; }
 
+    private AchivementList achivementList;
     private OrderedDictionary AchivementProgress;
-    private Achivement[] keys;
-    private int[] values;
-    public void Start() {
+
+    public Achivement[] keys { get;  private set; }
+    public int[] values  { get;  private set; }
+public void Start() {
         achivementList = GameObject.Find("GameSetup").GetComponent<AchivementList>();
         ACHIVEMENT_LEVEL = 0;
         AchivementProgress = new OrderedDictionary();
