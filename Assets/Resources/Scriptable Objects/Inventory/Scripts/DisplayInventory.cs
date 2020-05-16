@@ -137,13 +137,18 @@ public class DisplayInventory : MonoBehaviour {
     public void updateAchivement() {
         Achivement[] keys = achivementLog.keys;
         int[] values = achivementLog.values;
-        for (int i = 0; i < keys.Length; i++) {
-            for (int j = 0; j < achivementChapter.transform.GetChild(i).transform.childCount; j++) {
+        //WORK IN PROGRESS
+        /*
+        for (int i = 0; i < keys.Length; i++) { 
+            for (int j = 0; j < achivementChapter.transform.GetChild(i+1).transform.childCount; j++) {
                 string text = updateText(values[i + j], keys[i + j].requirement[1]);
-                achivementChapter.transform.GetChild(i).GetChild(3).GetComponent<TMPro.TMP_Text>().text = text;
+                achivementChapter.transform.GetChild(i+1).GetChild(j).GetChild(3).GetComponent<TMPro.TMP_Text>().text = text;
+            }
+            if (keys[i].isDone) {
+                achivementChapter.transform.GetChild(i+1);
             }
         }
-
+        */
     }
 
 
