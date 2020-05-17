@@ -48,7 +48,9 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private bool isWalking = true;
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isCrouched = false;
-    [SerializeField] private Collider playerCollider;
+    [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private float colliderHeight;
+    [SerializeField] private float colliderCenterY;
 
     [Header("Caracteristicas")]
     [SerializeField] private string name;
@@ -94,6 +96,8 @@ public class PlayerScript : MonoBehaviour {
         thirstC = thirstCoroutine();
         healthCS = healthCoroutineStarving();
         healthCT = healthCoroutineThirsth();
+        colliderHeight = playerCollider.height;
+        colliderCenterY = playerCollider.center.y;
 
         if (isOnline) {
             if (PV.IsMine) {
@@ -283,9 +287,13 @@ public class PlayerScript : MonoBehaviour {
         int jumpState = Animator.StringToHash("Base Layer.JumpRunning");
         AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         if (currentBaseState.nameHash == jumpState) {
-            CapsuleCollider a;
-            //a.center.y = 
-            //playerCollider.he = anim.GetFloat("ColliderHeight");
+            float animHeight = anim.GetFloat("ColliderHeight");
+            float animOffset = anim.GetFloat("ColliderOffset");
+
+            //playerCollider.height = colliderHeight * animHeight;
+            playerCollider.center = new Vector3(playerCollider.center.x,
+                                                colliderCenterY * animOffset,
+                                                playerCollider.center.z);
         }
 
         if (Input.GetKeyUp(walkRunKey) && stamina > 0) this.isWalking = !isWalking;

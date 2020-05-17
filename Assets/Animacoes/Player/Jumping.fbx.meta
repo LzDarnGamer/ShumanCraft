@@ -63,8 +63,8 @@ ModelImporter:
           serializedVersion: 2
           curve:
           - serializedVersion: 3
-            time: 0
-            value: 0
+            time: -0.012825012
+            value: 0.99839854
             inSlope: 0.123068795
             outSlope: 0.123068795
             tangentMode: 0
@@ -72,8 +72,8 @@ ModelImporter:
             inWeight: 0
             outWeight: 0.48856282
           - serializedVersion: 3
-            time: 0.30427587
-            value: 0.9908154
+            time: 0.37097284
+            value: 0.49515027
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -81,8 +81,8 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.44490087
-            value: 0.9908154
+            time: 0.6173833
+            value: 0.99839854
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -90,17 +90,8 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.6302083
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 0
+            time: 0.987175
+            value: 0.99839854
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -110,13 +101,22 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
-      - name: gravityWeight
+      - name: ColliderOffset
         curve:
           serializedVersion: 2
           curve:
           - serializedVersion: 3
             time: 0
-            value: 0
+            value: 1
+            inSlope: 2.686365
+            outSlope: 2.686365
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.37203166
+            value: 1.9994128
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -124,35 +124,8 @@ ModelImporter:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.00257802
-            value: 0.0041214563
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.31007808
-            value: 0.993271
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.45070308
-            value: 0.993271
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.6302083
-            value: 0
+            time: 0.61741424
+            value: 1
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -161,15 +134,15 @@ ModelImporter:
             outWeight: 0
           - serializedVersion: 3
             time: 1
-            value: 0
+            value: 1
             inSlope: 0
             outSlope: 0
-            tangentMode: 0
+            tangentMode: 34
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.33333334
             outWeight: 0
-          preInfinity: 3
-          postInfinity: 3
+          preInfinity: 2
+          postInfinity: 2
           rotationOrder: 4
       events: []
       transformMask: []
