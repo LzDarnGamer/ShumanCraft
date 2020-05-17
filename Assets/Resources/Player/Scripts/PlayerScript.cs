@@ -48,6 +48,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private bool isWalking = true;
     [SerializeField] private bool isRunning = false;
     [SerializeField] private bool isCrouched = false;
+    [SerializeField] private Collider playerCollider;
 
     [Header("Caracteristicas")]
     [SerializeField] private string name;
@@ -279,9 +280,19 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void Movement() {
+        int jumpState = Animator.StringToHash("Base Layer.JumpRunning");
+        AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+        if (currentBaseState.nameHash == jumpState) {
+            CapsuleCollider a;
+            //a.center.y = 
+            //playerCollider.he = anim.GetFloat("ColliderHeight");
+        }
+
         if (Input.GetKeyUp(walkRunKey) && stamina > 0) this.isWalking = !isWalking;
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) this.isCrouched = !isCrouched;
+        if (Input.GetKeyUp(jumpKey) && isRunning && (x != 0 || y != 0)) anim.SetTrigger("RunningJump");
+        else if (Input.GetKeyUp(jumpKey) && (x == 0 || y == 0)) { }
 
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
