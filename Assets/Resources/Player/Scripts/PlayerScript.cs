@@ -51,8 +51,9 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private CapsuleCollider playerCollider;
     [SerializeField] private float colliderHeight;
     [SerializeField] private float colliderCenterY;
+    private AnimatorStateInfo currentBaseState;
 
-    [Header("Caracteristicas")]
+   [Header("Caracteristicas")]
     [SerializeField] private string name;
     [SerializeField] [Range(0, 100)] private float health           = 100.0f;
     [SerializeField] [Range(0, 100)] private float stamina          = 100.0f;
@@ -186,7 +187,11 @@ public class PlayerScript : MonoBehaviour {
             //if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
         }
 
-        if (instCam != null && isCamFixed) { facing = instCam.transform.eulerAngles.y; transform.eulerAngles = new Vector3(0, facing, 0); }
+        if (instCam != null && isCamFixed) { 
+            facing = instCam.transform.eulerAngles.y;
+            Vector3 look = new Vector3(0, facing, 0);
+            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, look, 0.04f);
+        }
 
         UIControl();
         Movement();
@@ -285,7 +290,7 @@ public class PlayerScript : MonoBehaviour {
 
     private void Movement() {
         int jumpState = Animator.StringToHash("Base Layer.JumpRunning");
-        AnimatorStateInfo currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+        currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         if (currentBaseState.nameHash == jumpState) {
             float animHeight = anim.GetFloat("ColliderHeight");
             float animOffset = anim.GetFloat("ColliderOffset");
@@ -300,7 +305,7 @@ public class PlayerScript : MonoBehaviour {
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) this.isCrouched = !isCrouched;
         if (Input.GetKeyUp(jumpKey) && isRunning && (x != 0 || y != 0)) anim.SetTrigger("RunningJump");
-        else if (Input.GetKeyUp(jumpKey) && (x == 0 || y == 0)) { }
+        else if (Input.GetKeyUp(jumpKey) && (x == 0 || y == 0)) anim.SetTrigger("JumpSteady");
 
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
