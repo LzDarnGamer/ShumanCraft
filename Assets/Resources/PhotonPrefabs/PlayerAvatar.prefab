@@ -3595,6 +3595,9 @@ MonoBehaviour:
   isWalking: 1
   isRunning: 0
   isCrouched: 0
+  playerCollider: {fileID: 2832949667078301454}
+  colliderHeight: 0
+  colliderCenterY: 0
   name: 
   health: 100
   stamina: 100
@@ -3726,6 +3729,18 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Use
+  - Type: 9
+    SynchronizeType: 0
+    Name: RunningJump
+  - Type: 9
+    SynchronizeType: 0
+    Name: JumpSteady
+  - Type: 1
+    SynchronizeType: 0
+    Name: ColliderHeight
+  - Type: 1
+    SynchronizeType: 0
+    Name: ColliderOffset
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
