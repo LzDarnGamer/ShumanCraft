@@ -209,7 +209,6 @@ public class PlayerScript : MonoBehaviour {
     private void AddCamera() {
         instCam = Instantiate(cam, this.gameObject.transform);
         instSource = Instantiate(inputSource, this.gameObject.transform);
-
         construction.setCamera(instCam.GetComponentInChildren<Camera>());
 
         if (isCamFixed) gameObject.transform.eulerAngles = new Vector3(0, facing, 0);

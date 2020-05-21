@@ -21,16 +21,18 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
-        if (!transform.gameObject.GetComponent<Image>().sprite.name.Equals("UISprite")) {
-            canvasGroup.blocksRaycasts = false;
-            g = Instantiate(Resources.Load<GameObject>("Scriptable Objects/Inventory/Prefabs/invSlotImg"));
-            g.GetComponent<Image>().sprite = transform.GetComponent<Image>().sprite;
-            g.transform.SetParent(canvas.transform);
+        if (transform.gameObject.GetComponent<Image>().sprite != null)
+            if(!transform.gameObject.GetComponent<Image>().sprite.name.Equals("UISprite")) {
+                canvasGroup.blocksRaycasts = false;
+                g = Instantiate(Resources.Load<GameObject>("Scriptable Objects/Inventory/Prefabs/invSlotImg"));
+                g.GetComponent<Image>().sprite = transform.GetComponent<Image>().sprite;
+                g.transform.SetParent(canvas.transform);
         }
     }   
 
     public void OnDrag(PointerEventData eventData) {
-        if (!transform.gameObject.GetComponent<Image>().sprite.name.Equals("UISprite")) {
+        if (transform.gameObject.GetComponent<Image>().sprite != null)
+            if(!transform.gameObject.GetComponent<Image>().sprite.name.Equals("UISprite")) {
             g.transform.position = Input.mousePosition;
         }
     }

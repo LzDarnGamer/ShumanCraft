@@ -37,7 +37,7 @@ public void Start() {
         for (int i = 0; i < AchivementProgress.Count; i++) {
             if (!keys[i].isDone && keys[i].requirement[0] == it.itemID) {
                 values[i] += 1;
-                Debug.Log(values[i]);
+                Debug.Log(it.name + " " + values[i]);
                 if(values[i] >= keys[i].requirement[1]) {
                     values[i] = keys[i].requirement[1];
                     ACHIVEMENT_LEVEL++;

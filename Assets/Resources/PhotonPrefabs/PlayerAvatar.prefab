@@ -1934,6 +1934,7 @@ MonoBehaviour:
   EscPanel: {fileID: 4749199179492606730}
   InvPanel: {fileID: 4749199178220428601}
   QuestBookPanel: {fileID: 4749199178982065231}
+  displayInventory: {fileID: 4749199178730530794}
   crafting: {fileID: 447228023301489526}
 --- !u!114 &4749199178792713436
 MonoBehaviour:
@@ -2529,7 +2530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a5c997db9808643941969805443b45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayInventory: {fileID: 0}
+  displayInventory: {fileID: 4749199178730530794}
   tabs:
   - {fileID: 4749199179055259523}
   - {fileID: 1281338481080228184}

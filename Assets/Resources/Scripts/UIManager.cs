@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] GameObject EscPanel;
     [SerializeField] GameObject InvPanel;
     [SerializeField] GameObject QuestBookPanel;
+    [SerializeField] DisplayInventory displayInventory;
     [SerializeField] Crafting crafting;
 
     void Update() {
@@ -78,6 +79,7 @@ public class UIManager : MonoBehaviour {
                     currentActive = KeyCode.B;
                     isQuestBookActive = !isQuestBookActive;
                     if (isQuestBookActive) {
+                        displayInventory.updateAchivement();
                         QuestBookPanel.SetActive(true);
                     } else {
                         QuestBookPanel.SetActive(false);
