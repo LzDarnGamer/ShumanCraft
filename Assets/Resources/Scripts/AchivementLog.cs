@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AchivementLog : MonoBehaviour {
     [SerializeField] AudioClip achivementDone;
+    [SerializeField] AudioSource sound;
     [SerializeField] GameObject achivementdonePanel;
 
 
@@ -15,7 +16,10 @@ public class AchivementLog : MonoBehaviour {
 
     public Achivement[] keys { get;  private set; }
     public int[] values  { get;  private set; }
-public void Start() {
+
+
+    private float menuOffset = 50;
+    public void Start() {
         achivementList = GameObject.Find("GameSetup").GetComponent<AchivementList>();
         ACHIVEMENT_LEVEL = 0;
         AchivementProgress = new OrderedDictionary();
@@ -31,6 +35,8 @@ public void Start() {
         values = new int[AchivementProgress.Count];
         k.CopyTo(keys, 0);
         v.CopyTo(values, 0);
+
+        achivementdonePanel.transform.localScale = Vector3.zero;
     }
 
     public void advanceAchivement(ItemObject it) {
@@ -38,12 +44,21 @@ public void Start() {
             if (!keys[i].isDone && keys[i].requirement[0] == it.itemID) {
                 values[i] += 1;
                 Debug.Log(it.name + " " + values[i]);
-                if(values[i] >= keys[i].requirement[1]) {
+                if (values[i] >= keys[i].requirement[1]) {
                     values[i] = keys[i].requirement[1];
                     ACHIVEMENT_LEVEL++;
                     keys[i].isDone = true;
+                    StartCoroutine(achivementAnimation());
                 }
             }
         }
+    }
+
+
+    private IEnumerator achivementAnimation() {
+        sound.PlayOneShot(achivementDone);
+        LeanTween.scale(achivementdonePanel, new Vector3(1, 1, 1), 0.7f);
+        yield return new WaitForSeconds(3f);
+        LeanTween.scale(achivementdonePanel, new Vector3(0, 0, 0), 0.4f);
     }
 }

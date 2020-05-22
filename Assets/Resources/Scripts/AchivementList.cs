@@ -10,7 +10,7 @@ public class AchivementList : MonoBehaviour
             new Achivement(
                 "Collect Wood",
                 "Break trees to get wood",
-                new int[] { ItemsIndex.getItem(1).itemID, 20 },
+                new int[] { ItemsIndex.getItem(1).itemID, 1 },
                 ItemsIndex.getItem(1).icon
                 ),
             new Achivement(

@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 1942269284501022414}
   - component: {fileID: 2097762587186754794}
   m_Layer: 0
-  m_Name: PlayerAvatar
+  m_Name: PlayerAvatar_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,6 +404,9 @@ MonoBehaviour:
   isWalking: 1
   isRunning: 0
   isCrouched: 0
+  playerCollider: {fileID: 0}
+  colliderHeight: 0
+  colliderCenterY: 0
   name: 
   health: 100
   stamina: 100
@@ -535,6 +538,18 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Use
+  - Type: 9
+    SynchronizeType: 0
+    Name: RunningJump
+  - Type: 9
+    SynchronizeType: 0
+    Name: JumpSteady
+  - Type: 1
+    SynchronizeType: 0
+    Name: ColliderHeight
+  - Type: 1
+    SynchronizeType: 0
+    Name: ColliderOffset
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -552,9 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca8127584be6894f9cdb6b0557b67eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achivementDone: {fileID: 0}
-  achivementdonePanel: {fileID: 0}
-  achivementList: {fileID: 1711523467191285169, guid: 2c73d372e3ab20c45a48ae8d3cb54fef,
+  achivementDone: {fileID: 8300000, guid: 570d16fd76def2c48a0a6773963e878b, type: 3}
+  achivementdonePanel: {fileID: 4851379322084124641, guid: e3498083ab687af4cbdbe8384615dfc2,
     type: 3}
 --- !u!1 &1978832534163065935
 GameObject:
