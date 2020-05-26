@@ -12,6 +12,9 @@ TagManager:
   - MainCanvas
   - RoomUI
   - Terrain
+  - Dirt
+  - Sand
+  - Grass
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

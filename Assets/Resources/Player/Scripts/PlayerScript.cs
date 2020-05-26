@@ -57,8 +57,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private string Playername;
     [SerializeField] [Range(0, 100)] private float health           = 100.0f;
     [SerializeField] [Range(0, 100)] private float stamina          = 100.0f;
-    [SerializeField] [Range(0, 100)] private float staminaLoss      = 10.0f;
-    [SerializeField] [Range(0, 100)] private bool isUsingStamina = false;
+    [SerializeField] [Range(0, 100)] private float staminaLoss      = 0.5f;
+    [SerializeField] private bool isUsingStamina = false;
     [SerializeField] [Range(0, 100)] private float hunger           = 100.0f;
     [SerializeField] [Range(0, 100)] private float hungerLoss       = 0.5f;
     [SerializeField] [Range(0, 100)] private float hungerThreshold  = 10.0f;
@@ -266,9 +266,9 @@ public class PlayerScript : MonoBehaviour {
 
     private IEnumerator staminaCoroutineAdd () {
         while (true) {
-            if (isUsingStamina) {
+            if (!isUsingStamina && stamina < 100) {
                 stamina += staminaLoss / 2;
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.2f);
             } else {
                 yield return null;
             }
@@ -278,9 +278,9 @@ public class PlayerScript : MonoBehaviour {
 
     private IEnumerator staminaCoroutineMinus() {
         while (true) {
-            if (isUsingStamina) {
+            if (isUsingStamina && stamina > 0) {
                 stamina -= staminaLoss;
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.2f);
             } else {
                 yield return null;
             }
