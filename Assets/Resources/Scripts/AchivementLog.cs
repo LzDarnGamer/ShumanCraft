@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AchivementLog : MonoBehaviour {
     [SerializeField] AudioClip achivementDone;
@@ -48,15 +49,17 @@ public class AchivementLog : MonoBehaviour {
                     values[i] = keys[i].requirement[1];
                     ACHIVEMENT_LEVEL++;
                     keys[i].isDone = true;
-                    StartCoroutine(achivementAnimation());
+                    StartCoroutine(achivementAnimation(keys[i]));
                 }
             }
         }
     }
 
 
-    private IEnumerator achivementAnimation() {
+    private IEnumerator achivementAnimation(Achivement ach) {
         sound.PlayOneShot(achivementDone);
+        achivementdonePanel.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = ach.achName;
+        achivementdonePanel.transform.GetChild(1).GetComponent<Image>().sprite = ach.icon;
         LeanTween.scale(achivementdonePanel, new Vector3(1, 1, 1), 0.7f);
         yield return new WaitForSeconds(3f);
         LeanTween.scale(achivementdonePanel, new Vector3(0, 0, 0), 0.4f);

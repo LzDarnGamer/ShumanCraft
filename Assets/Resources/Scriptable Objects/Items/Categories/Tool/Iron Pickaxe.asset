@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ed4060f7a302a408d805287a2e9861, type: 3}
   m_Name: Iron Pickaxe
   m_EditorClassIdentifier: 
-  icon: {fileID: -2248273014285675650, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: -2283199200020712999, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 1
   itemID: 707
   isStackable: 0

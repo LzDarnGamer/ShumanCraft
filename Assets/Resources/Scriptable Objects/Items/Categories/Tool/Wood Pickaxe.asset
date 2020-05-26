@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ed4060f7a302a408d805287a2e9861, type: 3}
   m_Name: Wood Pickaxe
   m_EditorClassIdentifier: 
-  icon: {fileID: -5166432130525955749, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: 7627503616358371109, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 1
   itemID: 705
   isStackable: 0

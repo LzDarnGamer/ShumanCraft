@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dff3975678d8cc419cb8cfe5804c372, type: 3}
   m_Name: Stick
   m_EditorClassIdentifier: 
-  icon: {fileID: 6621252853494989987, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: -2652327829572825525, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 3
   itemID: 2
   isStackable: 1
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
+  inGameObject: {fileID: 0}
   description: Used to craft the most basic tools.

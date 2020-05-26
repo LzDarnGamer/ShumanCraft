@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dff3975678d8cc419cb8cfe5804c372, type: 3}
   m_Name: Leaves
   m_EditorClassIdentifier: 
-  icon: {fileID: -2132618675194457872, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: 1921378318177413420, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 3
   itemID: 6
   isStackable: 1

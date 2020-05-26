@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2d0e7e2f0edbc44849a9e8a3b60a0c, type: 3}
   m_Name: Berries
   m_EditorClassIdentifier: 
-  icon: {fileID: 4202938828118557322, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: -4297203505398261690, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 0
   itemID: 601
   isStackable: 1
   maxStackSize: 16
   recipeItems: []
   recipeAmount: 
+  inGameObject: {fileID: 0}
   description: Some are good, some are bad
   hungerRestore: 2
-  waterRestore: 1
+  thirstRestore: 0
   healthRestore: 0

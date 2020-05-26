@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dff3975678d8cc419cb8cfe5804c372, type: 3}
   m_Name: Rope
   m_EditorClassIdentifier: 
-  icon: {fileID: 5380821259769293072, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: 7043154560315042046, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 3
   itemID: 7
   isStackable: 1
@@ -20,4 +20,5 @@ MonoBehaviour:
   recipeItems:
   - {fileID: 11400000, guid: b4bef718a2a07a546b1983a7cc4542c7, type: 2}
   recipeAmount: 02000000
+  inGameObject: {fileID: 0}
   description: Used to atach things together just like duct tape
