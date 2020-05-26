@@ -54,10 +54,11 @@ public class PlayerScript : MonoBehaviour {
     private AnimatorStateInfo currentBaseState;
 
    [Header("Caracteristicas")]
-    [SerializeField] private string name;
+    [SerializeField] private string Playername;
     [SerializeField] [Range(0, 100)] private float health           = 100.0f;
     [SerializeField] [Range(0, 100)] private float stamina          = 100.0f;
     [SerializeField] [Range(0, 100)] private float staminaLoss      = 10.0f;
+    [SerializeField] [Range(0, 100)] private bool isUsingStamina = false;
     [SerializeField] [Range(0, 100)] private float hunger           = 100.0f;
     [SerializeField] [Range(0, 100)] private float hungerLoss       = 0.5f;
     [SerializeField] [Range(0, 100)] private float hungerThreshold  = 10.0f;
@@ -66,7 +67,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float thirst           = 100.0f;
     [SerializeField] [Range(0, 100)] private float thirstLoss       = 1.5f;
     [SerializeField] [Range(0, 100)] private float thirstThreshold  = 30.0f;
-    [SerializeField] [Range(0, 100)] private float thirstDecay      = 5.0f;
+    [SerializeField] [Range(0, 100)] private float thirstDecay      = 0.5f;
     [SerializeField] private bool needsWater                        = false;
 
     [Header("Controles")]
@@ -86,17 +87,16 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiThirst;
     [SerializeField] private bool isOnline = false;
 
-    private IEnumerator staminaMinus, staminaPlus, hungerC, thirstC, healthCS, healthCT;
 
     void Start() {
         anim = gameObject.GetComponent<Animator>();
         auxRPC = gameObject.GetComponent<PlayerAux>();
-        staminaMinus = staminaCoroutineMinus();
-        staminaPlus = staminaCoroutineAdd();
-        hungerC = hungerCoroutine();
-        thirstC = thirstCoroutine();
-        healthCS = healthCoroutineStarving();
-        healthCT = healthCoroutineThirsth();
+        StartCoroutine(staminaCoroutineMinus());
+        StartCoroutine(staminaCoroutineAdd());
+        StartCoroutine(hungerCoroutine());
+        StartCoroutine(thirstCoroutine());
+        StartCoroutine(healthCoroutineStarving());
+        StartCoroutine(healthCoroutineThirsth());
         colliderHeight = playerCollider.height;
         colliderCenterY = playerCollider.center.y;
 
@@ -226,64 +226,87 @@ public class PlayerScript : MonoBehaviour {
     public Camera getCamera() { return this.cam.GetComponentInChildren<Camera>(); }
 
     private void Attributes() {
-        //Debug.Log("Running Attributes");
         /* Stamina */
         isRunning = !isWalking;
-        if (isRunning && (x != 0 || y != 0)) { StartCoroutine(staminaMinus); StopCoroutine(staminaPlus); } //stamina -= staminaLoss * Time.deltaTime;
-        else if ((!isRunning || (x == 0 || y == 0)) && stamina < 100f) { StartCoroutine(staminaPlus); StopCoroutine(staminaMinus); } //stamina += (staminaLoss / 2) * Time.deltaTime;
+        if (isRunning && (x != 0 || y != 0)) { isUsingStamina = true; } //stamina -= staminaLoss * Time.deltaTime;
+        else if ((!isRunning || (x == 0 || y == 0)) && stamina < 100f) { isUsingStamina = false; } //stamina += (staminaLoss / 2) * Time.deltaTime;
 
         /* Hunger */
         if (hunger < hungerThreshold) isStarving = true; else isStarving = false;
-        if (isStarving) StartCoroutine(healthCS);
-        StartCoroutine (hungerC); //hunger -= hungerLoss * Time.deltaTime;
+
         // [FALTA] Mostrar Alerta no ecra
 
         /* Thirst */
         if (thirst < thirstThreshold) needsWater = true; else needsWater = false;
-        if (needsWater) StartCoroutine(healthCT);
-        StartCoroutine (thirstC); //thirst -= thirstLoss * Time.deltaTime;
+
         // [FALTA] Mostrar Alerta no ecra
     }
 
     private IEnumerator healthCoroutineStarving() {
         while (true) {
-            yield return new WaitForSeconds(1);
-            health -= starvingDecay;
+            if (isStarving && health > 0) {
+                health -= starvingDecay;
+                yield return new WaitForSeconds(1);
+            } else {
+                yield return null;
+            }
         }
     }
 
     private IEnumerator healthCoroutineThirsth() {
         while (true) {
-            yield return new WaitForSeconds(1);
-            health -= thirstDecay;
+            if (needsWater && health > 0) {
+                health -= thirstDecay;
+                yield return new WaitForSeconds(1);
+            } else {
+                yield return null;
+            }
         }
     }
 
     private IEnumerator staminaCoroutineAdd () {
         while (true) {
-            yield return new WaitForSeconds(1);
-            stamina += staminaLoss / 2;
+            if (isUsingStamina) {
+                stamina += staminaLoss / 2;
+                yield return new WaitForSeconds(1);
+            } else {
+                yield return null;
+            }
+            
         }
     }
 
     private IEnumerator staminaCoroutineMinus() {
         while (true) {
-            yield return new WaitForSeconds(1);
-            stamina -= staminaLoss;
+            if (isUsingStamina) {
+                stamina -= staminaLoss;
+                yield return new WaitForSeconds(1);
+            } else {
+                yield return null;
+            }
+            
         }
     }
 
     private IEnumerator hungerCoroutine() {
         while (true) {
-            yield return new WaitForSeconds(1);
-            hunger -= hungerLoss;
+            if (hunger > 0) { 
+                hunger -= hungerLoss; 
+                yield return new WaitForSeconds(1);
+            } else { 
+                yield return null;
+            }
         }
     }
 
     private IEnumerator thirstCoroutine() {
         while (true) {
-            yield return new WaitForSeconds(1);
-            thirst -= thirstLoss;
+            if (thirst > 0) {
+                thirst -= thirstDecay;
+                yield return new WaitForSeconds(1);
+            } else {
+                yield return null;
+            }
         }
     }
 
@@ -300,9 +323,9 @@ public class PlayerScript : MonoBehaviour {
                                                 playerCollider.center.z);
         }
 
-        if (Input.GetKeyUp(walkRunKey) && stamina > 0) this.isWalking = !isWalking;
+        if (Input.GetKeyUp(walkRunKey) && stamina > 0) isWalking = !isWalking;
         if (stamina <= 0) this.isWalking = true;
-        if (Input.GetKeyUp(crouchKey)) this.isCrouched = !isCrouched;
+        if (Input.GetKeyUp(crouchKey)) isCrouched = !isCrouched;
         if (Input.GetKeyUp(jumpKey) && isRunning && (x != 0 || y != 0)) anim.SetTrigger("RunningJump");
         else if (Input.GetKeyUp(jumpKey) && (x == 0 || y == 0)) anim.SetTrigger("JumpSteady");
 
