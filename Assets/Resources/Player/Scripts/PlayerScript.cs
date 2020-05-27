@@ -389,6 +389,12 @@ public class PlayerScript : MonoBehaviour {
         return false;
     }
 
+    public void activateCollider() {
+        if(instantiatedObject != null) {
+            instantiatedObject.GetComponent<BoxCollider>().enabled = !instantiatedObject.GetComponent<BoxCollider>().enabled;
+        }
+    }
+
     public void addHealth(float amount) {health += amount;}
     public void addThirst(float amount) {thirst += amount;}
     public void addHunger(float amount) {hunger += amount;}
