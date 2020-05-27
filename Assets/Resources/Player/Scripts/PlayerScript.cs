@@ -126,7 +126,6 @@ public class PlayerScript : MonoBehaviour {
             } else if (!PV.IsMine) {
                 DestroyImmediate(instCam, true);
                 DestroyImmediate(instSource, true);
-                
             }
         } else {
             PlayerManager();

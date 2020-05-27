@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +10,9 @@ public class NPC_Animal : MonoBehaviour {
 
     public int currentTarget;
     public float maxDistancetoCheck = 30.0f;
+
+    [SerializeField] private float health = 100.0f;
+    public bool dead = false;
 
     public Animator anim;
     Vector3 disttoPlayer;
@@ -30,18 +33,37 @@ public class NPC_Animal : MonoBehaviour {
     }
 
     void Update() {
+        if (dead) navMeshAgent.isStopped = true;
+        if (health > 0.0f) {
+            // Idea: apresentar UI de vida do npc quando o player esta perto
+            disttoPlayer = (transform.position - player.transform.position);
 
-        // Idea: apresentar UI de vida do npc quando o player esta perto
-        disttoPlayer = (transform.position - player.transform.position);
+            anim.SetFloat("DistToPlayer", disttoPlayer.magnitude);
 
-        anim.SetFloat("DistToPlayer", disttoPlayer.magnitude);
+            worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
 
-        worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
+            if (worldDeltaPosition.magnitude > navMeshAgent.radius)
+                navMeshAgent.nextPosition = transform.position + 0.5f * worldDeltaPosition;
 
-        if (worldDeltaPosition.magnitude > navMeshAgent.radius)
-            navMeshAgent.nextPosition = transform.position + 0.5f * worldDeltaPosition;
+            Visao();
+        } else {
+            if (!dead) {
+                anim.SetTrigger("dead");
+                if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
+                StartCoroutine(die());
+                dead = true;
+            }
+        }
+    }
 
-        Visao();
+    public void TakeDamage(float ammount) {
+        health -= ammount;
+    }
+
+    IEnumerator die() {
+        yield return new WaitForSeconds(5);
+        // Sistema de particulas
+        PhotonNetwork.Destroy(this.gameObject);
     }
 
     public void MoveToNextWaypoint() {
@@ -55,7 +77,7 @@ public class NPC_Animal : MonoBehaviour {
         }
     }
 
-    public void OnAnimatorMove () {
+    public void OnAnimatorMove() {
         Vector3 position = anim.rootPosition;
         position.y = navMeshAgent.nextPosition.y;
         transform.position = position;
@@ -67,7 +89,7 @@ public class NPC_Animal : MonoBehaviour {
         if (Physics.SphereCast(transform.position + Vector3.up, 1, transform.forward, out hit, maxDistancetoCheck)) {
             if (hit.rigidbody != null && hit.rigidbody.tag == "Player") {
                 Debug.DrawRay(transform.position + Vector3.up, transform.forward * maxDistancetoCheck, Color.red);
-                
+
                 anim.SetBool("Saw", true);
             }
 
