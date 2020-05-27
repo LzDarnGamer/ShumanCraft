@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 1722973095174101941}
   - component: {fileID: 1453516034509486224}
   - component: {fileID: 918879303851771128}
-  - component: {fileID: 4100431400650983147}
-  - component: {fileID: 8052372164301775174}
   - component: {fileID: 8052372164301775177}
   - component: {fileID: -6331678091699407918}
   - component: {fileID: 5230597818150118887}
@@ -99,36 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1826ab9e7ce64d04dbda24752b3b14ac, type: 2}
---- !u!64 &4100431400650983147
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2383132299548289514}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: cc19a81d76f844a90ad880aa48607613, type: 3}
---- !u!54 &8052372164301775174
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2383132299548289514}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &8052372164301775177
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,7 +106,7 @@ BoxCollider:
   m_GameObject: {fileID: 2383132299548289514}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.874853, y: 0.27619123, z: 0.13673812}
   m_Center: {x: -0.00012991033, y: 0.86587805, z: 0.0000006915627}
