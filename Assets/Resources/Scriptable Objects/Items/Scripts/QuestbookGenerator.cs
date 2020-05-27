@@ -131,7 +131,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(4).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = waterRestore;
         newObj.transform.GetChild(5).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = healthRestore;
 
-        newObj.transform.SetParent(contentFood);
+        newObj.transform.SetParent(contentFood, false);
     }
 
     private void fillMaterialInfo(GameObject obj, string name, string itemID, string description, Sprite icon) {
@@ -142,7 +142,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(1).gameObject.GetComponent<TMPro.TMP_Text>().text = name;
         newObj.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = icon;
 
-        newObj.transform.SetParent(contentMaterial);
+        newObj.transform.SetParent(contentMaterial, false);
     }
 
     private void fillToolInfo(GameObject obj, string name, string itemID, string durability,string description, Sprite icon) {
@@ -154,7 +154,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = icon;
         newObj.transform.GetChild(5).gameObject.GetComponent<TMPro.TMP_Text>().text = durability;
 
-        newObj.transform.SetParent(contentTool);
+        newObj.transform.SetParent(contentTool, false);
     }
     private void fillWeaponInfo(GameObject obj, string name, string itemID, string durability, string damage, string description, Sprite icon) {
         GameObject newObj = Instantiate(obj);
@@ -165,7 +165,7 @@ public class QuestbookGenerator : MonoBehaviour
         newObj.transform.GetChild(3).gameObject.GetComponent<TMPro.TMP_Text>().text = durability;
         newObj.transform.GetChild(4).gameObject.GetComponent<TMPro.TMP_Text>().text = damage;
 
-        newObj.transform.SetParent(contentWeapon);
+        newObj.transform.SetParent(contentWeapon, false);
     }
 
     private void fillCreaftingInfo(GameObject obj, string name, string description, 
@@ -184,12 +184,12 @@ public class QuestbookGenerator : MonoBehaviour
             item.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = recipeItem[i].icon;
             item.transform.GetChild(2).gameObject.GetComponent<TMPro.TMP_Text>().text = amountItem[i].ToString();
             item.transform.GetChild(3).gameObject.GetComponent<TMPro.TMP_Text>().text = "#"+ recipeItem[i].itemID.ToString();
-            item.transform.SetParent(Recipe.transform);
+            item.transform.SetParent(Recipe.transform, false);
         }
         newObj.transform.GetChild(4).gameObject.GetComponent<Button>().interactable = false;
         newObj.transform.GetChild(5).name = itemID.ToString();
         Destroy(Item);
-        newObj.transform.SetParent(contentCraftings);
+        newObj.transform.SetParent(contentCraftings, false);
     }
 
 

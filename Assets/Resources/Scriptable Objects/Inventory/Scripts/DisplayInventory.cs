@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections.Specialized;
 
 public class DisplayInventory : MonoBehaviour {
     [SerializeField] MatrixInventory AbstractInventory;
@@ -50,7 +49,7 @@ public class DisplayInventory : MonoBehaviour {
 
         SyncronizeInventories();
         ReloadTextures();
-
+        /*
         for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
             if (RealInventory[0][i].ArraySlot.item != null) {
                 RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
@@ -66,7 +65,7 @@ public class DisplayInventory : MonoBehaviour {
                 LoadAmount(i, AbstractInventory.getInventory(), 1);
             }
         }
-
+        */
 
  
     }
@@ -116,22 +115,38 @@ public class DisplayInventory : MonoBehaviour {
 
     private void ReloadTextures() {
         for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
-            if (RealInventory[0][i].ArraySlot.item != null)
+            if (RealInventory[0][i].ArraySlot.item != null) {
                 RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = RealInventory[0][i].ArraySlot.item.icon;
-            else
+                if(RealInventory[0][i].InGameSlot.transform.GetChild(0).childCount == 0) {
+                    LoadAmount(i, AbstractInventory.getHotbar(), 0);
+                }
+                
+            } else {
                 RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                = Resources.Load<Sprite>("Resources/unity_buildin_extra/UISprite");
+                = null;
+                if (RealInventory[0][i].InGameSlot.transform.GetChild(0).childCount > 0) {
+                    Destroy(RealInventory[0][i].InGameSlot.transform.GetChild(0).GetChild(0).gameObject);
+                }
+            }
         }
 
         for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
-            if (RealInventory[1][i].ArraySlot.item != null)
+            if (RealInventory[1][i].ArraySlot.item != null) {
                 RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
                     = RealInventory[1][i].ArraySlot.item.icon;
-            else
+                if (RealInventory[1][i].InGameSlot.transform.GetChild(0).childCount == 0) {
+                    LoadAmount(i, AbstractInventory.getInventory(), 1);
+                }
+            } else {
                 RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                = Resources.Load<Sprite>("Resources/unity_buildin_extra/UISprite");
+                = null;
+                if (RealInventory[1][i].InGameSlot.transform.GetChild(0).childCount > 0) {
+                    Destroy(RealInventory[1][i].InGameSlot.transform.GetChild(0).GetChild(0).gameObject);
+                }
+            }
         }
+
     }
 
     public void updateAchivement() {
@@ -149,19 +164,6 @@ public class DisplayInventory : MonoBehaviour {
                 }
             }
         }
-
-        //WORK IN PROGRESS
-        /*
-        for (int i = 0; i < keys.Length; i++) { 
-            for (int j = 0; j < achivementChapter.transform.GetChild(i+1).transform.childCount; j++) {
-                string text = updateText(values[i + j], keys[i + j].requirement[1]);
-                achivementChapter.transform.GetChild(i+1).GetChild(j).GetChild(3).GetComponent<TMPro.TMP_Text>().text = text;
-            }
-            if (keys[i].isDone) {
-                achivementChapter.transform.GetChild(i+1);
-            }
-        }
-        */
     }
 
 

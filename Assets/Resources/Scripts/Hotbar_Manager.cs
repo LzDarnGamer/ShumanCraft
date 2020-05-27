@@ -1,13 +1,14 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Hotbar_Manager : MonoBehaviour
 {
-    private Color unselectedColor = new Color32(255, 255, 255, 100);
-    private Color selectedColor = new Color32(0, 0, 0, 150);
+    [SerializeField] Sprite defaultIcon;
+    [SerializeField] Sprite selectedIcon;
 
     private KeyCode[] keyCodes = {
          KeyCode.Alpha0,
@@ -45,12 +46,12 @@ public class Hotbar_Manager : MonoBehaviour
         for (int i = 0; i < keyCodes.Length; i++) {
             if (Input.GetKeyDown(keyCodes[i])) {
                 if (i == 0) {
-                    hotbarslots[scrollPosition].transform.GetComponent<Image>().color = unselectedColor;
-                    hotbarslots[9].transform.GetComponent<Image>().color = selectedColor;
+                    hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
+                    hotbarslots[9].transform.GetComponent<Image>().sprite = selectedIcon;
                     scrollPosition = 9;
                 } else {
-                    hotbarslots[scrollPosition].transform.GetComponent<Image>().color = unselectedColor;
-                    hotbarslots[i-1].transform.GetComponent<Image>().color = selectedColor;
+                    hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
+                    hotbarslots[i-1].transform.GetComponent<Image>().sprite = selectedIcon;
                     scrollPosition = i-1;
                 }
             }
@@ -58,17 +59,17 @@ public class Hotbar_Manager : MonoBehaviour
 
 
         if (Input.mouseScrollDelta.y >= 1) {
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().color = unselectedColor;
+            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
             scrollPosition++;
             scrollPosition = (scrollPosition % 10);
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().color = selectedColor;
+            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
         } else if (Input.mouseScrollDelta.y <= -1) {
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().color = unselectedColor;
+            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
             scrollPosition--;
             if (scrollPosition < 0) {
                 scrollPosition = 9;
             }
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().color = selectedColor;
+            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
         }
     }
 

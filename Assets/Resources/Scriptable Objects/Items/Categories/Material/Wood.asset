@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dff3975678d8cc419cb8cfe5804c372, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  icon: {fileID: 3357360333254942192, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
+  icon: {fileID: 6621252853494989987, guid: cf1968c6002fa2a4fbffff3b43a796ed, type: 3}
   type: 3
   itemID: 1
   isStackable: 1
