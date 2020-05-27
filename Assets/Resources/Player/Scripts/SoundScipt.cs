@@ -23,13 +23,13 @@ public class SoundScipt : MonoBehaviour
             string floortag = hit.collider.tag;
             if (floortag == "Dirt") {
                 int r = Random.Range(0, dirt.Length-1);
-                audioPlayer.PlayOneShot(dirt[r]);
+                audioPlayer.PlayOneShot(dirt[r], 0.1f);
             } else if (floortag == "Sand") {
                 int r = Random.Range(0, sand.Length - 1);
-                audioPlayer.PlayOneShot(sand[r]);
+                audioPlayer.PlayOneShot(sand[r], 0.1f);
             } else if (floortag == "Grass") {
                 int r = Random.Range(0, grass.Length - 1);
-                audioPlayer.PlayOneShot(grass[r]);
+                audioPlayer.PlayOneShot(grass[r], 0.1f);
             }
         }
     }

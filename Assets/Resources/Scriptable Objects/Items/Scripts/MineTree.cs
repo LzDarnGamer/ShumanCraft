@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class MineTree : MineObject {
 
-    [SerializeField]
-    float minTimeToRespawn;
-
-    [SerializeField]
-    float maxTimeToRespawn;
-
-    
     AudioSource aud;
-
 
     private void Start() {
         aud = GetComponent<AudioSource>();
     }
 
+
     protected override void dropItems() {
+        /*
         int[] randomLocation = new int[LootTable.TreeLootTable().Count];
         for (int i = 0; i < randomLocation.Length; i++) {
             randomLocation[i] = Random.Range(0, transform.childCount-1);
@@ -30,20 +24,24 @@ public class MineTree : MineObject {
             }
         }
         int pos = 0;
+        */
         foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) {
             for (int i = 0; i < entry.Value; i++) {
                 Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, 
-                    transform.GetChild(randomLocation[pos]).transform.position,
-                    Quaternion.identity);
+                    transform.position + Vector3.up, Quaternion.identity);
             }
-            pos++;
+            //pos++;
         }
     }
 
-    protected override void OnCollisionEnter(Collision col) {
+
+    protected override void OnTriggerEnter(Collider col) {
+
         Item to = col.gameObject.GetComponent<Item>();
+        Debug.Log(to.item.itemID);
         if (to != null) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
+            aud.PlayOneShot(SoundOnHit, 0.05f);
             switch (to.item.itemID) {
                 case 701:
                     if (CheckIfAliveAfterHit(1)) {
@@ -74,7 +72,20 @@ public class MineTree : MineObject {
         }
     }
 
+    protected override void RespawnCountDown(float seconds, GameObject g) {
+        aud.PlayOneShot(SoundOnDestroy, 0.05f);
+        StartCoroutine(waitSeconds(seconds, g));
+        g.GetComponent<MeshRenderer>().enabled = false;
+        g.GetComponent<MeshCollider>().enabled = false; //Outros colliders tambem
+        HitsTaken = 0;
+    }
 
+    protected override IEnumerator waitSeconds(float seconds, GameObject g) {
+        yield return new WaitForSeconds(seconds);
+        g.GetComponent<MeshRenderer>().enabled = true;
+        g.GetComponent<MeshCollider>().enabled = true;
+        aud.PlayOneShot(SoundOnRespawn, 0.05f);
+    }
 }
 
   
