@@ -26,3 +26,4 @@ MonoBehaviour:
     type: 3}
   description: 
   durability: 64
+  hitPower: 4

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4574254793186606051}
   - component: {fileID: 5054836690699989483}
   - component: {fileID: 8689489169126728274}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ItemSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 7010305505557664612}
   - component: {fileID: 1678228490019368971}
   - component: {fileID: 8598090785062851682}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: you idot
+  m_text: You idot
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 6081448656738332816}
   - component: {fileID: 4709975441713882981}
   - component: {fileID: 1512481966444093686}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Panel - Achievement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 6900581830807988767}
   - component: {fileID: 280715689167328829}
   - component: {fileID: 829902689206890168}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -99,10 +99,12 @@ public class QuestbookGenerator : MonoBehaviour
 
         List<Achivement> list = achivementList.AchivementsList;
         for (int i = 0; i < list.Count; i+=2) {
-            if(i == list.Count - 1) {
-                fillAchivements(AchivementPage, list[i], list[i], i == list.Count - 1);
-            } else {
-                fillAchivements(AchivementPage, list[i], list[i+1], i == list.Count - 1);
+            if (!list[i].isHidden) {
+                if (i == list.Count - 1) {
+                    fillAchivements(AchivementPage, list[i], list[i], i == list.Count - 1);
+                } else {
+                    fillAchivements(AchivementPage, list[i], list[i + 1], i == list.Count - 1);
+                }
             }
         }
         AchivementChapter.parent.parent.gameObject.SetActive(false);

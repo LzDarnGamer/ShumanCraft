@@ -11,20 +11,30 @@ public class AchivementList : MonoBehaviour
                 "Collect Wood",
                 "Break trees to get wood",
                 new int[] { ItemsIndex.getItem(1).itemID, 1 },
-                ItemsIndex.getItem(1).icon
+                ItemsIndex.getItem(1).icon,
+                false
                 ),
             new Achivement(
                 "Collect Leafs",
                 "Break trees to get Leafs",
                 new int[] { ItemsIndex.getItem(6).itemID, 15 },
-                ItemsIndex.getItem(6).icon
+                ItemsIndex.getItem(6).icon,
+                false
                 ),
             new Achivement(
               "Craft rope",
               "Rope is going to be in a lot of tools and weapons craftings, use your leafs to craft",
               new int[] { ItemsIndex.getItem(7).itemID, 10 },
-              ItemsIndex.getItem(7).icon
-              )
+              ItemsIndex.getItem(7).icon,
+              false
+              ),
+            new Achivement(
+              "You idot",
+              "Suicide by jumping off map",
+              new int[] { ItemsIndex.getItem(1).itemID, 0 },
+              ItemsIndex.getItem(7).icon,
+              true
+              ),
         };
     }
 }

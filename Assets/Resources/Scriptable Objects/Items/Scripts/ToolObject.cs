@@ -6,6 +6,7 @@ using UnityEngine;
 public class ToolObject : ItemObject {
 
     public int durability;
+    public int hitPower;
 
     private void Awake() {
         type = ItemType.Tools;
