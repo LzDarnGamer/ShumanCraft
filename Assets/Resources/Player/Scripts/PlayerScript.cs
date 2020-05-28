@@ -195,14 +195,21 @@ public class PlayerScript : MonoBehaviour {
         UIControl();
         Movement();
         Attributes();
-        UseTool();
+        UseHand();
         PickUpItem();
     }
 
-    private void UseTool() {
+    private void UseHand() {
         if (Input.GetMouseButtonDown(0)) {
-            anim.SetTrigger("Use");
+            if (instantiatedObject == null) {
+                anim.SetTrigger("Punch");
+            } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Tools) {
+                anim.SetTrigger("Use");
+            } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
+                anim.SetTrigger("Stab");
+            }
         }
+
     }
 
     private void AddCamera() {
