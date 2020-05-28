@@ -40,6 +40,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     void Start() {
         PhotonNetwork.ConnectUsingSettings();
         createUIPanel.transform.localScale = new Vector3(0, 0, 0);
+        joinUI.transform.localScale = new Vector3(0, 0, 0);
     }
 
     public override void OnConnectedToMaster() {
@@ -93,12 +94,26 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public void OnCreateLobbyButtonClicked () {
         Debug.Log("Create Button was clicked");
         createUI.SetActive(true);
-        LeanTween.scale(createUIPanel, new Vector3(1, 1, 1), 0.5f);
+        if (joinUI.activeInHierarchy) {
+            StartCoroutine(delete(joinUI));
+            LeanTween.scale(joinUI, new Vector3(0, 0, 0), 0.8f);
+        }
+        LeanTween.scale(createUIPanel, new Vector3(1, 1, 1), 0.8f);
     }
-
+    
     public void OnJoinLobbyButtonClicked () {
         Debug.Log("Create Button was clicked");
         joinUI.SetActive(true);
+        if (createUI.activeInHierarchy) {
+            StartCoroutine(delete(createUI));
+            LeanTween.scale(createUI, new Vector3(0, 0, 0), 0.8f);
+        }
+        LeanTween.scale(joinUI, new Vector3(1, 1, 1), 0.8f);
+    }
+
+    IEnumerator delete(GameObject a) {
+        yield return new WaitForSeconds(2);
+        a.SetActive(false);
     }
 
     public void OnJoinButtonClicked() {
@@ -146,5 +161,12 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public override void OnCreateRoomFailed(short returnCode, string message) {
         Debug.Log("Error creating a room");
         CreateRoom();
+    }
+
+    public void OnMouseHover (GameObject btn) {
+        LeanTween.scale(btn, new Vector3(1.5f, 1.5f, 1.5f), 0.5f);
+    }
+    public void OnMouseExit (GameObject btn) {
+        LeanTween.scale(btn, new Vector3(1, 1, 1), 0.5f);
     }
 }
