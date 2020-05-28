@@ -62,6 +62,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float stamina          = 100.0f;
     [SerializeField] [Range(0, 100)] private float staminaLoss      = 0.5f;
     [SerializeField] private bool isUsingStamina = false;
+    [SerializeField] private bool isOutsideMap = false;
+    [SerializeField] private bool firstTime = true;
     [SerializeField] [Range(0, 100)] private float hunger           = 100.0f;
     [SerializeField] [Range(0, 100)] private float hungerLoss       = 0.5f;
     [SerializeField] [Range(0, 100)] private float hungerThreshold  = 10.0f;
@@ -72,6 +74,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float thirstThreshold  = 30.0f;
     [SerializeField] [Range(0, 100)] private float thirstDecay      = 0.5f;
     [SerializeField] private bool needsWater                        = false;
+    [SerializeField] [Range(0, 100)] private float voidDamage = 10f;
 
     [Header("Controles")]
     public KeyCode walkRunKey = KeyCode.LeftShift;
@@ -100,6 +103,7 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(thirstCoroutine());
         StartCoroutine(healthCoroutineStarving());
         StartCoroutine(healthCoroutineThirsth());
+        StartCoroutine(healthOutsideMap());
         colliderHeight = playerCollider.height;
         colliderCenterY = playerCollider.center.y;
 
@@ -200,6 +204,7 @@ public class PlayerScript : MonoBehaviour {
         Attributes();
         UseHand();
         PickUpItem();
+        TakeDamage();
     }
 
     private void UseHand() {
@@ -232,7 +237,18 @@ public class PlayerScript : MonoBehaviour {
         motor.AnchorOffset = new Vector3(0.0f, 1.3f, 0.0f);
     }
 
-    public Camera getCamera() { return this.cam.GetComponentInChildren<Camera>(); }
+    public Camera getCamera() { return cam.GetComponentInChildren<Camera>(); }
+
+    private void TakeDamage() {
+        if(transform.position.y < 1) {
+            isOutsideMap = true;
+            if(health <= 0 && firstTime) {
+                firstTime = false;
+                StartCoroutine(achivementLog.deadAchivement());
+            }
+        }
+    }
+
 
     private void Attributes() {
         /* Stamina */
@@ -251,6 +267,17 @@ public class PlayerScript : MonoBehaviour {
         if (thirst < thirstThreshold) needsWater = true; else needsWater = false;
 
         // [FALTA] Mostrar Alerta no ecra
+    }
+
+    private IEnumerator healthOutsideMap() {
+        while (true) {
+            if (isOutsideMap && health > 0) {
+                health -= voidDamage;
+                yield return new WaitForSeconds(0.5f);
+            } else {
+                yield return null;
+            }
+        }
     }
 
     private IEnumerator healthCoroutineStarving() {

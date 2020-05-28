@@ -10,6 +10,9 @@ public class AchivementLog : MonoBehaviour {
     [SerializeField] GameObject achivementdonePanel;
 
 
+    [Header("Hidden Achivements Icon")]
+    [SerializeField] Sprite dead;
+
     public int ACHIVEMENT_LEVEL { get; set; }
 
     private AchivementList achivementList;
@@ -53,6 +56,21 @@ public class AchivementLog : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public IEnumerator deadAchivement() {
+        for (int i = 0; i < AchivementProgress.Count; i++) {
+            if (!keys[i].isDone && keys[i].achName.Equals("You idot")) {
+                keys[i].isDone = true;
+                sound.PlayOneShot(achivementDone);
+                achivementdonePanel.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = "You idot";
+                achivementdonePanel.transform.GetChild(1).GetComponent<Image>().sprite = dead;
+                LeanTween.scale(achivementdonePanel, new Vector3(1, 1, 1), 0.7f);
+                yield return new WaitForSeconds(3f);
+                LeanTween.scale(achivementdonePanel, new Vector3(0, 0, 0), 0.4f);
+            }
+        }
+
     }
 
 

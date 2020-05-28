@@ -29,32 +29,10 @@ public class MineTree : MineObject {
         if (to != null) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
             aud.PlayOneShot(SoundOnHit, 0.05f);
-            switch (to.item.itemID) {
-                case 701:
-                    if (CheckIfAliveAfterHit(1)) {
-                        dropItems();
-                        RespawnCountDown(rt, gameObject);
-                }
-                    break;
-                case 702:
-                    if (CheckIfAliveAfterHit(2)) {
-                        dropItems();
-                        RespawnCountDown(rt, gameObject);
-                }
-                    break;
-                case 703:
-                    if (CheckIfAliveAfterHit(3)) {
-                        dropItems();
-                        RespawnCountDown(rt, gameObject);
-                    }
-                    break;
-                case 704:
-                    if (CheckIfAliveAfterHit(4)) {
-                        dropItems();
-                        RespawnCountDown(rt, gameObject);
-                    }
-                break;
-
+            ToolObject tool = (ToolObject) to.item;
+            if (CheckIfAliveAfterHit(tool.hitPower)) {
+                dropItems();
+                RespawnCountDown(rt, gameObject);
             }
         }
     }

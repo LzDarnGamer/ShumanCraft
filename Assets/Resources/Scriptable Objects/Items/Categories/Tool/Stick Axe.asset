@@ -19,5 +19,7 @@ MonoBehaviour:
   maxStackSize: 0
   recipeItems: []
   recipeAmount: 
+  inGameObject: {fileID: 0}
   description: 
   durability: 4
+  hitPower: 1
