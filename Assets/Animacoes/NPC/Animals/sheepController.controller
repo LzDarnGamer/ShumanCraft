@@ -48,7 +48,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -8945691123924629249, guid: 6dc7c47601a765e4e929de0cbc7e2011,
+  m_Motion: {fileID: -3100369314251171874, guid: a91c1fbb2b1ad6543a5342fbbc894a3f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -100,7 +100,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7551964380084998518, guid: 6dc7c47601a765e4e929de0cbc7e2011,
+  m_Motion: {fileID: 5522812681064789136, guid: a91c1fbb2b1ad6543a5342fbbc894a3f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -137,7 +137,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Chase
+  m_Name: Flee
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 2731765243839122219}
@@ -147,7 +147,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours:
-  - {fileID: -5760835821131189407}
+  - {fileID: 7728107264438354564}
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
@@ -173,25 +173,13 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -982115091633673366, guid: 6dc7c47601a765e4e929de0cbc7e2011,
+  m_Motion: {fileID: 4348485665485846014, guid: a91c1fbb2b1ad6543a5342fbbc894a3f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &-5760835821131189407
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a5a256d40c990040b836eb6263bccd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1101 &-4005891984405453955
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -254,7 +242,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: horseController
+  m_Name: sheepController
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Saw
@@ -368,7 +356,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7551964380084998518, guid: 6dc7c47601a765e4e929de0cbc7e2011,
+  m_Motion: {fileID: 5522812681064789136, guid: a91c1fbb2b1ad6543a5342fbbc894a3f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -479,13 +467,25 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -8945691123924629249, guid: 6dc7c47601a765e4e929de0cbc7e2011,
+  m_Motion: {fileID: -3100369314251171874, guid: a91c1fbb2b1ad6543a5342fbbc894a3f,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: Saw
   m_CycleOffsetParameter: DistToPlayer
   m_TimeParameter: DistToPlayer
+--- !u!114 &7728107264438354564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1aec17177ef8f42a7f5a51d0986aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1101 &8128941452013276494
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
