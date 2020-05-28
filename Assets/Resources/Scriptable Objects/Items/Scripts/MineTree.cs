@@ -5,7 +5,6 @@ using UnityEngine;
 public class MineTree : MineObject {
 
     AudioSource aud;
-
     private void Start() {
         aud = GetComponent<AudioSource>();
     }
@@ -14,26 +13,21 @@ public class MineTree : MineObject {
     protected override void dropItems() {
         foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) {
             for (int i = 0; i < entry.Value; i++) {
-                Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, 
+                Instantiate(ItemsIndex.getItem(entry.Key).inGameObject,
                     transform.position + Vector3.up, Quaternion.identity);
             }
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log(collision.transform.name);
-    }
 
-    protected override void OnTriggerEnter(Collider col) {
-        Item to = col.gameObject.GetComponent<Item>();
-        if (to != null) {
+    public void RaycastHit(Item it, Vector3 hitPos) {
+        aud.PlayOneShot(SoundOnHit, 0.05f);
+        Instantiate(particleEffects, hitPos, Quaternion.identity);
+        ToolObject tool = (ToolObject)it.item;
+        if (CheckIfAliveAfterHit(tool.hitPower)) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
-            aud.PlayOneShot(SoundOnHit, 0.05f);
-            ToolObject tool = (ToolObject) to.item;
-            if (CheckIfAliveAfterHit(tool.hitPower)) {
-                dropItems();
-                RespawnCountDown(rt, gameObject);
-            }
+            dropItems();
+            RespawnCountDown(rt, gameObject);
         }
     }
 
@@ -52,5 +46,7 @@ public class MineTree : MineObject {
         aud.PlayOneShot(SoundOnRespawn, 0.05f);
     }
 }
+
+
 
   

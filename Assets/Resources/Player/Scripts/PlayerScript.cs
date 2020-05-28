@@ -7,6 +7,7 @@ using com.ootii.Input;
 using System.IO;
 using System.Collections;
 using com.ootii.Utilities.Debug;
+using Photon.Realtime;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -94,6 +95,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private bool isOnline = false;
 
 
+    private int PlayerMask = 1 << 8;
     void Start() {
         anim = gameObject.GetComponent<Animator>();
         auxRPC = gameObject.GetComponent<PlayerAux>();
@@ -208,6 +210,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void UseHand() {
+        
         if (Input.GetMouseButtonDown(0)) {
             if (instantiatedObject == null) {
                 anim.SetTrigger("Punch");
@@ -215,9 +218,21 @@ public class PlayerScript : MonoBehaviour {
                 anim.SetTrigger("Use");
             } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
                 anim.SetTrigger("Stab");
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 4f)) {
+                    ray.collider.gameObject.CompareTag("");
+                }
+            }
+
+        }
+    }
+
+
+    private void mineObject() {
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
+            if (ray.collider.gameObject.CompareTag("Tree")) {
+                ray.collider.gameObject.GetComponent<MineTree>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
             }
         }
-
     }
 
     private void AddCamera() {
@@ -268,6 +283,7 @@ public class PlayerScript : MonoBehaviour {
 
         // [FALTA] Mostrar Alerta no ecra
     }
+
 
     private IEnumerator healthOutsideMap() {
         while (true) {
