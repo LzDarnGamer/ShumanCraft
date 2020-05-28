@@ -374,6 +374,12 @@ public class PlayerScript : MonoBehaviour {
 
         }
     }
+    public void activateCollider() {
+        if (instantiatedObject != null) {
+            instantiatedObject.GetComponent<BoxCollider>().enabled = !instantiatedObject.GetComponent<BoxCollider>().enabled;
+        }
+    }
+
 
     public bool Eat() {
         if (inventory.getHotbar()[hotbarManager.scrollPosition].item != null && typeof(FoodObject).IsInstanceOfType
