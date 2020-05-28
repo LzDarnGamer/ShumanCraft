@@ -12,33 +12,20 @@ public class MineTree : MineObject {
 
 
     protected override void dropItems() {
-        /*
-        int[] randomLocation = new int[LootTable.TreeLootTable().Count];
-        for (int i = 0; i < randomLocation.Length; i++) {
-            randomLocation[i] = Random.Range(0, transform.childCount-1);
-            for (int j = 0; j < i; j++) {
-                if (randomLocation[i] == randomLocation[j]) {
-                    i--;
-                    break;
-                }
-            }
-        }
-        int pos = 0;
-        */
         foreach (KeyValuePair<int, int> entry in LootTable.TreeLootTable()) {
             for (int i = 0; i < entry.Value; i++) {
                 Instantiate(ItemsIndex.getItem(entry.Key).inGameObject, 
                     transform.position + Vector3.up, Quaternion.identity);
             }
-            //pos++;
         }
     }
 
+    private void OnCollisionEnter(Collision collision) {
+        Debug.Log(collision.transform.name);
+    }
 
     protected override void OnTriggerEnter(Collider col) {
-
         Item to = col.gameObject.GetComponent<Item>();
-        Debug.Log(to.item.itemID);
         if (to != null) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
             aud.PlayOneShot(SoundOnHit, 0.05f);

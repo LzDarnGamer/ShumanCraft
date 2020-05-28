@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 751660856776241820}
   - component: {fileID: 751660856775274588}
   - component: {fileID: 751660857704283763}
-  - component: {fileID: 751660856773013149}
+  - component: {fileID: 8161514737528597784}
   m_Layer: 0
   m_Name: iron_axe
   m_TagString: Pickupable
@@ -95,17 +95,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1826ab9e7ce64d04dbda24752b3b14ac, type: 2}
---- !u!64 &751660856773013149
-MeshCollider:
+--- !u!65 &8161514737528597784
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751660856773013148}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 4e84a7bbd8f5df148b4cc66bf5cd31e9, type: 3}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.071143284, y: 0.25334257, z: 0.3813872}
+  m_Center: {x: 0.030399032, y: 0.80287087, z: 0.10392432}
