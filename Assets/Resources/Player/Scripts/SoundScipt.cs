@@ -13,11 +13,12 @@ public class SoundScipt : MonoBehaviour
     [Header("Footstep Sand")]
     [SerializeField] AudioClip[] sand;
 
+    [Header("Tired")] [SerializeField] AudioClip tired;
+    private bool tiredBool;
+
     [Header("Audio Player")]
     [SerializeField] AudioSource audioPlayer;
 
-
-    private int layerMask = (1 << 8);
     public void playFootStep() {
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, 2)) {
             string floortag = hit.collider.tag;
@@ -33,4 +34,18 @@ public class SoundScipt : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator PlayTired() {
+        if (!tiredBool) {
+            tiredBool = true;
+            audioPlayer.PlayOneShot(tired);
+            yield return new WaitForSeconds(2f);
+            tiredBool = false;
+        } else {
+            yield return null;
+        }
+    }
+
+    
+
 }

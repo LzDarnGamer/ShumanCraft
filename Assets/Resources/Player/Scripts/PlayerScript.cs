@@ -31,6 +31,9 @@ public class PlayerScript : MonoBehaviour {
     [Header("Achivement")]
     [SerializeField] private AchivementLog achivementLog;
 
+    [Header("Sound")]
+    [SerializeField] private SoundScipt soundScipt;
+
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
     [SerializeField] private Hotbar_Manager hotbarManager;
@@ -236,7 +239,9 @@ public class PlayerScript : MonoBehaviour {
         isRunning = !isWalking;
         if (isRunning && (x != 0 || y != 0)) { isUsingStamina = true; } //stamina -= staminaLoss * Time.deltaTime;
         else if ((!isRunning || (x == 0 || y == 0)) && stamina < 100f) { isUsingStamina = false; } //stamina += (staminaLoss / 2) * Time.deltaTime;
-
+        if(stamina < 21f && stamina > 17f && isUsingStamina) {
+            StartCoroutine(soundScipt.PlayTired());
+        }
         /* Hunger */
         if (hunger < hungerThreshold) isStarving = true; else isStarving = false;
 

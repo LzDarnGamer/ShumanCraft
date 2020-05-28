@@ -3588,6 +3588,7 @@ MonoBehaviour:
   construction: {fileID: 0}
   interact: {fileID: 0}
   achivementLog: {fileID: 6639102478278925428}
+  soundScipt: {fileID: 8796840111837463673}
   inventory: {fileID: 11400000, guid: 874c695d1a43a924b89cb7d8f52770c6, type: 2}
   hotbarManager: {fileID: 4749199178792713427}
   displayInventory: {fileID: 4749199178730530794}
@@ -3781,7 +3782,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3892,6 +3893,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c8641806dbf655e42b75e82d7d6c91a7, type: 3}
   - {fileID: 8300000, guid: d91be05878085e6428a38ba2b5fc24d8, type: 3}
   - {fileID: 8300000, guid: 0faf69da56f529c4c979260ecfbd5f2b, type: 3}
+  tired: {fileID: 8300000, guid: 5247c7092fe2b884bb5807afda755775, type: 3}
   audioPlayer: {fileID: 5757599731452791003}
 --- !u!1 &6706479765926830380
 GameObject:
