@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23000013730273626}
   - component: {fileID: -8296841238850613487}
   m_Layer: 0
-  m_Name: shovel_T
+  m_Name: shovel_T 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,4 +92,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983869dd81aa7454fa63db86b0b60a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 51a700bc1a9637f4783c5516c39aa786, type: 2}
