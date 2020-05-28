@@ -27,6 +27,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     [Header("Create Lobby Window")]
     public GameObject createUI;
+    public GameObject createUIPanel;
     public GameObject createButton;
     public TMP_InputField createField;
     public GameObject createOKButton;
@@ -38,6 +39,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     void Start() {
         PhotonNetwork.ConnectUsingSettings();
+        createUIPanel.transform.localScale = new Vector3(0, 0, 0);
     }
 
     public override void OnConnectedToMaster() {
@@ -91,6 +93,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public void OnCreateLobbyButtonClicked () {
         Debug.Log("Create Button was clicked");
         createUI.SetActive(true);
+        LeanTween.scale(createUIPanel, new Vector3(1, 1, 1), 0.5f);
     }
 
     public void OnJoinLobbyButtonClicked () {
