@@ -13,7 +13,6 @@ public abstract class MineObject : MonoBehaviour{
     [SerializeField] protected AudioClip SoundOnDestroy;
 
 
-    protected abstract void OnTriggerEnter(Collider collision);
 
     protected abstract void dropItems();
     protected float GetRandomNumber(float min, float max) {
