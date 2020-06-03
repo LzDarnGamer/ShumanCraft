@@ -5,6 +5,8 @@ using UnityEngine;
 public class ChangePages : MonoBehaviour
 {
     [SerializeField] GameObject MainPanel;
+    [SerializeField] SoundScipt soundScipt;
+
 
     private GameObject currentPanel;
     private int currentPageNumber;
@@ -26,6 +28,7 @@ public class ChangePages : MonoBehaviour
         if (tempNumber > -1 && tempNumber < currentPanel.transform.childCount) {
             currentPanel.transform.GetChild(currentPageNumber).gameObject.SetActive(false);
             currentPanel.transform.GetChild(currentPageNumber+=dir).gameObject.SetActive(true);
+            soundScipt.PlayTurnPage();
         }
     }
 }

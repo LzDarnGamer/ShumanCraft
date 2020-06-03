@@ -16,6 +16,8 @@ public class SoundScipt : MonoBehaviour
     [Header("Tired")] [SerializeField] AudioClip tired;
     private bool tiredBool;
 
+    [Header("Turning page")] [SerializeField] AudioClip pageTurn;
+
     [Header("Audio Player")]
     [SerializeField] AudioSource audioPlayer;
 
@@ -47,5 +49,8 @@ public class SoundScipt : MonoBehaviour
     }
 
     
+    public void PlayTurnPage() {
+        audioPlayer.PlayOneShot(pageTurn, 0.1f);
+    }
 
 }
