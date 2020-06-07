@@ -12,6 +12,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     [SerializeField] private List<string> roomNames;
 
+    [Header("Login System")]
+    public GameObject loginSystem;
+    public TMP_InputField loginField;
+
     [Header("Buttons")]
     public GameObject battleButton;
     public GameObject cancelButton;
@@ -46,8 +50,14 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public override void OnConnectedToMaster() {
         Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " Server");
         PhotonNetwork.AutomaticallySyncScene = true;
-        setOnlineUI();
+        //setOnlineUI();
+        loginSystem.SetActive(true);
         PhotonNetwork.JoinLobby(TypedLobby.Default);
+    }
+
+    public void loginBtnClicked() {
+        PhotonNetwork.NickName = loginField.text;
+        setOnlineUI();
     }
 
     private void setOnlineUI() {

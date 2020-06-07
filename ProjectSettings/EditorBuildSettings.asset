@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JoinRoom (1).unity
     guid: 235b84e1924538c4889358e1686c87be
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/TesteA.unity
     guid: 5977363462e45bd4ea8c186429e60273
   - enabled: 0
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Networking.unity
     guid: d84636fc135fd7c449ee5b686fe1c7cc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ilha.unity
     guid: 6e85f8fe63cccd0489b319334f9e0b18
   - enabled: 0

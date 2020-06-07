@@ -97,6 +97,7 @@ public class PlayerScript : MonoBehaviour {
 
     private int PlayerMask = 1 << 8;
     void Start() {
+
         anim = gameObject.GetComponent<Animator>();
         auxRPC = gameObject.GetComponent<PlayerAux>();
         StartCoroutine(staminaCoroutineMinus());
@@ -149,7 +150,6 @@ public class PlayerScript : MonoBehaviour {
         else {
             objectInHand = null;
             if (instantiatedObject != null) {
-                Debug.Log("@@@@@1");
                 PhotonNetwork.Destroy(instantiatedObject);
             }
         }
@@ -160,7 +160,6 @@ public class PlayerScript : MonoBehaviour {
             isToolOn = true;
             if (isOnline) {
                 if (instantiatedObject != null) {
-                    Debug.Log("@@@@@2");
                     PhotonNetwork.Destroy(instantiatedObject);
                 }
 

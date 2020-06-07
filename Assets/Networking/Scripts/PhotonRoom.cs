@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using ExitGames.Client.Photon;
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
     public static PhotonRoom room;
     private PhotonView PV;
+
+    [SerializeField] string gamerTag;
 
     public bool isGameLoaded;
     public int currentScene;
@@ -61,6 +64,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     }
 
     private void Update() {
+        gamerTag = PhotonNetwork.NickName;
         if (MultiplayerSettings.multiplayerSettings.delayStart) {
             if (playersInRoom == 1) {
                 RestartTimer();
@@ -74,7 +78,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
                     lessThanMaxPlayers -= Time.deltaTime;
                     timeToStart = lessThanMaxPlayers;
                 }
-
                 //Debug.Log("Display time to start to players " + timeToStart);
                 if (timeToStart <= 0)
                     StartGame();
@@ -88,7 +91,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         photonPlayers = PhotonNetwork.PlayerList;
         playersInRoom = photonPlayers.Length;
         myNumberInRoom = playersInRoom;
-        PhotonNetwork.NickName = myNumberInRoom.ToString();
+        //PhotonNetwork.NickName = myNumberInRoom.ToString();
         if (MultiplayerSettings.multiplayerSettings.delayStart) {
             Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");    
             if (playersInRoom > 1) {
@@ -105,9 +108,31 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
     }
 
+    public override void OnPlayerLeftRoom(Player otherPlayer) {
+        base.OnPlayerLeftRoom(otherPlayer);
+        Debug.Log("Player " + otherPlayer.NickName + " just left the game");
+        if (otherPlayer.IsMasterClient) {
+            DisconnectGame();
+        } else {
+            if (PhotonNetwork.IsMasterClient) {
+                SavePlayerInfo(otherPlayer);
+            }
+        }
+    }
+
+    void DisconnectGame() {
+        SceneManager.LoadScene(0);
+    }
+
+    void SavePlayerInfo(Player player) {
+        ExitGames.Client.Photon.Hashtable _info = player.CustomProperties;
+        
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer) {
         base.OnPlayerEnteredRoom(newPlayer);
-        Debug.Log("A new player has joined the room");
+        Debug.Log("A new player has joined the room " + newPlayer.NickName);
+        //newPlayer.SetCustomProperties();
         photonPlayers = PhotonNetwork.PlayerList;
         playersInRoom ++;
         if (MultiplayerSettings.multiplayerSettings.delayStart) {
@@ -133,7 +158,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     }
 
     // Comecar o jogo
-
     private void StartGame() {
         isGameLoaded = true;
         if (!PhotonNetwork.IsMasterClient)
