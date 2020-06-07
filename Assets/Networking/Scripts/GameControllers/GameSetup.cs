@@ -10,8 +10,8 @@ public class GameSetup : MonoBehaviour
     public Transform[] spawnPoints;
 
     private void OnEnable() {
-        if (GameSetup.GS == null)
-            GameSetup.GS = this;
+        if (GS == null)
+            GS = this;
     }
 
 }

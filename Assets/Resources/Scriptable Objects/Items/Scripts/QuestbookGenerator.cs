@@ -97,7 +97,7 @@ public class QuestbookGenerator : MonoBehaviour
             fillWeaponInfo(weaponsExamplePanel, name, itemID, durability, damage, description, icon);
         }
 
-        List<Achivement> list = achivementList.AchivementsList;
+        List<Achivement> list = AchivementList.achivementsListNoHidden();
         for (int i = 0; i < list.Count; i+=2) {
             if (!list[i].isHidden) {
                 if (i == list.Count - 1) {

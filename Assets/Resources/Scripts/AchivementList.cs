@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AchivementList : MonoBehaviour
 {
-    public List<Achivement> AchivementsList { get; private set; }
+    public static List<Achivement> AchivementsList { get; private set; }
+
+    
     void Awake() {
         AchivementsList = new List<Achivement> {
             new Achivement(
@@ -36,5 +38,12 @@ public class AchivementList : MonoBehaviour
               true
               ),
         };
+    }
+
+
+    public static List<Achivement> achivementsListNoHidden() {
+        List<Achivement> list = new List<Achivement>(AchivementsList);
+        list.RemoveAll(ach => ach.isHidden == true);
+        return list;
     }
 }
