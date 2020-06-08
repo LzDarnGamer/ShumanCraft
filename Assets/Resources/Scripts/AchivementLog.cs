@@ -22,14 +22,13 @@ public class AchivementLog : MonoBehaviour {
     public int[] values  { get;  private set; }
 
 
-    private float menuOffset = 50;
     public void Start() {
         achivementList = GameObject.Find("GameSetup").GetComponent<AchivementList>();
         ACHIVEMENT_LEVEL = 0;
         AchivementProgress = new OrderedDictionary();
 
-        for (int i = 0; i < achivementList.AchivementsList.Count; i++) {
-            AchivementProgress.Add(achivementList.AchivementsList[i], 0);
+        for (int i = 0; i < AchivementList.AchivementsList.Count; i++) {
+            AchivementProgress.Add(AchivementList.AchivementsList[i], 0);
         }
 
         ICollection k = AchivementProgress.Keys;
