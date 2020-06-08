@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JoinRoom (1).unity
     guid: 235b84e1924538c4889358e1686c87be
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TesteA.unity
     guid: 5977363462e45bd4ea8c186429e60273
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Teste.unity
     guid: acb089011ccfb344098705642dd26061
   - enabled: 0

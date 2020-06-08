@@ -29,6 +29,9 @@ public class PlayerScript : MonoBehaviour {
 
     public Interact interact;
 
+    [Header("Save Game")]
+    [SerializeField] private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+
     [Header("Achivement")]
     [SerializeField] private AchivementLog achivementLog;
 
@@ -92,7 +95,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiStamina;
     [SerializeField] private Image uiHunger;
     [SerializeField] private Image uiThirst;
-    [SerializeField] private bool isOnline = false;
+    [SerializeField] private bool isOnline = true;
 
 
     private int PlayerMask = 1 << 8;
@@ -114,6 +117,7 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 StartManager();
             } else {
+
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
@@ -126,6 +130,7 @@ public class PlayerScript : MonoBehaviour {
 
     private void StartManager() {
         construction = gameObject.GetComponent<ConstructionController>();
+        PhotonNetwork.SetPlayerCustomProperties(hash);
         AddCamera();
     }
 
@@ -206,6 +211,13 @@ public class PlayerScript : MonoBehaviour {
         UseHand();
         PickUpItem();
         TakeDamage();
+        HashUpdate();
+    }
+
+    void HashUpdate() {
+        if (hash.ContainsKey("Health")) { hash["Health"] = health; hash["Stamina"] = stamina; return; }
+        hash.Add("Health", health);
+        hash.Add("Stamina", stamina);
     }
 
     private void UseHand() {

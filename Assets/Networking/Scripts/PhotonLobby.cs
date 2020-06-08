@@ -2,6 +2,7 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " Server");
         PhotonNetwork.AutomaticallySyncScene = true;
         //setOnlineUI();
+        connectText.text = "Connected";
         loginSystem.SetActive(true);
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
@@ -64,7 +66,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         battleButton.GetComponent<Button>().interactable = true;
         createButton.GetComponent<Button>().interactable = true;
         joinButton.GetComponent<Button>().interactable = true;
-        connectText.text = "Connected";
+        //connectText.text = "Connected";
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList) {
@@ -73,9 +75,12 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         foreach (Transform child in content.transform) Destroy(child.gameObject);
 
         foreach (RoomInfo game in roomList) {
+            Debug.Log("Got in FOR");
             if (!roomNames.Contains(game.Name)) {
+                Debug.Log("Got in contains");
                 GameObject sala = Instantiate(roomObj) as GameObject;
                 sala.transform.parent = content.transform;
+                sala.transform.localScale = new Vector3(1, 1, 1);
                 TMP_Text[] atributos = sala.GetComponentsInChildren<TMP_Text>();
                 atributos[0].text = game.Name;
                 atributos[1].text = game.PlayerCount.ToString();

@@ -2061,7 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da89872c20697a4db057429656a51df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 4749199178792713426}
   PV: {fileID: 8113904021683205663}
   cam: {fileID: 1374596839805319218, guid: 422bc07971120d749995962e29dda140, type: 3}
   isCamFixed: 1
@@ -2399,6 +2399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb82d6d524738a439e467b1db616290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PV: {fileID: 0}
 --- !u!1 &6706479765926830380
 GameObject:
   m_ObjectHideFlags: 0
@@ -6351,7 +6352,7 @@ PrefabInstance:
     - target: {fileID: 2899039888306690403, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 169.19995
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888306690403, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -6493,12 +6494,12 @@ PrefabInstance:
     - target: {fileID: 2899039888647923174, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0.04866769
+      value: 0.4999999
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888647923174, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Size
-      value: 0.6049174
+      value: 0.6049173
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888678406841, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
