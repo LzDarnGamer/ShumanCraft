@@ -10,25 +10,9 @@ public class PlayerAux : MonoBehaviour {
     [SerializeField] PhotonView PV;
     [SerializeField] private GameObject objectInHand;
     [SerializeField] private GameObject playerHand;
-    [SerializeField] private List<ExitGames.Client.Photon.Hashtable> playersInfo;
 
     public void SetObject(GameObject a) { objectInHand = a; }
     public void SetHand(GameObject b) { playerHand = b; }
-
-    public void runSaveRPC (int id) {
-        PV.RPC("RPC_SaveInfo", RpcTarget.AllBuffered, id);
-    }
-
-    [PunRPC]
-    private void RPC_SaveInfo (int id) {
-        PhotonView obj = PhotonView.Find(id);
-        
-        float hp = Convert.ToInt32(obj.Owner.CustomProperties["Health"]);
-        float hunger = Convert.ToInt32(obj.Owner.CustomProperties["Hunger"]);
-
-        Debug.Log("RPC_SaveInfo HEALTH " + hp);
-        Debug.Log("RPC_SaveInfo HUNGER " + hunger);
-    }
 
     public void runRPC(string name, int handID, int instatiatedID, float[] position, float[] rotation) {
         PV.RPC("RPC_UpdateObject", RpcTarget.AllBuffered, name, handID, instatiatedID, position, rotation);

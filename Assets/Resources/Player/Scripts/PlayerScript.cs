@@ -12,10 +12,14 @@ using Photon.Realtime;
 public class PlayerScript : MonoBehaviour {
 
     private Animator anim;
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private PhotonView PV;
-    [SerializeField] private GameObject cam;
-    [SerializeField] private bool isCamFixed = true;
+    [SerializeField]
+    private GameObject canvas;
+    [SerializeField]
+    private PhotonView PV;
+    [SerializeField]
+    private GameObject cam;
+    [SerializeField]
+    private bool isCamFixed = true;
     private float facing;
     [SerializeField] private GameObject inputSource;
 
@@ -74,17 +78,17 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float thirstThreshold  = 30.0f;
     [SerializeField] [Range(0, 100)] private float thirstDecay      = 0.5f;
     [SerializeField] private bool needsWater                        = false;
-    [SerializeField] [Range(0, 100)] private float voidDamage       = 10f;
+    [SerializeField] [Range(0, 100)] private float voidDamage = 10f;
 
     [Header("Controles")]
-    public KeyCode walkRunKey               = KeyCode.LeftShift;
-    public KeyCode jumpKey                  = KeyCode.Space;
-    public KeyCode crouchKey                = KeyCode.LeftControl;
-    public KeyCode startKey                 = KeyCode.P;
-    public KeyCode openChatKey              = KeyCode.T;
-    public KeyCode openInventoryKey         = KeyCode.E;
-    public KeyCode openConstructionkey      = KeyCode.R;
-    public KeyCode changeConstructionKey    = KeyCode.T;
+    public KeyCode walkRunKey = KeyCode.LeftShift;
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode startKey = KeyCode.P;
+    public KeyCode openChatKey = KeyCode.T;
+    public KeyCode openInventoryKey = KeyCode.E;
+    public KeyCode openConstructionkey = KeyCode.R;
+    public KeyCode changeConstructionKey = KeyCode.T;
 
     [Header("UI")]
     [SerializeField] private Image uiHealth;
@@ -113,6 +117,7 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 StartManager();
             } else {
+
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
@@ -125,7 +130,7 @@ public class PlayerScript : MonoBehaviour {
 
     private void StartManager() {
         construction = gameObject.GetComponent<ConstructionController>();
-        //PhotonNetwork.SetPlayerCustomProperties(hash);
+        PhotonNetwork.SetPlayerCustomProperties(hash);
         AddCamera();
     }
 
@@ -133,15 +138,6 @@ public class PlayerScript : MonoBehaviour {
         if (isOnline) {
             if (PV.IsMine) {
                 PlayerManager();
-
-                if (Input.GetKeyUp(KeyCode.P)) {
-                    HashUpdate();
-                    Debug.Log("PS HJ" + hash["Health"]);
-                    Debug.Log("PS HN" + hash["Hunger"]);
-                    PhotonNetwork.SetPlayerCustomProperties(hash);
-                    auxRPC.runSaveRPC(PV.ViewID);
-                }
-
             } else if (!PV.IsMine) {
                 DestroyImmediate(instCam, true);
                 DestroyImmediate(instSource, true);
@@ -215,13 +211,13 @@ public class PlayerScript : MonoBehaviour {
         UseHand();
         PickUpItem();
         TakeDamage();
-        //HashUpdate();
+        HashUpdate();
     }
 
     void HashUpdate() {
-        if (hash.ContainsKey("Health")) { hash["Health"] = health; hash["Hunger"] = hunger; return; }
+        if (hash.ContainsKey("Health")) { hash["Health"] = health; hash["Stamina"] = stamina; return; }
         hash.Add("Health", health);
-        hash.Add("Hunger", hunger);
+        hash.Add("Stamina", stamina);
     }
 
     private void UseHand() {

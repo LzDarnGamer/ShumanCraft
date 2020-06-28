@@ -40,7 +40,6 @@ MonoBehaviour:
   - RPC_LoadedGameScene
   - RPC_UpdateObject
   - RPC_LeaveRoom
-  - RPC_SaveInfo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
