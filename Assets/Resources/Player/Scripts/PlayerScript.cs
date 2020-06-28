@@ -404,10 +404,9 @@ public class PlayerScript : MonoBehaviour {
             x = newX;
             y = newY;
         }
-
         // Set animator variables
-        anim.SetFloat("VelX", x);
-        anim.SetFloat("VelY", y);
+        anim.SetFloat("VelX", x, 1f, Time.deltaTime * 10f);
+        anim.SetFloat("VelY", y, 1f, Time.deltaTime * 10f);
         anim.SetBool("isCrouched", isCrouched);
     }
 
