@@ -13,6 +13,7 @@ public class NPC_Animal : MonoBehaviour {
 
     [SerializeField] private float health = 100.0f;
     public bool dead = false;
+    [SerializeField] private bool deadH = false;
 
     public Animator anim;
     Vector3 disttoPlayer;
@@ -33,7 +34,9 @@ public class NPC_Animal : MonoBehaviour {
     }
 
     void Update() {
-        if (dead) navMeshAgent.isStopped = true;
+        if (dead) {
+            navMeshAgent.isStopped = true;
+        }
         if (health > 0.0f) {
             // Idea: apresentar UI de vida do npc quando o player esta perto
             disttoPlayer = (transform.position - player.transform.position);
@@ -48,9 +51,14 @@ public class NPC_Animal : MonoBehaviour {
             Visao();
         } else {
             if (!dead) {
+                /*if (deadH == false) {
+                    anim.SetBool("dead", true);
+                    Debug.Log("Dead animation running");
+                    deadH = true;
+                }*/
                 anim.SetTrigger("dead");
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
-                StartCoroutine(die());
+                //StartCoroutine(die());
                 dead = true;
             }
         }

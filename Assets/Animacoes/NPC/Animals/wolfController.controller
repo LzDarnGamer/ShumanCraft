@@ -285,7 +285,7 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: dead
-    m_Type: 9
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -541,9 +541,9 @@ AnimatorStateMachine:
   - {fileID: 212898129614324372}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -8504649877675358037}
-    second: []
   - first: {fileID: -6440570913802302359}
+    second: []
+  - first: {fileID: -8504649877675358037}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
