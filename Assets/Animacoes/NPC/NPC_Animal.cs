@@ -25,9 +25,14 @@ public class NPC_Animal : MonoBehaviour {
     [SerializeField] private bool eatingEnabled = false;
     [SerializeField] private bool[] eatingWaypoints;
 
+    public GameObject me;
+    public PhotonView PV;
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        me = this.gameObject;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;
         navMeshAgent.updateRotation = true;
@@ -58,7 +63,7 @@ public class NPC_Animal : MonoBehaviour {
                 }*/
                 anim.SetTrigger("dead");
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
-                //StartCoroutine(die());
+                StartCoroutine(die());
                 dead = true;
             }
         }
@@ -71,7 +76,13 @@ public class NPC_Animal : MonoBehaviour {
     IEnumerator die() {
         yield return new WaitForSeconds(5);
         // Sistema de particulas
-        PhotonNetwork.Destroy(this.gameObject);
+        PV.RPC("RPC_DestroyMe", RpcTarget.AllBuffered, PV.ViewID);
+    }
+
+    [PunRPC]
+    public void RPC_DestroyMe (int id) {
+        GameObject del = PhotonView.Find(id).gameObject;
+        GameObject.Destroy(del);
     }
 
     public void MoveToNextWaypoint() {
