@@ -2308,6 +2308,7 @@ GameObject:
   - component: {fileID: 973983536}
   - component: {fileID: 973983535}
   - component: {fileID: 973983537}
+  - component: {fileID: 973983538}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -2326,8 +2327,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.3056564, y: 5.0968943, z: 0.0490036}
-  m_Center: {x: -0.1795311, y: 0.021699667, z: 0.4754982}
+  m_Size: {x: 5.3056564, y: 5.0968943, z: 1.6566467}
+  m_Center: {x: -0.1795311, y: 0.021699667, z: 0.19697571}
 --- !u!4 &973983536
 Transform:
   m_ObjectHideFlags: 0
@@ -2336,7 +2337,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973983534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 41.35, y: 3.22, z: 79.76}
+  m_LocalPosition: {x: 41.35, y: 3.22, z: 79.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2360,6 +2361,22 @@ MonoBehaviour:
     were adrift from quite some time after you ended in this island. Now your objective
     is trying to survive and maintaining your status while exploring and unlocking
     new items and progress in the map.\r"
+--- !u!54 &973983538
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973983534}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &981848938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5954,6 +5971,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4489371998386187689, guid: ce13e4c2444b8004db19f8d56e199841,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489371998386187689, guid: ce13e4c2444b8004db19f8d56e199841,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 142.8999
+      objectReference: {fileID: 0}
     - target: {fileID: 4491670757834818087, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -7576,6 +7603,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4749199179262282050, guid: ce13e4c2444b8004db19f8d56e199841,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4749199179266304067, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
@@ -10573,6 +10605,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6862590957176365481, guid: ce13e4c2444b8004db19f8d56e199841,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6862590957276002589, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_Layer
@@ -11626,7 +11663,7 @@ PrefabInstance:
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.996311
+      value: 0.218456
       objectReference: {fileID: 0}
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
@@ -11636,7 +11673,7 @@ PrefabInstance:
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.08581606
+      value: 0.9758468
       objectReference: {fileID: 0}
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
@@ -11651,7 +11688,7 @@ PrefabInstance:
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -170.154
+      value: 25.237001
       objectReference: {fileID: 0}
     - target: {fileID: 7672318882093067878, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
@@ -12281,6 +12318,11 @@ PrefabInstance:
     - target: {fileID: 9215069841137855946, guid: ce13e4c2444b8004db19f8d56e199841,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215069841137855946, guid: ce13e4c2444b8004db19f8d56e199841,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

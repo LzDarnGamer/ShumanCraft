@@ -41,6 +41,7 @@ MonoBehaviour:
   - RPC_UpdateObject
   - RPC_LeaveRoom
   - RPC_DestroyMe
+  - RPC_TakePlayerDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
