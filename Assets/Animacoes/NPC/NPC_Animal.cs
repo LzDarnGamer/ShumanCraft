@@ -13,6 +13,7 @@ public class NPC_Animal : MonoBehaviour {
 
     [SerializeField] private float health = 100.0f;
     public bool dead = false;
+    [SerializeField] private bool deadH = false;
 
     public Animator anim;
     Vector3 disttoPlayer;
@@ -24,16 +25,23 @@ public class NPC_Animal : MonoBehaviour {
     [SerializeField] private bool eatingEnabled = false;
     [SerializeField] private bool[] eatingWaypoints;
 
+    public GameObject me;
+    public PhotonView PV;
+
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+        me = this.gameObject;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;
         navMeshAgent.updateRotation = true;
     }
 
     void Update() {
-        if (dead) navMeshAgent.isStopped = true;
+        if (dead) {
+            navMeshAgent.isStopped = true;
+        }
         if (health > 0.0f) {
             // Idea: apresentar UI de vida do npc quando o player esta perto
             disttoPlayer = (transform.position - player.transform.position);
@@ -63,7 +71,13 @@ public class NPC_Animal : MonoBehaviour {
     IEnumerator die() {
         yield return new WaitForSeconds(5);
         // Sistema de particulas
-        PhotonNetwork.Destroy(this.gameObject);
+        PV.RPC("RPC_DestroyMe", RpcTarget.AllBuffered, PV.ViewID);
+    }
+
+    [PunRPC]
+    public void RPC_DestroyMe (int id) {
+        GameObject del = PhotonView.Find(id).gameObject;
+        GameObject.Destroy(del);
     }
 
     public void MoveToNextWaypoint() {

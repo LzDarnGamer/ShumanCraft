@@ -890,12 +890,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7561960810501673679}
+  - component: {fileID: 8636360201499512986}
   - component: {fileID: 1342246605903464880}
   - component: {fileID: 5266614145534208048}
-  - component: {fileID: 8636360201499512986}
   - component: {fileID: 8464436235973414366}
   - component: {fileID: 6792648564119021939}
   - component: {fileID: 315709235055820687}
+  - component: {fileID: 133731128632806183}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -919,6 +920,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &8636360201499512986
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821302596686733532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!195 &1342246605903464880
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -964,25 +984,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!95 &8636360201499512986
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6821302596686733532}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &8464436235973414366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,12 +1035,28 @@ MonoBehaviour:
   maxDistancetoCheck: 30
   health: 100
   dead: 0
+  deadH: 0
   anim: {fileID: 0}
   player: {fileID: 0}
   cameraPlayer: {fileID: 0}
   isEating: 0
   eatingEnabled: 0
   eatingWaypoints: 
+  me: {fileID: 0}
+  PV: {fileID: 0}
+--- !u!114 &133731128632806183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821302596686733532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4108aee73ffba734880f57bf466f794b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PV: {fileID: 5266614145534208048}
 --- !u!1 &6994843010130617056
 GameObject:
   m_ObjectHideFlags: 0
