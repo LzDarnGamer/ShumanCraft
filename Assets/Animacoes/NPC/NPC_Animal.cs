@@ -56,11 +56,6 @@ public class NPC_Animal : MonoBehaviour {
             Visao();
         } else {
             if (!dead) {
-                /*if (deadH == false) {
-                    anim.SetBool("dead", true);
-                    Debug.Log("Dead animation running");
-                    deadH = true;
-                }*/
                 anim.SetTrigger("dead");
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
                 StartCoroutine(die());

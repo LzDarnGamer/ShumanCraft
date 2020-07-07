@@ -460,6 +460,7 @@ public class PlayerScript : MonoBehaviour {
         return false;
     }
 
+    public void GotBitten(float amount) { health -= amount; }
     public void addHealth(float amount) { health += amount; }
     public void addThirst(float amount) { thirst += amount; }
     public void addHunger(float amount) { hunger += amount; }

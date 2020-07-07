@@ -896,6 +896,7 @@ GameObject:
   - component: {fileID: 8464436235973414366}
   - component: {fileID: 6792648564119021939}
   - component: {fileID: 315709235055820687}
+  - component: {fileID: 133731128632806183}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -1042,6 +1043,20 @@ MonoBehaviour:
   eatingEnabled: 0
   eatingWaypoints: 
   me: {fileID: 0}
+  PV: {fileID: 0}
+--- !u!114 &133731128632806183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821302596686733532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4108aee73ffba734880f57bf466f794b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PV: {fileID: 5266614145534208048}
 --- !u!1 &6994843010130617056
 GameObject:
   m_ObjectHideFlags: 0
