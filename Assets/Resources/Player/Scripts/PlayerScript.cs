@@ -201,8 +201,10 @@ public class PlayerScript : MonoBehaviour {
 
         if (instCam != null && isCamFixed) { 
             facing = instCam.transform.eulerAngles.y;
-            Vector3 look = new Vector3(0, facing, 0);
-            transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, look, 0.04f);
+            transform.eulerAngles = new Vector3(0, facing, 0);
+
+            //Vector3 look = new Vector3(0, facing, 0);
+            //transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, look, .2f);
         }
 
         UIControl();
