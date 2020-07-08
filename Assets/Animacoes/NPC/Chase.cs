@@ -20,6 +20,8 @@ public class Chase : StateMachineBehaviour {
         if (distance > 10f)
             animator.SetBool("Saw", false);
         else if (distance < 2f) {
+            int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
+            npc.GetComponent<AnimalAux>().RunRPC(id);
             // Atacar
             //animator.SetBool("Saw", false);
         }
@@ -27,10 +29,11 @@ public class Chase : StateMachineBehaviour {
         animator.transform.eulerAngles = new Vector3(0, animator.transform.eulerAngles.y, 0);
         npc.navMeshAgent.SetDestination(playerPos.position);
 
+        /*
         if (npc.navMeshAgent.remainingDistance <= 2.0f) {
             int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
             npc.GetComponent<AnimalAux>().RunRPC(id);
-        }
+        }*/
         
         //animator.transform.position = Vector3.MoveTowards(animator.transform.position, playerPos.position, speed * Time.deltaTime);
     }
