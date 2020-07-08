@@ -22,5 +22,5 @@ MonoBehaviour:
   inGameObject: {fileID: 3725465688555768825, guid: a948896682d00e7418a873512a0d6847,
     type: 3}
   description: Better version of the wood spear
-  damagePoints: 4
+  damagePoints: 15
   durability: 32

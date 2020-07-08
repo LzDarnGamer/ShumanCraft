@@ -231,18 +231,17 @@ public class PlayerScript : MonoBehaviour {
                 anim.SetTrigger("Use");
             } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
                 anim.SetTrigger("Stab");
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 4f)) {
-                    ray.collider.gameObject.CompareTag("");
-                }
             }
 
         }
     }
 
     private void atackNPC() {
+        Debug.Log("HERE");
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
             if (ray.collider.gameObject.CompareTag("NPC")) {
-                ray.collider.gameObject.GetComponent<NPC_Animal>().TakeDamage(10);
+                int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
+                ray.collider.gameObject.GetComponent<NPC_Animal>().TakeDamage(damage);
             }
         }
     }

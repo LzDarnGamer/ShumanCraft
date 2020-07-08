@@ -1,9 +1,11 @@
 ﻿using Boo.Lang;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class NPC_Animal : MonoBehaviour {
 
@@ -41,6 +43,9 @@ public class NPC_Animal : MonoBehaviour {
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;
         navMeshAgent.updateRotation = true;
+
+
+        canvas.transform.GetChild(2).GetComponent<Text>().text = gameObject.name;
     }
 
     void Update() {
@@ -58,6 +63,7 @@ public class NPC_Animal : MonoBehaviour {
                 anim.SetFloat("DistToPlayer", dist.magnitude);
 
                 canvas.transform.LookAt(closestPlayer.transform);
+                canvas.transform.Rotate(0, 180, 0);
             }
             
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
@@ -67,6 +73,7 @@ public class NPC_Animal : MonoBehaviour {
 
             Visao();
         } else {
+            health = 0.0f;
             if (!dead) {
                 anim.SetTrigger("dead");
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
@@ -74,8 +81,8 @@ public class NPC_Animal : MonoBehaviour {
                 dead = true;
             }
         }
-        
-
+        canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
+        canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
     }
 
     IEnumerator UpdatePlayersList() {
