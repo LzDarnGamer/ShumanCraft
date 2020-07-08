@@ -11,7 +11,8 @@ public class Chase : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         npc = animator.GetComponent<NPC_Animal>();
-        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPos = npc.GetLastSeenPlayer().transform;
+        //playerPos = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,8 +21,8 @@ public class Chase : StateMachineBehaviour {
         if (distance > 10f)
             animator.SetBool("Saw", false);
         else if (distance < 2f) {
-            int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
-            npc.GetComponent<AnimalAux>().RunRPC(id);
+            //int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
+            //npc.GetComponent<AnimalAux>().RunRPC(id);
             // Atacar
             //animator.SetBool("Saw", false);
         }

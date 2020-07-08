@@ -1,11 +1,12 @@
-﻿using Photon.Pun;
+﻿using Boo.Lang;
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC_Animal : MonoBehaviour {
 
-    public Transform[] waypoints;
+    [SerializeField] private Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
 
     public int currentTarget;
@@ -15,21 +16,23 @@ public class NPC_Animal : MonoBehaviour {
     public bool dead = false;
     [SerializeField] private bool deadH = false;
 
+    private GameObject playerSeen;
+
     public Animator anim;
-    Vector3 disttoPlayer;
-    public GameObject player, cameraPlayer;
+    //Vector3 disttoPlayer;
+    private List<Vector3> distToPlayers;
+    //public GameObject player;
+    [SerializeField] private GameObject[] players;
     RaycastHit hit;
     Vector3 worldDeltaPosition;
-
-    [SerializeField] private bool isEating;
-    [SerializeField] private bool eatingEnabled = false;
-    [SerializeField] private bool[] eatingWaypoints;
 
     public GameObject me;
     public PhotonView PV;
 
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        distToPlayers = new List<Vector3>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
         me = this.gameObject;
         navMeshAgent = GetComponent<NavMeshAgent>();
         PV = GetComponent<PhotonView>();
@@ -39,14 +42,17 @@ public class NPC_Animal : MonoBehaviour {
     }
 
     void Update() {
-        if (dead) {
-            navMeshAgent.isStopped = true;
-        }
+        if (dead) navMeshAgent.isStopped = true;
+
         if (health > 0.0f) {
             // Idea: apresentar UI de vida do npc quando o player esta perto
-            disttoPlayer = (transform.position - player.transform.position);
+            //disttoPlayer = (transform.position - player.transform.position);
 
-            anim.SetFloat("DistToPlayer", disttoPlayer.magnitude);
+
+            GameObject closestPlayer = GetClosestPlayerDistance();
+            Vector3 dist = (transform.position - closestPlayer.transform.position);
+            //anim.SetFloat("DistToPlayer", disttoPlayer.magnitude);
+            anim.SetFloat("DistToPlayer", dist.magnitude);
 
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
 
@@ -62,6 +68,20 @@ public class NPC_Animal : MonoBehaviour {
                 dead = true;
             }
         }
+    }
+
+    public GameObject GetClosestPlayerDistance() {
+        float closestPlayerdistance = float.MaxValue;
+        GameObject closestPlayer = null;
+        for (int i = 0; i < players.Length; ++i) {
+            Vector3 ajuda = transform.position - players[i].transform.position;
+            distToPlayers.Add(ajuda);
+            if (ajuda.magnitude < closestPlayerdistance) {
+                closestPlayerdistance = ajuda.magnitude;
+                closestPlayer = players[i];
+            }
+        }
+        return closestPlayer;
     }
 
     public void TakeDamage(float ammount) {
@@ -81,14 +101,18 @@ public class NPC_Animal : MonoBehaviour {
     }
 
     public void MoveToNextWaypoint() {
-        currentTarget = (currentTarget + 1) % waypoints.Length;
+
+        Vector3 nextPos = RandomNavmeshLocation(4f);
+        navMeshAgent.SetDestination(nextPos);
+
+        /*currentTarget = (currentTarget + 1) % waypoints.Length;
         navMeshAgent.SetDestination(waypoints[currentTarget].position);
         if (eatingEnabled) {
             if (eatingWaypoints[currentTarget]) isEating = true;
             else isEating = false;
 
             anim.SetBool("Eating", isEating);
-        }
+        }*/
     }
 
     public void OnAnimatorMove() {
@@ -103,11 +127,25 @@ public class NPC_Animal : MonoBehaviour {
         if (Physics.SphereCast(transform.position + Vector3.up, 1, transform.forward, out hit, maxDistancetoCheck)) {
             if (hit.rigidbody != null && hit.rigidbody.tag == "Player") {
                 Debug.DrawRay(transform.position + Vector3.up, transform.forward * maxDistancetoCheck, Color.red);
-
+                playerSeen = hit.transform.gameObject;
                 anim.SetBool("Saw", true);
             }
 
         }
+    }
+
+    public GameObject GetLastSeenPlayer () { return playerSeen; }
+
+    public Vector3 RandomNavmeshLocation(float radius) {
+        Vector3 randomDir = Random.insideUnitSphere * radius;
+        randomDir += transform.position;
+
+        NavMeshHit hit;
+        Vector3 finalPos = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDir, out hit, radius, 1))
+            finalPos = hit.position;
+
+        return finalPos;
     }
 
 
