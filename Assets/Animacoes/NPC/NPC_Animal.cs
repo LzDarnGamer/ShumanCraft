@@ -117,8 +117,22 @@ public class NPC_Animal : MonoBehaviour {
 
     public void MoveToNextWaypoint() {
 
-        Vector3 nextPos = RandomNavmeshLocation(4f);
-        navMeshAgent.SetDestination(nextPos);
+        for (;;) {
+            Vector3 nextPos = RandomNavmeshLocation(1.5f);
+
+            NavMeshPath path = new NavMeshPath();
+            navMeshAgent.CalculatePath(nextPos, path);
+
+            // If path is valid then set destination and break the loop
+            if (path.status != NavMeshPathStatus.PathPartial
+                && path.status != NavMeshPathStatus.PathInvalid) {
+
+                navMeshAgent.SetDestination(nextPos);
+                break;
+            }
+
+        }
+        
 
         /*currentTarget = (currentTarget + 1) % waypoints.Length;
         navMeshAgent.SetDestination(waypoints[currentTarget].position);
