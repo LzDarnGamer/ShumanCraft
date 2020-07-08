@@ -14,6 +14,7 @@ public class Chase : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         npc = animator.GetComponent<NPC_Animal>();
         playerPos = npc.GetLastSeenPlayer().transform;
+        npc.ShowIconGameObject(true);
         //playerPos = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -42,5 +43,6 @@ public class Chase : StateMachineBehaviour {
         
         //animator.transform.position = Vector3.MoveTowards(animator.transform.position, playerPos.position, speed * Time.deltaTime);
     }
+
 
 }

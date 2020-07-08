@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raio: {fileID: 441565505}
   value: 0.1
-  valueClimb: 1.2
+  valueClimb: 2.1
 --- !u!65 &1213954300
 BoxCollider:
   m_ObjectHideFlags: 0

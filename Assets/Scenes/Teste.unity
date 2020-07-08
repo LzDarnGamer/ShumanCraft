@@ -525,6 +525,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deer
       objectReference: {fileID: 0}
+    - target: {fileID: 1326201109382081166, guid: 4cfaced890801414ab5e81415ac1438d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1326201109382248110, guid: 4cfaced890801414ab5e81415ac1438d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -949,7 +954,7 @@ PrefabInstance:
     - target: {fileID: 8159420448377493076, guid: 2c73d372e3ab20c45a48ae8d3cb54fef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c73d372e3ab20c45a48ae8d3cb54fef, type: 3}
@@ -1023,7 +1028,7 @@ PrefabInstance:
     - target: {fileID: 1273805392848103870, guid: aaeb0cccb348d5e4a91482733c964985,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1273805392848103870, guid: aaeb0cccb348d5e4a91482733c964985,
         type: 3}
@@ -1059,6 +1064,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 1273805392848598110, guid: aaeb0cccb348d5e4a91482733c964985,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2969672880432401787, guid: aaeb0cccb348d5e4a91482733c964985,
         type: 3}
@@ -1187,7 +1197,7 @@ PrefabInstance:
     - target: {fileID: 5944164352947489288, guid: 71aa88e78acc6514eabf1ae55d863950,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5944164352947489288, guid: 71aa88e78acc6514eabf1ae55d863950,
         type: 3}
@@ -1208,6 +1218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sheep
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216649124398987291, guid: 71aa88e78acc6514eabf1ae55d863950,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71aa88e78acc6514eabf1ae55d863950, type: 3}
@@ -1276,7 +1291,7 @@ PrefabInstance:
     - target: {fileID: 7561960810501673679, guid: 49b188bbabe1fb946ac5ec9e88755b39,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561960810501673679, guid: 49b188bbabe1fb946ac5ec9e88755b39,
         type: 3}
@@ -1367,6 +1382,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zebra
       objectReference: {fileID: 0}
+    - target: {fileID: 3717867843570379490, guid: 843e72bfb398aaf45897937bf5926d46,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4663873295472319659, guid: 843e72bfb398aaf45897937bf5926d46,
         type: 3}
       propertyPath: viewIdField
@@ -1451,6 +1471,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wolf Black
       objectReference: {fileID: 0}
+    - target: {fileID: 5648777543739037026, guid: a3f5b5ad576df6f4685f5772889016cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5648777543806436078, guid: a3f5b5ad576df6f4685f5772889016cb,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -1465,6 +1490,16 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405942048110386576, guid: a3f5b5ad576df6f4685f5772889016cb,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.335
+      objectReference: {fileID: 0}
+    - target: {fileID: 8405942048110386576, guid: a3f5b5ad576df6f4685f5772889016cb,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3f5b5ad576df6f4685f5772889016cb, type: 3}

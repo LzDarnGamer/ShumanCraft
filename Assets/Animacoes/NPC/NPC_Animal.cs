@@ -36,6 +36,7 @@ public class NPC_Animal : MonoBehaviour {
     public PhotonView PV;
 
     void Start() {
+        initHeightUI = thuderUI.transform.localScale.x;
         distToPlayers = new List<Vector3>();
         players = GameObject.FindGameObjectsWithTag("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -62,8 +63,8 @@ public class NPC_Animal : MonoBehaviour {
                 Vector3 dist = (transform.position - closestPlayer.transform.position);
                 anim.SetFloat("DistToPlayer", dist.magnitude);
 
-                canvas.transform.LookAt(closestPlayer.transform);
-                canvas.transform.Rotate(0, 180, 0);
+                //canvas.transform.LookAt(closestPlayer.transform);
+                //canvas.transform.Rotate(0, 180, 0);
             }
             
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
@@ -81,8 +82,8 @@ public class NPC_Animal : MonoBehaviour {
                 dead = true;
             }
         }
-        canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
-        canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
+        //canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
+        //canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
     }
 
     IEnumerator UpdatePlayersList() {
@@ -183,6 +184,25 @@ public class NPC_Animal : MonoBehaviour {
 
         return finalPos;
     }
+
+    [Header("Animal UI")]
+    [SerializeField] private GameObject thuderUI;
+    [SerializeField] private float scaleValueUI;
+    [SerializeField] private float climbValueUI;
+    private float initHeightUI;
+
+    public void ShowIconGameObject(bool goingUp) {
+
+        if (goingUp) {
+            thuderUI.transform.LeanMoveLocalY(climbValueUI, .5f);
+            LeanTween.scale(thuderUI, new Vector3(scaleValueUI, scaleValueUI, scaleValueUI), .5f);
+        } else {
+            thuderUI.transform.LeanMoveLocalY(initHeightUI, .5f);
+            LeanTween.scale(thuderUI, Vector3.zero, .5f);
+        }
+    }
+
+    public bool IsChaser() { return (thuderUI != null) ? true : false; }
 
 
 }

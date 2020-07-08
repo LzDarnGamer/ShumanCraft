@@ -38,4 +38,8 @@ public class Escape : StateMachineBehaviour
         
         //animator.transform.position = Vector3.MoveTowards(animator.transform.position, playerPos.position, speed * Time.deltaTime);
     }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        npc.ShowIconGameObject(false);
+    }
 }
