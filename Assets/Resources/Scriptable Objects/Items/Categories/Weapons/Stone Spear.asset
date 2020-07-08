@@ -19,7 +19,7 @@ MonoBehaviour:
   maxStackSize: 0
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 5848450147430284794, guid: 0cd98028b33b8a34298c29f0d14c2162,
+  inGameObject: {fileID: 3725465688555768825, guid: a948896682d00e7418a873512a0d6847,
     type: 3}
   description: Better version of the wood spear
   damagePoints: 4

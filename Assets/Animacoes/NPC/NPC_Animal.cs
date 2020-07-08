@@ -1,10 +1,13 @@
 ﻿using Boo.Lang;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPC_Animal : MonoBehaviour {
+
+    [SerializeField] private Canvas canvas;
 
     [SerializeField] private Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
@@ -21,19 +24,18 @@ public class NPC_Animal : MonoBehaviour {
     public Animator anim;
     //Vector3 disttoPlayer;
     private List<Vector3> distToPlayers;
+    //Canvas
+    
     //public GameObject player;
     [SerializeField] private GameObject[] players;
     RaycastHit hit;
     Vector3 worldDeltaPosition;
 
-    public GameObject me;
     public PhotonView PV;
 
     void Start() {
         distToPlayers = new List<Vector3>();
-        //player = GameObject.FindGameObjectWithTag("Player");
         players = GameObject.FindGameObjectsWithTag("Player");
-        me = this.gameObject;
         navMeshAgent = GetComponent<NavMeshAgent>();
         PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
@@ -47,11 +49,9 @@ public class NPC_Animal : MonoBehaviour {
         if (health > 0.0f) {
             // Idea: apresentar UI de vida do npc quando o player esta perto
             //disttoPlayer = (transform.position - player.transform.position);
-
-
+            
             GameObject closestPlayer = GetClosestPlayerDistance();
             Vector3 dist = (transform.position - closestPlayer.transform.position);
-            //anim.SetFloat("DistToPlayer", disttoPlayer.magnitude);
             anim.SetFloat("DistToPlayer", dist.magnitude);
 
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
@@ -60,6 +60,7 @@ public class NPC_Animal : MonoBehaviour {
                 navMeshAgent.nextPosition = transform.position + 0.5f * worldDeltaPosition;
 
             Visao();
+            canvas.transform.LookAt(-closestPlayer.transform);
         } else {
             if (!dead) {
                 anim.SetTrigger("dead");
@@ -68,6 +69,8 @@ public class NPC_Animal : MonoBehaviour {
                 dead = true;
             }
         }
+        
+
     }
 
     public GameObject GetClosestPlayerDistance() {
