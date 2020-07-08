@@ -16,7 +16,7 @@ TagManager:
   - Sand
   - Grass
   - Tree
-  - player
+  - NPC
   layers:
   - Default
   - TransparentFX
