@@ -60,7 +60,7 @@ public class NPC_Animal : MonoBehaviour {
                 navMeshAgent.nextPosition = transform.position + 0.5f * worldDeltaPosition;
 
             Visao();
-            canvas.transform.LookAt(-closestPlayer.transform);
+            canvas.transform.LookAt(closestPlayer.transform);
         } else {
             if (!dead) {
                 anim.SetTrigger("dead");
