@@ -46,21 +46,26 @@ public class NPC_Animal : MonoBehaviour {
     void Update() {
         if (dead) navMeshAgent.isStopped = true;
 
+        StartCoroutine(UpdatePlayersList());
+        
+
         if (health > 0.0f) {
             // Idea: apresentar UI de vida do npc quando o player esta perto
             //disttoPlayer = (transform.position - player.transform.position);
-            
-            GameObject closestPlayer = GetClosestPlayerDistance();
-            Vector3 dist = (transform.position - closestPlayer.transform.position);
-            anim.SetFloat("DistToPlayer", dist.magnitude);
+            if (players != null && players.Length > 0) {
+                GameObject closestPlayer = GetClosestPlayerDistance();
+                Vector3 dist = (transform.position - closestPlayer.transform.position);
+                anim.SetFloat("DistToPlayer", dist.magnitude);
 
+                canvas.transform.LookAt(closestPlayer.transform);
+            }
+            
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
 
             if (worldDeltaPosition.magnitude > navMeshAgent.radius)
                 navMeshAgent.nextPosition = transform.position + 0.5f * worldDeltaPosition;
 
             Visao();
-            canvas.transform.LookAt(closestPlayer.transform);
         } else {
             if (!dead) {
                 anim.SetTrigger("dead");
@@ -71,6 +76,13 @@ public class NPC_Animal : MonoBehaviour {
         }
         
 
+    }
+
+    IEnumerator UpdatePlayersList() {
+        while (true) {
+            players = GameObject.FindGameObjectsWithTag("Player");
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public GameObject GetClosestPlayerDistance() {

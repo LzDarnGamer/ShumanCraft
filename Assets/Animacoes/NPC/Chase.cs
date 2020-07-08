@@ -21,10 +21,8 @@ public class Chase : StateMachineBehaviour {
         if (distance > 10f)
             animator.SetBool("Saw", false);
         else if (distance < 2f) {
-            //int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
-            //npc.GetComponent<AnimalAux>().RunRPC(id);
-            // Atacar
-            //animator.SetBool("Saw", false);
+            int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
+            npc.GetComponent<AnimalAux>().RunRPC(id);
         }
         animator.transform.LookAt(playerPos, Vector3.up);
         animator.transform.eulerAngles = new Vector3(0, animator.transform.eulerAngles.y, 0);

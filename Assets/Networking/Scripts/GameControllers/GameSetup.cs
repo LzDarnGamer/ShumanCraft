@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSetup : MonoBehaviour
-{
+public class GameSetup : MonoBehaviour {
 
     public static GameSetup GS;
 
