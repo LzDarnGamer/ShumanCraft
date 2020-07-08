@@ -896,7 +896,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stab
-  m_Speed: 15
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8740943007605421422}
@@ -909,7 +909,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: ab87cbafc697f2c4d85ca3557ac487e1,
+  m_Motion: {fileID: 1827226128182048838, guid: fae6967647c072f459054dc305f1f666,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
