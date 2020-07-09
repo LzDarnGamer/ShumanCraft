@@ -1,4 +1,4 @@
-﻿using Boo.Lang;
+﻿
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
@@ -25,7 +25,7 @@ public class NPC_Animal : MonoBehaviour {
 
     public Animator anim;
     //Vector3 disttoPlayer;
-    private List<Vector3> distToPlayers;
+    //private List<Vector3> distToPlayers;
     //Canvas
     
     //public GameObject player;
@@ -37,14 +37,13 @@ public class NPC_Animal : MonoBehaviour {
 
     void Start() {
         initHeightUI = thuderUI.transform.localScale.x;
-        distToPlayers = new List<Vector3>();
+        //distToPlayers = new List<Vector3>();
         players = GameObject.FindGameObjectsWithTag("Player");
         navMeshAgent = GetComponent<NavMeshAgent>();
         PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;
         navMeshAgent.updateRotation = true;
-
 
         //canvas.transform.GetChild(2).GetComponent<Text>().text = gameObject.name;
     }
@@ -98,7 +97,7 @@ public class NPC_Animal : MonoBehaviour {
         GameObject closestPlayer = null;
         for (int i = 0; i < players.Length; ++i) {
             Vector3 ajuda = transform.position - players[i].transform.position;
-            distToPlayers.Add(ajuda);
+            //distToPlayers.Add(ajuda);
             if (ajuda.magnitude < closestPlayerdistance) {
                 closestPlayerdistance = ajuda.magnitude;
                 closestPlayer = players[i];
@@ -152,13 +151,13 @@ public class NPC_Animal : MonoBehaviour {
         }*/
     }
 
-    public void OnAnimatorMove() {
+    public void OnAnimatorMove () {
         Vector3 position = anim.rootPosition;
         position.y = navMeshAgent.nextPosition.y;
         transform.position = position;
     }
 
-    public void Visao() {
+    public void Visao () {
         Debug.DrawRay(transform.position + Vector3.up, transform.forward * maxDistancetoCheck, Color.green);
         RaycastHit hit;
         if (Physics.SphereCast(transform.position + Vector3.up, 1, transform.forward, out hit, maxDistancetoCheck)) {
@@ -173,7 +172,7 @@ public class NPC_Animal : MonoBehaviour {
 
     public GameObject GetLastSeenPlayer () { return playerSeen; }
 
-    public Vector3 RandomNavmeshLocation(float radius) {
+    public Vector3 RandomNavmeshLocation (float radius) {
         Vector3 randomDir = Random.insideUnitSphere * radius;
         randomDir += transform.position;
 
@@ -191,7 +190,7 @@ public class NPC_Animal : MonoBehaviour {
     [SerializeField] private float climbValueUI;
     private float initHeightUI;
 
-    public void ShowIconGameObject(bool goingUp) {
+    public void ShowIconGameObject (bool goingUp) {
 
         if (goingUp) {
             thuderUI.transform.LeanMoveLocalY(climbValueUI, .5f);

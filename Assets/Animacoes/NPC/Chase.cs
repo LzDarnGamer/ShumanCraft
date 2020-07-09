@@ -20,11 +20,13 @@ public class Chase : StateMachineBehaviour {
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        float distance = Vector3.Distance(playerPos.position, animator.bodyPosition);
+        float distance = Vector3.Distance(playerPos.position, npc.transform.position);
+        Debug.Log("Distance: " + distance);
         if (distance > 10f)
             animator.SetBool("Saw", false);
-        else if (distance < 2f) {
+        else if (distance < 3.5f) {
             int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
+            Debug.Log("id: " + id);
             npc.GetComponent<AnimalAux>().RunRPC(id);
         }
 
@@ -33,7 +35,6 @@ public class Chase : StateMachineBehaviour {
         npc.navMeshAgent.SetDestination(playerPos.position);
 
         if (raio != null) raio.SetActive(true);
-
 
         /*
         if (npc.navMeshAgent.remainingDistance <= 2.0f) {

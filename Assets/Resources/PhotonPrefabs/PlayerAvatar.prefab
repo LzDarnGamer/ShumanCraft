@@ -2327,16 +2327,16 @@ MonoBehaviour:
   isOutsideMap: 0
   firstTime: 1
   hunger: 100
-  hungerLoss: 0.5
+  hungerLoss: 0
   hungerThreshold: 10
-  starvingDecay: 2
+  starvingDecay: 0
   isStarving: 0
   thirst: 100
-  thirstLoss: 0.5
+  thirstLoss: 0
   thirstThreshold: 30
-  thirstDecay: 2
+  thirstDecay: 0
   needsWater: 0
-  voidDamage: 10
+  voidDamage: 0
   walkRunKey: 304
   jumpKey: 32
   crouchKey: 306
@@ -2472,6 +2472,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Punch
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsHoldingSpear
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -3415,7 +3418,7 @@ PrefabInstance:
     - target: {fileID: 5829614617957031213, guid: 3f13d99ed616b5e4b83f18a147a67e74,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f13d99ed616b5e4b83f18a147a67e74, type: 3}

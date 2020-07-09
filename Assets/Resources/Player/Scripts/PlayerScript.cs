@@ -121,7 +121,7 @@ public class PlayerScript : MonoBehaviour {
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
-                DestroyImmediate(this, true);
+                //DestroyImmediate(this, true);
             }
         } else {
             StartManager();

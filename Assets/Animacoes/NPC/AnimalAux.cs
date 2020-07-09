@@ -19,8 +19,7 @@ public class AnimalAux : MonoBehaviour {
     public void RPC_TakePlayerDamage(int id) {
         PlayerScript player = PhotonView.Find(id).GetComponent<PlayerScript>();
 
-        player.GotBitten(40f);
-
+        player.GotBitten(0.03f);
     }
     
 }
