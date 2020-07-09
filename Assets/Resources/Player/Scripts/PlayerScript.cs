@@ -237,7 +237,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void atackNPC() {
-        Debug.Log("HERE");
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
             if (ray.collider.gameObject.CompareTag("NPC")) {
                 int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
@@ -405,7 +404,13 @@ public class PlayerScript : MonoBehaviour {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
 
-
+        if (instantiatedObject != null) {
+            if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
+                anim.SetBool("IsHoldingSpear", true);
+            }
+        } else {
+            anim.SetBool("IsHoldingSpear", false);
+        }
         if (isWalking) {
             float newX = (float)(this.x * .5);
             float newY = (float)(this.y * .5);
