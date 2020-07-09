@@ -46,7 +46,7 @@ public class NPC_Animal : MonoBehaviour {
         navMeshAgent.updateRotation = true;
 
 
-        canvas.transform.GetChild(2).GetComponent<Text>().text = gameObject.name;
+        //canvas.transform.GetChild(2).GetComponent<Text>().text = gameObject.name;
     }
 
     void Update() {
