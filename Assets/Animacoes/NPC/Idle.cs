@@ -9,7 +9,7 @@ public class Idle : StateMachineBehaviour
         animator.GetComponent<NPC_Animal>().navMeshAgent.isStopped = true;
 
         NPC_Animal npc = animator.GetComponent<NPC_Animal>();
-        if (npc.IsChaser()) { npc.ShowIconGameObject(false); }
+        if (npc.IsChaser()) { npc.ShowIconGameObject(false); npc.isChasing = false; }
 
     }
 

@@ -110,6 +110,8 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(healthCoroutineStarving());
         StartCoroutine(healthCoroutineThirsth());
         StartCoroutine(healthOutsideMap());
+        StartCoroutine(UpdateNPCNear());
+
         colliderHeight = playerCollider.height;
         colliderCenterY = playerCollider.center.y;
 
@@ -121,7 +123,7 @@ public class PlayerScript : MonoBehaviour {
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
-                //DestroyImmediate(this, true);
+                DestroyImmediate(this, true);
             }
         } else {
             StartManager();
@@ -477,4 +479,27 @@ public class PlayerScript : MonoBehaviour {
     public void addHealth(float amount) { health += amount; }
     public void addThirst(float amount) { thirst += amount; }
     public void addHunger(float amount) { hunger += amount; }
+
+    private GameObject GetClosestNPC() {
+        float closestNPCdistance = float.MaxValue;
+        GameObject[] npcs = GameObject.FindGameObjectsWithTag("NPC");
+        GameObject closestNPC = null;
+        for (int i = 0; i < npcs.Length; ++i) {
+            Vector3 ajuda = transform.position - npcs[i].transform.position;
+            //distToPlayers.Add(ajuda);
+            if (ajuda.magnitude < closestNPCdistance) {
+                closestNPCdistance = ajuda.magnitude;
+                closestNPC = npcs[i];
+            }
+        }
+        return closestNPC;
+    }
+
+    IEnumerator UpdateNPCNear() {
+        while (true) {
+            GameObject n = GetClosestNPC();
+            if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
+            yield return new WaitForSeconds(1);
+        }
+    }
 }

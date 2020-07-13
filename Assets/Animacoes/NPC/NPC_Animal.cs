@@ -33,6 +33,8 @@ public class NPC_Animal : MonoBehaviour {
     RaycastHit hit;
     Vector3 worldDeltaPosition;
 
+    public bool isChasing = false;
+
     public PhotonView PV;
 
     void Start() {

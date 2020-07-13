@@ -15,6 +15,7 @@ public class Chase : StateMachineBehaviour {
         npc = animator.GetComponent<NPC_Animal>();
         playerPos = npc.GetLastSeenPlayer().transform;
         npc.ShowIconGameObject(true);
+        npc.isChasing = true;
         //playerPos = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -25,9 +26,7 @@ public class Chase : StateMachineBehaviour {
         if (distance > 10f)
             animator.SetBool("Saw", false);
         else if (distance < 3.5f) {
-            int id = playerPos.gameObject.GetComponent<PhotonView>().ViewID;
-            Debug.Log("id: " + id);
-            npc.GetComponent<AnimalAux>().RunRPC(id);
+            
         }
 
         animator.transform.LookAt(playerPos, Vector3.up);

@@ -15,7 +15,7 @@ public class Walk : StateMachineBehaviour
         npc.navMeshAgent.speed = 1.3f;
         npc.MoveToNextWaypoint();
 
-        if (npc.IsChaser()) { npc.ShowIconGameObject(false); }
+        if (npc.IsChaser()) { npc.ShowIconGameObject(false); npc.isChasing = false; }
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
