@@ -120,7 +120,6 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(healthOutsideMap());
         StartCoroutine(UpdateNPCNear());
 
-        chatPublic = GameObject.FindGameObjectWithTag("ChatAux").GetComponent<PhotonView>();
 
         colliderHeight = playerCollider.height;
         colliderCenterY = playerCollider.center.y;
@@ -129,7 +128,7 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 StartManager();
             } else {
-
+                chatPublic = GameObject.FindGameObjectWithTag("ChatAux").GetComponent<PhotonView>();
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
