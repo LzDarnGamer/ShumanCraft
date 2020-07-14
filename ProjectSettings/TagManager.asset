@@ -17,6 +17,7 @@ TagManager:
   - Grass
   - Tree
   - NPC
+  - ChatAux
   layers:
   - Default
   - TransparentFX

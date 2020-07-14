@@ -8,6 +8,8 @@ using System.IO;
 using System.Collections;
 using com.ootii.Utilities.Debug;
 using Photon.Realtime;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -88,7 +90,6 @@ public class PlayerScript : MonoBehaviour {
     public KeyCode openChatKey = KeyCode.T;
     public KeyCode openInventoryKey = KeyCode.E;
     public KeyCode openConstructionkey = KeyCode.R;
-    public KeyCode changeConstructionKey = KeyCode.T;
 
     [Header("UI")]
     [SerializeField] private Image uiHealth;
@@ -96,6 +97,13 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private Image uiHunger;
     [SerializeField] private Image uiThirst;
     [SerializeField] private bool isOnline = true;
+
+    [Header("Chat System")]
+    [SerializeField] private GameObject chatPanel;
+    [SerializeField] private TMP_InputField chatInput;
+    public TMP_Text chatMsgTxt;
+    public TMP_Text chatPlayer;
+    [SerializeField] private PhotonView chatPublic;
 
 
     private int PlayerMask = 1 << 8;
@@ -112,6 +120,8 @@ public class PlayerScript : MonoBehaviour {
         StartCoroutine(healthOutsideMap());
         StartCoroutine(UpdateNPCNear());
 
+        chatPublic = GameObject.FindGameObjectWithTag("ChatAux").GetComponent<PhotonView>();
+
         colliderHeight = playerCollider.height;
         colliderCenterY = playerCollider.center.y;
 
@@ -127,6 +137,20 @@ public class PlayerScript : MonoBehaviour {
             }
         } else {
             StartManager();
+        }
+    }
+
+    private void ChatSystem() {
+        if (Input.GetKey(openChatKey)) {
+            chatPanel.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(chatInput.gameObject);
+        } else if (Input.GetKey(KeyCode.Escape)) {
+            chatPanel.SetActive(false);
+        }
+
+        if (Input.GetKey(KeyCode.Return) && chatInput.isFocused && chatInput.text != "") {
+            auxRPC.handleChat(chatInput.text, chatPublic.ViewID);
+            chatInput.text = "";
         }
     }
 
@@ -216,6 +240,7 @@ public class PlayerScript : MonoBehaviour {
         PickUpItem();
         TakeDamage();
         HashUpdate();
+        ChatSystem();
     }
 
     void HashUpdate() {
@@ -266,6 +291,11 @@ public class PlayerScript : MonoBehaviour {
 
         controller.Anchor = this.gameObject.transform;
         controller.InputSource = instSource.GetComponent<IInputSource>();
+
+        CameraMotor mainMotor = controller.GetMotor("3rd Person Fixed");
+        mainMotor.UseRigAnchor = false;
+        mainMotor.Anchor = gameObject.transform;
+        mainMotor.AnchorOffset = new Vector3(0.0f, 0.9f, 0.0f);
 
         CameraMotor motor = controller.GetMotor("Targeting");
         motor.UseRigAnchor = false;
@@ -503,6 +533,7 @@ public class PlayerScript : MonoBehaviour {
         while (true) {
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
+            if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
             yield return new WaitForSeconds(1);
         }
     }

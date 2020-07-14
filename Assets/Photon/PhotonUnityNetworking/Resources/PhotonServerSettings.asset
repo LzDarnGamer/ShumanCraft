@@ -42,6 +42,8 @@ MonoBehaviour:
   - RPC_LeaveRoom
   - RPC_DestroyMe
   - RPC_TakePlayerDamage
+  - updateChat
+  - RPC_UpdateChat
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

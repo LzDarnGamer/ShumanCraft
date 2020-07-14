@@ -14,6 +14,10 @@ public class PlayerAux : MonoBehaviour {
     public void SetObject(GameObject a) { objectInHand = a; }
     public void SetHand(GameObject b) { playerHand = b; }
 
+    public void handleChat(string txt, int id) {
+        PV.RPC("RPC_UpdateChat", RpcTarget.AllBuffered, txt, id);
+    }
+
     public void runRPC(string name, int handID, int instatiatedID, float[] position, float[] rotation) {
         PV.RPC("RPC_UpdateObject", RpcTarget.AllBuffered, name, handID, instatiatedID, position, rotation);
     } 
@@ -43,5 +47,12 @@ public class PlayerAux : MonoBehaviour {
         i.transform.localRotation = rot;
         i.transform.localScale = scal;
         */
+    }
+
+    [PunRPC]
+    private void RPC_UpdateChat(string textmsg, int id) {
+        TMPro.TMP_Text msg = PhotonView.Find(id).gameObject.GetComponent<TMPro.TMP_Text>();
+        msg.text = textmsg;
+        //TMPro.TMP_Text msg = this.gameObject.GetComponent<PlayerScript>().chatMsgTxt;
     }
 }
