@@ -57,15 +57,13 @@ public class NPC_Animal : MonoBehaviour {
         
 
         if (health > 0.0f) {
-            // Idea: apresentar UI de vida do npc quando o player esta perto
-            //disttoPlayer = (transform.position - player.transform.position);
+
             if (players != null && players.Length > 0) {
                 GameObject closestPlayer = GetClosestPlayerDistance();
                 Vector3 dist = (transform.position - closestPlayer.transform.position);
                 anim.SetFloat("DistToPlayer", dist.magnitude);
 
-                //canvas.transform.LookAt(closestPlayer.transform);
-                //canvas.transform.Rotate(0, 180, 0);
+
             }
             
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
@@ -83,10 +81,25 @@ public class NPC_Animal : MonoBehaviour {
                 dead = true;
             }
         }
-        //canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
-        //canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
+        setCanvas();
+
     }
 
+    private void setCanvas() {
+        if (players != null && players.Length > 0) {
+            GameObject closestPlayer = GetClosestPlayerDistance();
+            float distToPlayer = Vector3.Distance(transform.position, closestPlayer.transform.position);
+            if (distToPlayer < 10) {
+                canvas.gameObject.SetActive(true);
+                canvas.transform.LookAt(closestPlayer.transform);
+                canvas.transform.Rotate(0, 180, 0);
+                canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
+                canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
+            } else {
+                canvas.gameObject.SetActive(false);
+            }
+        }
+    }
     IEnumerator UpdatePlayersList() {
         while (true) {
             players = GameObject.FindGameObjectsWithTag("Player");
@@ -185,6 +198,8 @@ public class NPC_Animal : MonoBehaviour {
 
         return finalPos;
     }
+
+
 
     [Header("Animal UI")]
     [SerializeField] private GameObject thuderUI;

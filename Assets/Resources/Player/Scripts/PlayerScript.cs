@@ -239,6 +239,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void atackNPC() {
+        Debug.Log("he");
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
             if (ray.collider.gameObject.CompareTag("NPC")) {
                 int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
