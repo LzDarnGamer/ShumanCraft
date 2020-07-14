@@ -397,7 +397,9 @@ public class PlayerScript : MonoBehaviour {
                                                 playerCollider.center.z);
         }
 
-        if (Input.GetKeyUp(walkRunKey) && stamina > 0) isWalking = !isWalking;
+        if (Input.GetKeyDown(walkRunKey) && stamina > 0) isWalking = false;
+        if (Input.GetKeyUp(walkRunKey)) isWalking = true;
+
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) isCrouched = !isCrouched;
         if (Input.GetKeyUp(jumpKey) && isRunning && (x != 0 || y != 0)) anim.SetTrigger("RunningJump");
@@ -419,6 +421,7 @@ public class PlayerScript : MonoBehaviour {
             x = newX;
             y = newY;
         }
+
         // Set animator variables
         anim.SetFloat("VelX", x, 1f, Time.deltaTime * 10f);
         anim.SetFloat("VelY", y, 1f, Time.deltaTime * 10f);
