@@ -111,6 +111,8 @@ public class PlayerScript : MonoBehaviour {
 
         anim = gameObject.GetComponent<Animator>();
         auxRPC = gameObject.GetComponent<PlayerAux>();
+        chatPublic = GameObject.FindGameObjectWithTag("ChatAux").GetComponent<PhotonView>();
+
         StartCoroutine(staminaCoroutineMinus());
         StartCoroutine(staminaCoroutineAdd());
         StartCoroutine(hungerCoroutine());
@@ -128,7 +130,6 @@ public class PlayerScript : MonoBehaviour {
             if (PV.IsMine) {
                 StartManager();
             } else {
-                chatPublic = GameObject.FindGameObjectWithTag("ChatAux").GetComponent<PhotonView>();
                 DestroyImmediate(gameObject.GetComponent<ConstructionController>(), true);
                 DestroyImmediate(canvas, true);
                 DestroyImmediate(gameObject.GetComponent<Interact>(), true);
