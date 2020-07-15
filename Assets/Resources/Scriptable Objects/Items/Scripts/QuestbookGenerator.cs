@@ -13,6 +13,15 @@ public class QuestbookGenerator : MonoBehaviour
     [SerializeField] GameObject materialExamplePanel;
     [SerializeField] GameObject craftingExamplePanel;
 
+    [Header("Content Book")]
+    [SerializeField] GameObject BookContentFood;
+    [SerializeField] GameObject BookContentArmour;
+    [SerializeField] GameObject BookContentTool;
+    [SerializeField] GameObject BookContentWeapons;
+    [SerializeField] GameObject BookContentMaterial;
+    [SerializeField] GameObject BookContentCrafting;
+
+
     [Header("QuestBook")]
     [SerializeField] Transform AchivementChapter;
     [SerializeField] GameObject AchivementPage;
@@ -36,12 +45,12 @@ public class QuestbookGenerator : MonoBehaviour
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
 
-        contentFood = GameObject.Find("Content - Food").transform;
-        contentArmour = GameObject.Find("Content - Armour").transform;
-        contentTool = GameObject.Find("Content - Tool").transform;
-        contentWeapon = GameObject.Find("Content - Weapon").transform;
-        contentMaterial = GameObject.Find("Content - Material").transform;
-        contentCraftings = GameObject.Find("Content - Craftings").transform;
+        contentFood = BookContentFood.transform;
+        contentArmour = BookContentArmour.transform;
+        contentTool = BookContentTool.transform;
+        contentWeapon = BookContentWeapons.transform;
+        contentMaterial = BookContentMaterial.transform;
+        contentCraftings = BookContentCrafting.transform;
 
         foreach (var food in Fooditems) {
             string name = food.name;
