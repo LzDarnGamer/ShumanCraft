@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class QuestbookGenerator : MonoBehaviour
 {
     [Header("Infobook")]
+    [SerializeField] GameObject InfoBook;
     [SerializeField] GameObject foodExamplePanel;
     [SerializeField] GameObject armourExamplePanel;
     [SerializeField] GameObject toolExamplePanel;
@@ -25,6 +26,7 @@ public class QuestbookGenerator : MonoBehaviour
     [Header("QuestBook")]
     [SerializeField] Transform AchivementChapter;
     [SerializeField] GameObject AchivementPage;
+    
 
     [Header("Script")]
     [SerializeField] AchivementList achivementList;
@@ -125,7 +127,7 @@ public class QuestbookGenerator : MonoBehaviour
         contentMaterial.parent.gameObject.SetActive(false);
         contentCraftings.parent.gameObject.SetActive(false);
 
-        GameObject.Find("InfoBook").gameObject.SetActive(false);
+        InfoBook.SetActive(false);
     }
 
 
