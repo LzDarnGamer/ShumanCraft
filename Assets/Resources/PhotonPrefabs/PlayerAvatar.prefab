@@ -2337,6 +2337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9324f3e3efb70e244be75759890f6730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfoBook: {fileID: 4749199179262282050}
   foodExamplePanel: {fileID: 5670653129734385031, guid: 57436ae031c8e764096c96a35a4c6494,
     type: 3}
   armourExamplePanel: {fileID: 4322785665570466919, guid: 110190b1062bebe45a02cd57e5044135,
