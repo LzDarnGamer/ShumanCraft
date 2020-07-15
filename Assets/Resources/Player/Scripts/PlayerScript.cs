@@ -104,6 +104,7 @@ public class PlayerScript : MonoBehaviour {
     public TMP_Text chatMsgTxt;
     public TMP_Text chatPlayer;
     [SerializeField] private PhotonView chatPublic;
+    [SerializeField] private float chatCounter;
 
 
     private int PlayerMask = 1 << 8;
@@ -149,7 +150,8 @@ public class PlayerScript : MonoBehaviour {
         }
 
         if (Input.GetKey(KeyCode.Return) && chatInput.isFocused && chatInput.text != "") {
-            auxRPC.handleChat(chatInput.text, chatPublic.ViewID);
+            string aux = chatInput.text + "\n";
+            auxRPC.handleChat(aux, chatPublic.ViewID);
             chatInput.text = "";
         }
     }

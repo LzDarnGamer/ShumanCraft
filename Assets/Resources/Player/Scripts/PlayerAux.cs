@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using System.Text.RegularExpressions;
+using com.ootii.Helpers;
 
 public class PlayerAux : MonoBehaviour {
 
@@ -52,7 +54,14 @@ public class PlayerAux : MonoBehaviour {
     [PunRPC]
     private void RPC_UpdateChat(string textmsg, int id) {
         TMPro.TMP_Text msg = PhotonView.Find(id).gameObject.GetComponent<TMPro.TMP_Text>();
-        msg.text = textmsg;
+
+        msg.text = msg.text.Replace((char)10, (char)159);
+        string[] aj = msg.text.Split((char)159);
+        int a = aj.Length;
+
+        Debug.Log("Numero: " + a);
+        msg.text = (a > 6) ? textmsg : msg.text + textmsg;
+        msg.text = msg.text.Replace((char)159, (char)10);
         //TMPro.TMP_Text msg = this.gameObject.GetComponent<PlayerScript>().chatMsgTxt;
     }
 }
