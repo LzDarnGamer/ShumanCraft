@@ -140,14 +140,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374596839805319218}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.9900007, y: 5, z: 11.22}
+  m_LocalRotation: {x: 0.06162845, y: -0.70441604, z: 0.06162845, w: 0.70441604}
+  m_LocalPosition: {x: 6.9900007, y: 10, z: 11.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1374596837937883193}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: -90.00001, z: 0}
 --- !u!114 &1374596839805319217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   _AnchorOffset: {x: 0, y: 1.8, z: 0}
   _RotateAnchorOffset: 1
   _InvertPitch: 1
-  _ActiveMotorIndex: 1
+  _ActiveMotorIndex: 5
   MotorTestActivateEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -227,7 +227,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   MotorDefinitions:
   - '{, "Type" : "com.ootii.Cameras.OrbitFollowMotor, ootii, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null", "Name" : "Follow", "IsEnabled" : "True", "ActionAlias"
+    PublicKeyToken=null", "Name" : "Follow", "IsEnabled" : "False", "ActionAlias"
     : "", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset" : "(0, 0,
     0)", "Offset" : "(0, 0, 0)", "Distance" : "3.00000", "MaxDistance" : "3.00000",
     "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
@@ -238,7 +238,7 @@ MonoBehaviour:
   - '{, "Type" : "com.ootii.Cameras.OrbitFixedMotor, ootii, Version=0.0.0.0, Culture=neutral,
     PublicKeyToken=null", "Name" : "3rd Person Fixed", "IsEnabled" : "True", "ActionAlias"
     : "", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset" : "(0, 0,
-    0)", "Offset" : "(0, 0, 0)", "Distance" : "3.00000", "MaxDistance" : "3.00000",
+    0)", "Offset" : "(0, 0, 0)", "Distance" : "2.50000", "MaxDistance" : "2.50000",
     "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
     : "False", "FadeTransformIndexes" : "", "RotateWithAnchor" : "False", "RotateAnchor"
     : "True", "RotateAnchorAlias" : "Camera Rotate Character", "IsYawEnabled" : "True",
@@ -275,10 +275,19 @@ MonoBehaviour:
     : "0", "TransitionTime" : "0.25", "ActionAliasEventType" : "1", "LimitToStart"
     : "False", "TestDistance" : "False", "ActorStances" : "", "InvertVerifyActorStances"
     : "False", "DistanceCompareType" : "0", "DistanceValue" : "0.5"}'
+  - '{, "Type" : "com.ootii.Cameras.OrbitFollowMotor, ootii, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null", "Name" : "3rd Person Follow", "IsEnabled" : "True", "ActionAlias"
+    : "", "UseRigAnchor" : "True", "AnchorIndex" : "-1", "AnchorOffset" : "(0, 0,
+    0)", "Offset" : "(0, 0, 0)", "Distance" : "3.00000", "MaxDistance" : "3.00000",
+    "IsCollisionEnabled" : "True", "IsFadingEnabled" : "True", "SpecifyFadeRenderers"
+    : "False", "FadeTransformIndexes" : "", "IsYawEnabled" : "True", "MinYaw" : "-180",
+    "MaxYaw" : "180", "YawSpeed" : "120", "TargetRotationMultiplier" : "3", "IsPitchEnabled"
+    : "True", "InvertPitch" : "True", "MinPitch" : "-60", "MaxPitch" : "60", "PitchSpeed"
+    : "45", "Smoothing" : "0.05"}'
   StoredTransforms: []
   EditorShowDebug: 0
   EditorTabIndex: 1
-  EditorMotorIndex: 3
+  EditorMotorIndex: 5
   EditorRefresh: 0
   EditorCameraStyle: 1
   EditorUseAdventureStyle: 0
