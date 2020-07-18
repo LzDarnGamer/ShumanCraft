@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class MineObject : MonoBehaviour{
     [SerializeField] protected GameObject particleEffects;
-    [SerializeField] protected int HitsNeeded;
+    [SerializeField] protected int HitsNeeded = 20;
     [SerializeField] protected int HitsTaken;
-    [SerializeField] protected float minTimeToRespawn;
-    [SerializeField] protected float maxTimeToRespawn;
+    [SerializeField] protected float minTimeToRespawn = 15;
+    [SerializeField] protected float maxTimeToRespawn = 25;
     [SerializeField] protected AudioClip SoundOnHit;
     [SerializeField] protected AudioClip SoundOnRespawn;
     [SerializeField] protected AudioClip SoundOnDestroy;
@@ -18,6 +18,8 @@ public abstract class MineObject : MonoBehaviour{
     protected float GetRandomNumber(float min, float max) {
         return Random.Range(min, max);
     }
+
+    public abstract void RaycastHit(Item it, Vector3 hitPos);
 
     protected abstract void RespawnCountDown(float seconds, GameObject g);
 

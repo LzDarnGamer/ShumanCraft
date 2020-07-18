@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LootTable : MonoBehaviour
+[System.Serializable]
+public class LootTable 
 {
-
+    public string tablename;
+    public int[] itemID;
+    public int[] minValue;
+    public int[] maxValue;
+    public LootTable[] lootTable;
     public static Dictionary<int,int> IronOreLootTable() {
         return new Dictionary<int, int> {
             { ItemsIndex.getItem(4).itemID, 1 }

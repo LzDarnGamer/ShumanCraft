@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8159420448377493077}
   - component: {fileID: 8159420448377493079}
   - component: {fileID: 6757801336193082412}
+  - component: {fileID: 8512986986897785614}
   m_Layer: 0
   m_Name: GameSetup
   m_TagString: Untagged
@@ -72,3 +73,16 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &8512986986897785614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159420448377493074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b24fdb80bd32b84a8077e5284c82bd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootTableJSON: {fileID: 4900000, guid: ec95ace717b85464e8a267dd65bb2946, type: 3}
