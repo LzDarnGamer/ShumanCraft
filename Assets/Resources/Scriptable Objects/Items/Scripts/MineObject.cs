@@ -8,10 +8,11 @@ public abstract class MineObject : MonoBehaviour{
     [SerializeField] protected int HitsTaken;
     [SerializeField] protected float minTimeToRespawn = 15;
     [SerializeField] protected float maxTimeToRespawn = 25;
-    [SerializeField] protected AudioClip SoundOnHit;
+    [SerializeField] protected AudioClip[] SoundOnHit;
     [SerializeField] protected AudioClip SoundOnRespawn;
     [SerializeField] protected AudioClip SoundOnDestroy;
 
+    protected int[] ToolNeeded;
 
 
     protected abstract void dropItems();

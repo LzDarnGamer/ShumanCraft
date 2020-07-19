@@ -266,7 +266,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void atackNPC() {
-        Debug.Log("he");
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
             if (ray.collider.gameObject.CompareTag("NPC")) {
                 int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
@@ -277,8 +276,13 @@ public class PlayerScript : MonoBehaviour {
 
     private void mineObject() {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
-            if (ray.collider.gameObject.CompareTag("Tree")) {
-                ray.collider.gameObject.GetComponent<MineTree>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
+            switch (ray.collider.gameObject.tag) {
+                case "Tree":
+                    ray.collider.gameObject.GetComponent<MineTree>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
+                    break;
+                case "Ore":
+                    ray.collider.gameObject.GetComponent<MineIronOre>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
+                    break;
             }
         }
     }
