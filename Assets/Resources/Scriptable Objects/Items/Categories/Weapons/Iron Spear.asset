@@ -19,8 +19,8 @@ MonoBehaviour:
   maxStackSize: 0
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 5848450147430284794, guid: 2d3abe10b731e344e8af60ca28d4b65d,
+  inGameObject: {fileID: 3725465688555768825, guid: 67cc1e5ff7ba04c4695ec24b9e59270c,
     type: 3}
   description: Basic spear to protect youserf
-  damagePoints: 5
+  damagePoints: 10
   durability: 64

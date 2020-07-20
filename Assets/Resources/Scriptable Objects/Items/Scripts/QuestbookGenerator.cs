@@ -46,6 +46,7 @@ public class QuestbookGenerator : MonoBehaviour
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
+        PlacebleObject[] Placableitems = Resources.LoadAll<PlacebleObject>("Scriptable Objects/Items/Categories/Placeble");
 
         contentFood = BookContentFood.transform;
         contentArmour = BookContentArmour.transform;
