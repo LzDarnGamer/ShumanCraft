@@ -88,7 +88,7 @@ public class QuestbookGenerator : MonoBehaviour
             Sprite icon = placeable.icon;
 
             if (placeable.recipeItems != null && placeable.recipeItems.Length > 0) {
-                Debug.Log(Placeableitems.Length);
+                
                 fillCreaftingInfo(craftingExamplePanel, name, description, icon,
                     placeable.recipeItems, placeable.recipeAmount, placeable.itemID);
             }

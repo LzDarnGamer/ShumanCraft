@@ -14,11 +14,13 @@ public class ItemsIndex : MonoBehaviour
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
+        PlaceableObject[] Placeableitems = Resources.LoadAll<PlaceableObject>("Scriptable Objects/Items/Categories/Placeables");
         initializeItems(Fooditems);
         initializeItems(Armouritems);
         initializeItems(Toolitems);
         initializeItems(Weaponsitems);
         initializeItems(Materialitems);
+        initializeItems(Placeableitems);
 
     }
     public static ItemObject getItem(int itemId) {
