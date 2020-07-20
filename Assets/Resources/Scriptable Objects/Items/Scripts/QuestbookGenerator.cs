@@ -46,7 +46,8 @@ public class QuestbookGenerator : MonoBehaviour
         ToolObject[] Toolitems = Resources.LoadAll<ToolObject>("Scriptable Objects/Items/Categories/Tool");
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
-        PlacebleObject[] Placableitems = Resources.LoadAll<PlacebleObject>("Scriptable Objects/Items/Categories/Placeble");
+        PlaceableObject[] Placeableitems = Resources.LoadAll<PlaceableObject>("Scriptable Objects/Items/Categories/Placeables");
+
 
         contentFood = BookContentFood.transform;
         contentArmour = BookContentArmour.transform;
@@ -78,6 +79,19 @@ public class QuestbookGenerator : MonoBehaviour
                     material.recipeItems, material.recipeAmount, material.itemID);
             }
             fillMaterialInfo(materialExamplePanel, name, itemID, description, icon);
+        }
+
+        foreach (var placeable in Placeableitems) {
+            string name = placeable.name;
+            string itemID = placeable.itemID.ToString();
+            string description = placeable.description;
+            Sprite icon = placeable.icon;
+
+            if (placeable.recipeItems != null && placeable.recipeItems.Length > 0) {
+                Debug.Log(Placeableitems.Length);
+                fillCreaftingInfo(craftingExamplePanel, name, description, icon,
+                    placeable.recipeItems, placeable.recipeAmount, placeable.itemID);
+            }
         }
 
 
