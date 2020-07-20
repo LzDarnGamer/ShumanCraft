@@ -85,15 +85,21 @@ public class MatrixInventory : ScriptableObject
         return false;
     }
 
+    /*
+     * Tira os items que necessarios para o crafting
+     * e adiciona o item que e necessario craftear
+     */
     public void CraftItem(ItemObject item) {
         bool hasFound = false;
+        Debug.Log(item.name + "HEREEEEE" );
         for (int i = 0; i < item.recipeItems.Length; i++) {
+            // Pesquisa na hotbar
             for (int j = 0; j < hotbar.Length; j++) {
                 if (hotbar[j].item != null) {
                     if (hotbar[j].item.itemID == item.recipeItems[i].itemID &&
                         hotbar[j].amount >= item.recipeAmount[i]) {
                         hotbar[j].RemoveAmount(item.recipeAmount[i]);
-                        AddItem(item, 1);
+                        if (!(item.itemID >= 800 && item.itemID <= 850)) AddItem(item, 1);
                         hasFound = !hasFound;
                         break;
                     }
@@ -103,12 +109,14 @@ public class MatrixInventory : ScriptableObject
                 hasFound = !hasFound;
                 continue;
             }
+
+            // Pesquisa no inventario
             for (int j = 0; j < inventory.Length; j++) {
                 if (inventory[j].item != null) {
                     if (inventory[j].item.itemID == item.recipeItems[i].itemID &&
                         inventory[j].amount >= item.recipeAmount[i]) {
                         inventory[j].RemoveAmount(item.recipeAmount[i]);
-                        AddItem(item, 1);
+                        if (!(item.itemID >= 800 && item.itemID <= 850)) AddItem(item, 1);
                     }
                 }
             }

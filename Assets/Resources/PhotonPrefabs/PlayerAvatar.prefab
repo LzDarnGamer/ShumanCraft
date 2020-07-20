@@ -3088,9 +3088,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea4879b0f0a53d47b841cb222afab92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: {fileID: 255578545082703532, guid: ececb4dd09898eb4c9ed348a74c76f77, type: 3}
   placeableObjectPrefab: {fileID: 0}
   newObjectHotKey: 114
+  isOn: 0
+  isUsing: 0
 --- !u!114 &8113904021683205663
 MonoBehaviour:
   m_ObjectHideFlags: 0
