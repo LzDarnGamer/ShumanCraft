@@ -9,8 +9,7 @@ public class Onclick : MonoBehaviour
 
     DisplayInventory display;
 
-    [SerializeField]
-    MatrixInventory inventory;
+    [SerializeField] MatrixInventory inventory;
 
     private Button btn;
     private int id;
@@ -24,7 +23,12 @@ public class Onclick : MonoBehaviour
     }
     
     private void craft() {
-        inventory.CraftItem(ItemsIndex.getItem(id));
+        ItemObject _id = ItemsIndex.getItem(id);
+        inventory.CraftItem(_id);
+        if (!(_id.itemID >= 800 && _id.itemID <= 850)) {
+            //Aceder ao player
+            Debug.Log((transform.root.gameObject.name) + ": IS PLAYER OR NOT");
+        }
     }
 
 
