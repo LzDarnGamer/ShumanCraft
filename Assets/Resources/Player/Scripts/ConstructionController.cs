@@ -7,11 +7,12 @@ using System.IO;
 
 public class ConstructionController : MonoBehaviour {
 
-    [SerializeField] private GameObject objects;
-
     [SerializeField] private GameObject placeableObjectPrefab;
 
     [SerializeField] private KeyCode newObjectHotKey = KeyCode.R;
+
+    [SerializeField] private bool isOn = false;
+    [SerializeField] private bool isUsing = false;
 
     private bool isOnline = true;
 
@@ -24,10 +25,9 @@ public class ConstructionController : MonoBehaviour {
 
     void Update() {
         if (cam != null) {
-            placeableObjectPrefab = objects;
-            HandleNewObjectHotKey();
+            //HandleNewObjectHotKey();
 
-            if (currentPlaceableObject != null) {
+            if (isOn && currentPlaceableObject != null) {
                 MoveCurrentPlaceableObjectToMouse();
                 RotateFromMouseWheel();
                 ReleaseIfClicked();
@@ -74,17 +74,29 @@ public class ConstructionController : MonoBehaviour {
         }
     }
 
-    private void HandleNewObjectHotKey() {
-        if (Input.GetKeyDown(newObjectHotKey)) {
+    /*
+     * Set Object to place in the map
+     */
+    public void SetObject(GameObject obj) {
+        placeableObjectPrefab = obj;
+    }
+
+    /*
+     * Set Construction Mode On
+     */
+    public void HandleNewObjectHotKey() {
+        //if (Input.GetKeyDown(newObjectHotKey)) {
             if (currentPlaceableObject == null) {
 
                 currentPlaceableObject = !isOnline ? Instantiate(placeableObjectPrefab) :
                     PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", placeableObjectPrefab.name), transform.position, Quaternion.identity, 0);
                 
                 SetColliders(false);
+
+                isUsing = true;
             } else {
                 Destroy(currentPlaceableObject);
             }
-        }
+        //}
     }
 }
