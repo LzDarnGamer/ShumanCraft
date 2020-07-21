@@ -91,7 +91,6 @@ public class MatrixInventory : ScriptableObject
      */
     public void CraftItem(ItemObject item) {
         bool hasFound = false;
-        Debug.Log(item.name + "HEREEEEE" );
         for (int i = 0; i < item.recipeItems.Length; i++) {
             // Pesquisa na hotbar
             for (int j = 0; j < hotbar.Length; j++) {

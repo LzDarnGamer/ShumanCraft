@@ -10,6 +10,7 @@ public class Onclick : MonoBehaviour
     DisplayInventory display;
 
     [SerializeField] MatrixInventory inventory;
+    private PlayerScript player;
 
     private Button btn;
     private int id;
@@ -18,17 +19,26 @@ public class Onclick : MonoBehaviour
         id = int.Parse(transform.parent.transform.GetChild(5).name);
         crafting = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().GetComponent<Crafting>();
         display = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().GetComponent<DisplayInventory>();
+        player = GameObject.FindGameObjectWithTag("MainCanvas").transform.root.GetComponent<PlayerScript>();
 
         btn.onClick.AddListener(() => { craft(); crafting.UpdateCratables(); display.UpdateDisplay(); });
     }
     
     private void craft() {
         ItemObject _id = ItemsIndex.getItem(id);
-        inventory.CraftItem(_id);
-        if (!(_id.itemID >= 800 && _id.itemID <= 850)) {
-            //Aceder ao player
-            Debug.Log((transform.root.gameObject.name) + ": IS PLAYER OR NOT");
+        if (_id.itemID >= 800 && _id.itemID <= 850) {
+            // Dar disable ao Panel para desaparecer
+
+            /*
+             * 1. Get the construction script
+             * 2. Set the construction prefab
+             * 3. Set the construction mode on
+             */
+            ConstructionController construct = player.construction;
+            construct.SetObject(_id.inGameObject);            
+            construct.HandleNewObject();
         }
+        inventory.CraftItem(_id);
     }
 
 

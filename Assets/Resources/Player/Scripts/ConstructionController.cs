@@ -84,7 +84,7 @@ public class ConstructionController : MonoBehaviour {
     /*
      * Set Construction Mode On
      */
-    public void HandleNewObjectHotKey() {
+    public void HandleNewObject() {
         //if (Input.GetKeyDown(newObjectHotKey)) {
             if (currentPlaceableObject == null) {
 

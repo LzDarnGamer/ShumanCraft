@@ -14,14 +14,10 @@ using UnityEngine.EventSystems;
 public class PlayerScript : MonoBehaviour {
 
     private Animator anim;
-    [SerializeField]
-    private GameObject canvas;
-    [SerializeField]
-    private PhotonView PV;
-    [SerializeField]
-    private GameObject cam;
-    [SerializeField]
-    private bool isCamFixed = true;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private PhotonView PV;
+    [SerializeField] private GameObject cam;
+    [SerializeField] private bool isCamFixed = true;
     private float facing;
     [SerializeField] private GameObject inputSource;
 
@@ -89,7 +85,6 @@ public class PlayerScript : MonoBehaviour {
     public KeyCode startKey = KeyCode.P;
     public KeyCode openChatKey = KeyCode.T;
     public KeyCode openInventoryKey = KeyCode.E;
-    public KeyCode openConstructionkey = KeyCode.R;
 
     [Header("UI")]
     [SerializeField] private Image uiHealth;

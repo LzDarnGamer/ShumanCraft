@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8155732986467610788}
   - component: {fileID: 8155732986467610787}
   - component: {fileID: 8155732986467610786}
+  - component: {fileID: -3994956464266551047}
   m_Layer: 0
   m_Name: ChatAux
   m_TagString: ChatAux
@@ -227,3 +228,15 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-3994956464266551047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8155732986467610785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403701403345b9d49844739d1f33ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
