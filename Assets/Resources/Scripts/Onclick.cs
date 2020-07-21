@@ -11,15 +11,18 @@ public class Onclick : MonoBehaviour
 
     [SerializeField] MatrixInventory inventory;
     private PlayerScript player;
+    private GameObject canvas;
 
     private Button btn;
     private int id;
+
     private void Start() {
         btn = GetComponent<Button>();
         id = int.Parse(transform.parent.transform.GetChild(5).name);
-        crafting = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().GetComponent<Crafting>();
-        display = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>().GetComponent<DisplayInventory>();
-        player = GameObject.FindGameObjectWithTag("MainCanvas").transform.root.GetComponent<PlayerScript>();
+        canvas = GameObject.FindGameObjectWithTag("MainCanvas");
+        crafting = canvas.GetComponent<Canvas>().GetComponent<Crafting>();
+        display = canvas.GetComponent<Canvas>().GetComponent<DisplayInventory>();
+        player = canvas.transform.root.GetComponent<PlayerScript>();
 
         btn.onClick.AddListener(() => { craft(); crafting.UpdateCratables(); display.UpdateDisplay(); });
     }
@@ -27,7 +30,9 @@ public class Onclick : MonoBehaviour
     private void craft() {
         ItemObject _id = ItemsIndex.getItem(id);
         if (_id.itemID >= 800 && _id.itemID <= 850) {
-            // Dar disable ao Panel para desaparecer
+            // Disable the panel
+            Debug.Log("Found Info book: " + (canvas.transform.Find("InfoBook").gameObject != null));
+            canvas.transform.Find("InfoBook").gameObject.SetActive(false);
 
             /*
              * 1. Get the construction script
@@ -38,7 +43,7 @@ public class Onclick : MonoBehaviour
             construct.SetObject(_id.inGameObject);            
             construct.HandleNewObject();
         }
-        inventory.CraftItem(_id);
+        //inventory.CraftItem(_id);
     }
 
 

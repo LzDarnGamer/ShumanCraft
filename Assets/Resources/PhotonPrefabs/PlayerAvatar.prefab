@@ -3005,7 +3005,7 @@ MonoBehaviour:
   isCamFixed: 1
   inputSource: {fileID: 7922058828114047516, guid: 9d21f332ac50997428c8cb5436a1ae17,
     type: 3}
-  construction: {fileID: 0}
+  construction: {fileID: 2832949667078301452}
   interact: {fileID: 0}
   achivementLog: {fileID: 6639102478278925428}
   soundScipt: {fileID: 8796840111837463673}
@@ -3049,7 +3049,6 @@ MonoBehaviour:
   startKey: 112
   openChatKey: 116
   openInventoryKey: 101
-  openConstructionkey: 114
   uiHealth: {fileID: 6862590957448085970}
   uiStamina: {fileID: 6862590957413172195}
   uiHunger: {fileID: 6862590956429656073}
@@ -3090,7 +3089,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placeableObjectPrefab: {fileID: 0}
   newObjectHotKey: 114
-  isOn: 0
   isUsing: 0
 --- !u!114 &8113904021683205663
 MonoBehaviour:
@@ -8213,7 +8211,7 @@ PrefabInstance:
     - target: {fileID: 2899039888214259646, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888214259646, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8233,7 +8231,7 @@ PrefabInstance:
     - target: {fileID: 2899039888275084214, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888275084214, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8370,7 +8368,7 @@ PrefabInstance:
     - target: {fileID: 2899039888329147631, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888329147631, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8435,12 +8433,12 @@ PrefabInstance:
     - target: {fileID: 2899039888647923174, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0.27433372
+      value: 0.27433378
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888647923174, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Size
-      value: 0.6049174
+      value: 0.60491735
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888678406840, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8485,7 +8483,7 @@ PrefabInstance:
     - target: {fileID: 2899039888755948470, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888755948470, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8701,7 +8699,7 @@ PrefabInstance:
     - target: {fileID: 2899039888986542877, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039888986542877, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8751,7 +8749,7 @@ PrefabInstance:
     - target: {fileID: 2899039889185794636, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039889185794636, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
@@ -8872,7 +8870,7 @@ PrefabInstance:
     - target: {fileID: 2899039889519726015, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2899039889519726015, guid: 42d8531d6ed4b794491486b82487177e,
         type: 3}

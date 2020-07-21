@@ -136,6 +136,8 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
+    public PhotonView GetPV() { return PV; }
+
     private void ChatSystem() {
         if (Input.GetKey(openChatKey)) {
             chatPanel.SetActive(true);

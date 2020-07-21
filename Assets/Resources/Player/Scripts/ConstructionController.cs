@@ -11,7 +11,6 @@ public class ConstructionController : MonoBehaviour {
 
     [SerializeField] private KeyCode newObjectHotKey = KeyCode.R;
 
-    [SerializeField] private bool isOn = false;
     [SerializeField] private bool isUsing = false;
 
     private bool isOnline = true;
@@ -27,7 +26,7 @@ public class ConstructionController : MonoBehaviour {
         if (cam != null) {
             //HandleNewObjectHotKey();
 
-            if (isOn && currentPlaceableObject != null) {
+            if (isUsing && currentPlaceableObject != null) {
                 MoveCurrentPlaceableObjectToMouse();
                 RotateFromMouseWheel();
                 ReleaseIfClicked();
@@ -43,6 +42,7 @@ public class ConstructionController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             SetColliders(true);
             currentPlaceableObject = null;
+            isUsing = false;
         }
     }
 
@@ -65,12 +65,12 @@ public class ConstructionController : MonoBehaviour {
         Debug.DrawRay(cam.transform.position, ray.direction, Color.green);
         if (Physics.Raycast(ray, out hitInfo)) {
             if (hitInfo.collider.gameObject.tag.Equals("Terrain")) {
-                Debug.Log("CONSTRUCTION ~ Hit Info: " + hitInfo.point);
+                //Debug.Log("CONSTRUCTION ~ Hit Info: " + hitInfo.point);
                 currentPlaceableObject.transform.position = hitInfo.point;
                 currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             } else Debug.Log("CONSTRUCTION ~ NO TERRAIN");
         } else {
-            Debug.Log("CONSTRUCTION ~ NO RAYCAST");
+            //Debug.Log("CONSTRUCTION ~ NO RAYCAST");
         }
     }
 
@@ -86,17 +86,17 @@ public class ConstructionController : MonoBehaviour {
      */
     public void HandleNewObject() {
         //if (Input.GetKeyDown(newObjectHotKey)) {
-            if (currentPlaceableObject == null) {
+            //if (currentPlaceableObject == null) {
 
-                currentPlaceableObject = !isOnline ? Instantiate(placeableObjectPrefab) :
-                    PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", placeableObjectPrefab.name), transform.position, Quaternion.identity, 0);
+            currentPlaceableObject = !isOnline ? Instantiate(placeableObjectPrefab) :
+                PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", placeableObjectPrefab.name), transform.position, Quaternion.identity, 0);
                 
-                SetColliders(false);
+            SetColliders(false);
 
-                isUsing = true;
-            } else {
-                Destroy(currentPlaceableObject);
-            }
+            isUsing = true;
+            //} else {
+            //    Destroy(currentPlaceableObject);
+            //}
         //}
     }
 }
