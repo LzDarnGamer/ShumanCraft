@@ -126,7 +126,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
     void SavePlayerInfo(Player player) {
         ExitGames.Client.Photon.Hashtable _info = player.CustomProperties;
-        Debug.Log(_info["Health"]);
+        Debug.Log(_info["Health"].ToString());
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer) {

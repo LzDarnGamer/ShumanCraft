@@ -155,7 +155,6 @@ public class PlayerScript : MonoBehaviour {
 
     private void StartManager() {
         construction = gameObject.GetComponent<ConstructionController>();
-        PhotonNetwork.SetPlayerCustomProperties(hash);
         AddCamera();
     }
 
@@ -243,10 +242,15 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void HashUpdate() {
-        if (hash.ContainsKey("Health")) { hash["Health"] = health; hash["Stamina"] = stamina; return; }
-        hash.Add("Health", health);
-        hash.Add("Stamina", stamina);
+        if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
+        if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        //if (!PhotonNetwork.IsMasterClient)
+        //    auxRPC.runDebugger(PhotonNetwork.LocalPlayer.CustomProperties["Health"].ToString());
     }
+
+    
 
     private void UseHand() {
         

@@ -44,6 +44,8 @@ MonoBehaviour:
   - RPC_TakePlayerDamage
   - updateChat
   - RPC_UpdateChat
+  - Debugger
+  - RPC_Debugger
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

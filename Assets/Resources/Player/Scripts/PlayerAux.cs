@@ -16,6 +16,10 @@ public class PlayerAux : MonoBehaviour {
     public void SetObject(GameObject a) { objectInHand = a; }
     public void SetHand(GameObject b) { playerHand = b; }
 
+    public void runDebugger(string a) {
+        PV.RPC("RPC_Debugger", RpcTarget.AllBuffered, a);
+    }
+
     public void handleChat(string txt, int id) {
         PV.RPC("RPC_UpdateChat", RpcTarget.AllBuffered, txt, id);
     }
@@ -63,5 +67,10 @@ public class PlayerAux : MonoBehaviour {
         msg.text = (a > 6) ? textmsg : msg.text + textmsg;
         msg.text = msg.text.Replace((char)159, (char)10);
         //TMPro.TMP_Text msg = this.gameObject.GetComponent<PlayerScript>().chatMsgTxt;
+    }
+
+    [PunRPC]
+    private void RPC_Debugger(string ajuda) {
+        Debug.Log("DEBUG OF PLAYER DISCONNECTING: \"" + ajuda + "\"");
     }
 }
