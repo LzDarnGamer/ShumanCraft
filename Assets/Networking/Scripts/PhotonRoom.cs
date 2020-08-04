@@ -1,6 +1,7 @@
 ﻿using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     private PhotonView PV;
 
     [SerializeField] string gamerTag;
+
+    private string playerDataFile = Application.persistentDataPath + "/PlayersData.json";
 
     public bool isGameLoaded;
     public int currentScene;
@@ -127,7 +130,34 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     void SavePlayerInfo(Player player) {
         ExitGames.Client.Photon.Hashtable _info = player.CustomProperties;
         Debug.Log(_info["Health"].ToString());
+        Debug.Log(_info["Nickname"].ToString());
+        SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()));
     }
+    private void SaveIntoJson(string nickname, int health) {
+        PlayerData pd = new PlayerData(nickname, health);
+
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>("");
+        int counter = 1;
+
+        PlayerData[] ajuda;
+
+        if (everything != null) {
+            counter += everything.data.Length;
+            bool hasAlready = false;
+
+            // Search for duplicates
+            foreach (PlayerData p in everything.data) { if (p.nickname.Equals(pd.nickname)) hasAlready = true; }
+
+            // Fill the array
+            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; } else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
+
+            for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
+        } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
+        AllPlayerData elFinal = new AllPlayerData(ajuda);
+        string player = JsonUtility.ToJson(elFinal);
+        File.WriteAllText(playerDataFile, player);
+    }
+
 
     public override void OnPlayerEnteredRoom(Player newPlayer) {
         base.OnPlayerEnteredRoom(newPlayer);
@@ -194,4 +224,24 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     }
 
 
+}
+
+[Serializable]
+public class PlayerData {
+    public string nickname;
+    public int health;
+
+    public PlayerData (string nickname, int health) {
+        this.nickname = nickname;
+        this.health = health;
+    }
+}
+
+[Serializable]
+public class AllPlayerData {
+    public PlayerData[] data;
+
+    public AllPlayerData(PlayerData[] data) {
+        this.data = data;
+    }
 }

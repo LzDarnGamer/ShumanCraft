@@ -79,12 +79,12 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] [Range(0, 100)] private float voidDamage = 10f;
 
     [Header("Controles")]
-    public KeyCode walkRunKey = KeyCode.LeftShift;
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode crouchKey = KeyCode.LeftControl;
-    public KeyCode startKey = KeyCode.P;
-    public KeyCode openChatKey = KeyCode.T;
-    public KeyCode openInventoryKey = KeyCode.E;
+    public KeyCode walkRunKey           = KeyCode.LeftShift;
+    public KeyCode jumpKey              = KeyCode.Space;
+    public KeyCode crouchKey            = KeyCode.LeftControl;
+    public KeyCode startKey             = KeyCode.P;
+    public KeyCode openChatKey          = KeyCode.T;
+    public KeyCode openInventoryKey     = KeyCode.E;
 
     [Header("UI")]
     [SerializeField] private Image uiHealth;
@@ -242,6 +242,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void HashUpdate() {
+        if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
         if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
         if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
 
