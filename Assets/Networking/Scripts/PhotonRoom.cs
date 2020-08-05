@@ -15,7 +15,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
     [SerializeField] string gamerTag;
 
-    private string playerDataFile = Application.persistentDataPath + "/PlayersData.json";
+    private string playerDataFile;
 
     public bool isGameLoaded;
     public int currentScene;
@@ -42,6 +42,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
                 PhotonRoom.room = this;
             }
         }
+        playerDataFile = Application.persistentDataPath + "/PlayersData.json";
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -113,7 +114,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
     public override void OnPlayerLeftRoom(Player otherPlayer) {
         base.OnPlayerLeftRoom(otherPlayer);
-        Debug.Log("Player " + otherPlayer.NickName + " just left the game");
+        
+        Debug.Log("Player \"" + otherPlayer.NickName + "\" just left the game");
+
         if (otherPlayer.IsMasterClient) {
             DisconnectGame();
         } else {
@@ -123,14 +126,62 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer) {
+        base.OnPlayerEnteredRoom(newPlayer);
+
+        Debug.Log("Player \"" + newPlayer.NickName + "\" just joined the game");
+
+        photonPlayers = PhotonNetwork.PlayerList;
+        playersInRoom++;
+
+        if (MultiplayerSettings.multiplayerSettings.delayStart) {
+            Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
+            if (playersInRoom > 1) {
+                readyToCount = true;
+            }
+            if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers) {
+                readyToStart = true;
+                if (!PhotonNetwork.IsMasterClient)
+                    return;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+            }
+        }
+
+        // Check JSON file
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>("");
+        if (everything != null) {
+            foreach (PlayerData p in everything.data) {
+                // Check if player has data stored
+                if (p.nickname.Equals(newPlayer.NickName)) {
+                    // Load JSON to Player CustomProperties
+                    LoadPlayerInfo(p, newPlayer);
+                }
+            }
+        }
+    }
+
     void DisconnectGame() {
         SceneManager.LoadScene(0);
     }
 
+    void LoadPlayerInfo(PlayerData player, Player newPlayer) {
+        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+
+        hash["Nickname"] = player.nickname;
+        hash["Health"] = player.health;
+
+        newPlayer.SetCustomProperties(hash);
+
+        Debug.Log(hash["Health"].ToString());
+        Debug.Log(hash["Nickname"].ToString());
+    }
+
     void SavePlayerInfo(Player player) {
         ExitGames.Client.Photon.Hashtable _info = player.CustomProperties;
+
         Debug.Log(_info["Health"].ToString());
         Debug.Log(_info["Nickname"].ToString());
+
         SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()));
     }
     private void SaveIntoJson(string nickname, int health) {
@@ -156,27 +207,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         AllPlayerData elFinal = new AllPlayerData(ajuda);
         string player = JsonUtility.ToJson(elFinal);
         File.WriteAllText(playerDataFile, player);
-    }
-
-
-    public override void OnPlayerEnteredRoom(Player newPlayer) {
-        base.OnPlayerEnteredRoom(newPlayer);
-        Debug.Log("A new player has joined the room " + newPlayer.NickName);
-        //newPlayer.SetCustomProperties();
-        photonPlayers = PhotonNetwork.PlayerList;
-        playersInRoom ++;
-        if (MultiplayerSettings.multiplayerSettings.delayStart) {
-            Debug.Log("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxPlayers + ")");
-            if (playersInRoom > 1) {
-                readyToCount = true;
-            }
-            if (playersInRoom == MultiplayerSettings.multiplayerSettings.maxPlayers) {
-                readyToStart = true;
-                if (!PhotonNetwork.IsMasterClient)
-                    return;
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-            }
-        }
     }
 
     private void RestartTimer() {
