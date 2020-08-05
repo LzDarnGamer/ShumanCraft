@@ -10,6 +10,7 @@ using com.ootii.Utilities.Debug;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -103,6 +104,11 @@ public class PlayerScript : MonoBehaviour {
 
 
     private int PlayerMask = 1 << 8;
+
+    private void Awake() {
+        LoadSaveGame();
+    }
+
     void Start() {
 
         anim = gameObject.GetComponent<Animator>();
@@ -249,6 +255,15 @@ public class PlayerScript : MonoBehaviour {
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         //if (!PhotonNetwork.IsMasterClient)
         //    auxRPC.runDebugger(PhotonNetwork.LocalPlayer.CustomProperties["Health"].ToString());
+    }
+
+    void LoadSaveGame() {
+        ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
+        if (_hash != null) {
+            health = Int32.Parse(_hash["Health"].ToString());
+        }
+
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
     }
 
     
