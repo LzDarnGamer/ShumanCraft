@@ -19,5 +19,6 @@ MonoBehaviour:
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 0}
+  inGameObject: {fileID: 431672050152124596, guid: 539be085e3ce0f84296025ea96f1d01c,
+    type: 3}
   description: Used to craft the most basic tools.

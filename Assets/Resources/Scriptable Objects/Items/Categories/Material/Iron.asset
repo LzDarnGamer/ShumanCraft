@@ -19,6 +19,6 @@ MonoBehaviour:
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 1015341677895250, guid: e414636a1ae0e50469ef2a24cf1b759b,
+  inGameObject: {fileID: -927199367670048503, guid: 6996c6df01966b24f9a4f639a7c03e6a,
     type: 3}
   description: Iron ingot, very strong material to make strong tools and weapons

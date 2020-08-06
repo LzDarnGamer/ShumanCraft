@@ -19,5 +19,6 @@ MonoBehaviour:
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 0}
+  inGameObject: {fileID: 5277627864763643188, guid: 72a9c6945db65304ca108f4c2c237a9c,
+    type: 3}
   description: The most basic resource in this game, little bit stronger than wood.
