@@ -37,9 +37,21 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     public TMP_InputField createField;
     public GameObject createOKButton;
 
+    public UnityEngine.Audio.AudioMixer mixer;
+
+
     private void Awake() {
         lobby = this;
         roomNames = new List<string>();
+
+
+
+
+        float savedVol = PlayerPrefs.GetFloat("volume", 1);
+        SetVolume(savedVol);
+        int value = PlayerPrefs.GetInt("quality", 3);
+        setQuality(value);
+
     }
 
     void Start() {
@@ -106,7 +118,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         Debug.Log("Room " + name + " clicked!");
     }
 
-    public void OnCreateLobbyButtonClicked () {
+    public void OnCreateLobbyButtonClicked() {
         Debug.Log("Create Button was clicked");
         createUI.SetActive(true);
         if (joinUI.activeInHierarchy) {
@@ -115,8 +127,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         }
         LeanTween.scale(createUIPanel, new Vector3(1, 1, 1), 0.8f);
     }
-    
-    public void OnJoinLobbyButtonClicked () {
+
+    public void OnJoinLobbyButtonClicked() {
         Debug.Log("Create Button was clicked");
         joinUI.SetActive(true);
         if (createUI.activeInHierarchy) {
@@ -165,7 +177,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         CreateRoom();
     }
 
-    private void CreateRoom (string roomName = null) { 
+    private void CreateRoom(string roomName = null) {
         Debug.Log("Trying to create room...");
         int randomRoomName = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, MaxPlayers = (byte)MultiplayerSettings.multiplayerSettings.maxPlayers };
@@ -178,10 +190,60 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         CreateRoom();
     }
 
-    public void OnMouseHover (GameObject btn) {
+    public void OnMouseHover(GameObject btn) {
         LeanTween.scale(btn, new Vector3(1.5f, 1.5f, 1.5f), 0.5f);
     }
-    public void OnMouseExit (GameObject btn) {
+    public void OnMouseExit(GameObject btn) {
         LeanTween.scale(btn, new Vector3(1, 1, 1), 0.5f);
     }
+
+    public void UpdateQuality(Dropdown dropdown) {
+        setQuality(dropdown.value);
+    }
+
+    private void setQuality(int value) {
+        switch (value) {
+            case 0:
+            QualitySettings.SetQualityLevel(0, true);
+            break;
+            case 1:
+            QualitySettings.SetQualityLevel(1, true);
+            break;
+            case 2:
+            QualitySettings.SetQualityLevel(2, true);
+            break;
+            case 3:
+            QualitySettings.SetQualityLevel(3, true);
+            break;
+            case 4:
+            QualitySettings.SetQualityLevel(4, true);
+            break;
+            case 5:
+            QualitySettings.SetQualityLevel(5, true);
+            break;
+            default:
+            Debug.Log("Button does not change the quality settings!");
+            break;
+        }
+        PlayerPrefs.SetInt("quality", value);
+        PlayerPrefs.Save();
+    }
+
+    public void OnSliderChanged(Slider s) {
+        SetVolume(s.value);
+    }
+
+    public float ConvertToDecibel(float _value) {
+        return Mathf.Log10(Mathf.Max(_value, 0.0001f)) * 20f;
+    }
+    
+    private void SetVolume(float s) {
+        mixer.SetFloat("Volume", ConvertToDecibel(s)); 
+        PlayerPrefs.SetFloat("volume", s);
+        PlayerPrefs.Save();
+    }
 }
+
+
+
+

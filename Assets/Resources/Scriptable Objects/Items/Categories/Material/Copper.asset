@@ -19,7 +19,7 @@ MonoBehaviour:
   maxStackSize: 64
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: -927199367670048503, guid: ccf150bc8111fd44fbdfe79ac7a57fa3,
+  inGameObject: {fileID: 234633456372873996, guid: d9bb533ed2167be499ba76e0aed029b4,
     type: 3}
   description: Copper is a soft, malleable, and ductile metal. Very good to make
     alloys
