@@ -30,12 +30,16 @@ public class PlayerScript : MonoBehaviour {
 
     [Header("Save Game")]
     [SerializeField] private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+    [SerializeField] private bool isLoaded = false;
 
     [Header("Achivement")]
     [SerializeField] private AchivementLog achivementLog;
 
     [Header("Sound")]
     [SerializeField] private SoundScipt soundScipt;
+
+    [Header("Placeables React")]
+    [SerializeField] private float fireplaceDist = 3f;
 
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
@@ -243,16 +247,17 @@ public class PlayerScript : MonoBehaviour {
         UseHand();
         PickUpItem();
         TakeDamage();
-        HashUpdate();
         ChatSystem();
     }
 
     void HashUpdate() {
-        if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
-        if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
-        if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
+        if (isLoaded) {
+            if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
+            if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
+            if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
         //if (!PhotonNetwork.IsMasterClient)
         //    auxRPC.runDebugger(PhotonNetwork.LocalPlayer.CustomProperties["Health"].ToString());
     }
@@ -261,7 +266,16 @@ public class PlayerScript : MonoBehaviour {
         ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
         Debug.Log("LOAD SAVE GAME PLAYERSCRIPT");
         if (_hash != null) {
-            Debug.Log("--SUCCESS");
+            Debug.Log("--SUCCESS, isnull = ");
+            Debug.Log(_hash["Health"] == null);
+            if (_hash["Health"] != null) {
+                Debug.Log(_hash["Health"].ToString());
+                isLoaded = true;
+            }
+
+            if (_hash["NotFound"] != null) isLoaded = true;
+            
+
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
         }
 
@@ -453,8 +467,8 @@ public class PlayerScript : MonoBehaviour {
                                                 playerCollider.center.z);
         }
 
-        if (Input.GetKeyDown(walkRunKey) && stamina > 0) isWalking = false;
-        if (Input.GetKeyUp(walkRunKey)) isWalking = true;
+        if (Input.GetKey(walkRunKey) && stamina > 0) isWalking = false;
+        else isWalking = true;
 
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) isCrouched = !isCrouched;
@@ -535,7 +549,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void GotBitten(float amount) { health -= amount; }
-    public void addHealth(float amount) { health += amount; }
+    public void addHealth(float amount) { if (health < 100.0f) health += amount; else if (health > 100.0f) health = 100.0f; }
     public void addThirst(float amount) { thirst += amount; }
     public void addHunger(float amount) { hunger += amount; }
 
@@ -554,11 +568,24 @@ public class PlayerScript : MonoBehaviour {
         return closestNPC;
     }
 
+    private void FireplaceHandler() {
+        GameObject[] fireplaces = GameObject.FindGameObjectsWithTag("Fireplace");
+        for (int i = 0; i < fireplaces.Length; ++i) {
+            Vector3 ajuda = transform.position - fireplaces[i].transform.position;
+            if (ajuda.magnitude < fireplaceDist) {
+                addHealth(1.5f);
+            }
+        }
+    }
+
     IEnumerator UpdateNPCNear() {
         while (true) {
+            FireplaceHandler();
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
+            if (!isLoaded) LoadSaveGame();
+            HashUpdate();
             yield return new WaitForSeconds(1);
         }
     }

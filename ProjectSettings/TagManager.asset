@@ -19,6 +19,7 @@ TagManager:
   - NPC
   - ChatAux
   - Ore
+  - Fireplace
   layers:
   - Default
   - TransparentFX

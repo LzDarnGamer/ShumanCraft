@@ -112,6 +112,11 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
     }
 
+    public override void OnLeftRoom() {
+        base.OnLeftRoom();
+        if (PhotonNetwork.IsMasterClient) SavePlayerInfo(PhotonNetwork.LocalPlayer);
+    }
+
     public override void OnPlayerLeftRoom(Player otherPlayer) {
         base.OnPlayerLeftRoom(otherPlayer);
         
@@ -147,15 +152,24 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             }
         }
 
-        // Check JSON file
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
-        if (everything != null) {
-            foreach (PlayerData p in everything.data) {
-                // Check if player has data stored
-                if (p.nickname.Equals(newPlayer.NickName)) {
-                    // Load JSON to Player CustomProperties
-                    LoadPlayerInfo(p, newPlayer);
+        if (PhotonNetwork.IsMasterClient) {
+            // Check JSON file
+            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+            bool a1 = false;
+            if (everything != null) {
+                foreach (PlayerData p in everything.data) {
+                    // Check if player has data stored
+                    if (p.nickname.Equals(newPlayer.NickName)) {
+                        // Load JSON to Player CustomProperties
+                        LoadPlayerInfo(p, newPlayer);
+                        a1 = true;
+                    }
                 }
+            }
+            if (!a1) {
+                ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+                hash1["NotFound"] = 1;
+                newPlayer.SetCustomProperties(hash1);
             }
         }
     }
@@ -172,9 +186,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         newPlayer.SetCustomProperties(hash);
 
-        Debug.Log("Loaded new player...");
+        Debug.Log("Loaded new player: " + player.nickname);
         Debug.Log(hash["Health"].ToString());
         Debug.Log(hash["Nickname"].ToString());
+        Debug.Log("--------------------------");
     }
 
     void SavePlayerInfo(Player player) {
@@ -185,6 +200,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()));
     }
+
     private void SaveIntoJson(string nickname, int health) {
         PlayerData pd = new PlayerData(nickname, health);
 
@@ -198,12 +214,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             bool hasAlready = false;
 
             // Search for duplicates
-            foreach (PlayerData p in everything.data) { if (p.nickname.Equals(pd.nickname)) hasAlready = true; }
+            foreach (PlayerData p in everything.data) {
+                if (p.nickname.Equals(pd.nickname)) {
+                    hasAlready = true;
+
+                    // Atualizar valores do player
+                    p.health = pd.health;
+                }
+            }
 
             // Fill the array
-            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; } else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
+            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; }
+            else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
 
             for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
+
         } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
         AllPlayerData elFinal = new AllPlayerData(ajuda);
         string player = JsonUtility.ToJson(elFinal);
@@ -227,6 +252,28 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         if (MultiplayerSettings.multiplayerSettings.delayStart) {
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
+
+        // Check JSON file
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+
+        bool a2 = false;
+        if (everything != null) {
+            foreach (PlayerData p in everything.data) {
+                // Check if player has data stored
+                if (p.nickname.Equals(PhotonNetwork.LocalPlayer.NickName)) {
+                    // Load JSON to Player CustomProperties
+                    LoadPlayerInfo(p, PhotonNetwork.LocalPlayer);
+                    a2 = true;
+                }
+            }
+        }
+
+        if (!a2) {
+            ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+            hash1["NotFound"] = 1;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash1);
+        }
+
         PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene); 
     }
 
