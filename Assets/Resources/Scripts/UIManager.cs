@@ -97,4 +97,19 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void ResumeGame() {
+        EscPanel.SetActive(false);
+        BackgroundPanel.SetActive(false);
+        isMouseActive = false;
+        currentActive = KeyCode.Pipe;
+    }
+
+    public void QuitGame() {
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                    Application.Quit();
+        #endif
+    }
+
 }

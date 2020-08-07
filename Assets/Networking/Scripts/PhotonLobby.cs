@@ -52,6 +52,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         int value = PlayerPrefs.GetInt("quality", 3);
         setQuality(value);
 
+        
+
     }
 
     void Start() {
@@ -61,6 +63,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     }
 
     public override void OnConnectedToMaster() {
+
         Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " Server");
         PhotonNetwork.AutomaticallySyncScene = true;
         //setOnlineUI();
@@ -191,10 +194,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
     }
 
     public void OnMouseHover(GameObject btn) {
-        LeanTween.scale(btn, new Vector3(1.5f, 1.5f, 1.5f), 0.5f);
+        LeanTween.scale(btn, new Vector3(1.2f, 1.2f, 1.2f), 0.2f);
     }
     public void OnMouseExit(GameObject btn) {
-        LeanTween.scale(btn, new Vector3(1, 1, 1), 0.5f);
+        LeanTween.scale(btn, new Vector3(1, 1, 1), 0.2f);
     }
 
     public void UpdateQuality(Dropdown dropdown) {
@@ -241,6 +244,14 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         mixer.SetFloat("Volume", ConvertToDecibel(s)); 
         PlayerPrefs.SetFloat("volume", s);
         PlayerPrefs.Save();
+    }
+
+    public void QuitGame() {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
 
