@@ -188,6 +188,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()));
     }
+
     private void SaveIntoJson(string nickname, int health) {
         PlayerData pd = new PlayerData(nickname, health);
 
@@ -201,12 +202,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             bool hasAlready = false;
 
             // Search for duplicates
-            foreach (PlayerData p in everything.data) { if (p.nickname.Equals(pd.nickname)) hasAlready = true; }
+            foreach (PlayerData p in everything.data) {
+                if (p.nickname.Equals(pd.nickname)) {
+                    hasAlready = true;
+
+                    // Atualizar valores do player
+                    p.health = pd.health;
+                }
+            }
 
             // Fill the array
-            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; } else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
+            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; }
+            else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
 
             for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
+
         } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
         AllPlayerData elFinal = new AllPlayerData(ajuda);
         string player = JsonUtility.ToJson(elFinal);

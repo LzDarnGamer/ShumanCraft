@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour {
 
     [Header("Save Game")]
     [SerializeField] private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+    private bool isLoaded = false;
 
     [Header("Achivement")]
     [SerializeField] private AchivementLog achivementLog;
@@ -243,16 +244,17 @@ public class PlayerScript : MonoBehaviour {
         UseHand();
         PickUpItem();
         TakeDamage();
-        HashUpdate();
         ChatSystem();
     }
 
     void HashUpdate() {
-        if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
-        if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
-        if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
+        if (isLoaded) {
+            if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
+            if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
+            if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
         //if (!PhotonNetwork.IsMasterClient)
         //    auxRPC.runDebugger(PhotonNetwork.LocalPlayer.CustomProperties["Health"].ToString());
     }
@@ -263,7 +265,11 @@ public class PlayerScript : MonoBehaviour {
         if (_hash != null) {
             Debug.Log("--SUCCESS, isnull = ");
             Debug.Log(_hash["Health"] == null);
-            if (_hash["Health"] != null) Debug.Log(_hash["Health"].ToString());
+            if (_hash["Health"] != null) {
+                Debug.Log(_hash["Health"].ToString());
+                isLoaded = true;
+            }
+            
 
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
         }
@@ -459,6 +465,8 @@ public class PlayerScript : MonoBehaviour {
         if (Input.GetKeyDown(walkRunKey) && stamina > 0) isWalking = false;
         if (Input.GetKeyUp(walkRunKey)) isWalking = true;
 
+        if (Input.GetKeyUp(KeyCode.L)) { health = 93.0f; }
+
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) isCrouched = !isCrouched;
         if (Input.GetKeyUp(jumpKey) && isRunning && (x != 0 || y != 0)) anim.SetTrigger("RunningJump");
@@ -562,7 +570,8 @@ public class PlayerScript : MonoBehaviour {
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
-            LoadSaveGame();
+            if (!isLoaded) LoadSaveGame();
+            HashUpdate();
             yield return new WaitForSeconds(1);
         }
     }
