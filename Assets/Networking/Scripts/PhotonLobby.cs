@@ -233,8 +233,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         SetVolume(s.value);
     }
 
-    public float ConvertToDecibel(float _value) {
-        return Mathf.Log10(Mathf.Max(_value, 0.0001f)) * 20f;
+    public float ConvertToDecibel(float value) {
+        return Mathf.Log10(value) * 20f;
     }
     
     private void SetVolume(float s) {
