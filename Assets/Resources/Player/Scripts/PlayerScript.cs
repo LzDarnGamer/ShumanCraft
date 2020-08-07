@@ -462,10 +462,8 @@ public class PlayerScript : MonoBehaviour {
                                                 playerCollider.center.z);
         }
 
-        if (Input.GetKeyDown(walkRunKey) && stamina > 0) isWalking = false;
-        if (Input.GetKeyUp(walkRunKey)) isWalking = true;
-
-        if (Input.GetKeyUp(KeyCode.L)) { health = 93.0f; }
+        if (Input.GetKey(walkRunKey) && stamina > 0) isWalking = false;
+        else isWalking = true;
 
         if (stamina <= 0) this.isWalking = true;
         if (Input.GetKeyUp(crouchKey)) isCrouched = !isCrouched;
