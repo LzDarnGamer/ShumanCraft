@@ -112,6 +112,11 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
     }
 
+    public override void OnLeftRoom() {
+        base.OnLeftRoom();
+        if (PhotonNetwork.IsMasterClient) SavePlayerInfo(PhotonNetwork.LocalPlayer);
+    }
+
     public override void OnPlayerLeftRoom(Player otherPlayer) {
         base.OnPlayerLeftRoom(otherPlayer);
         
