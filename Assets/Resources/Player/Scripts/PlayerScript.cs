@@ -30,13 +30,16 @@ public class PlayerScript : MonoBehaviour {
 
     [Header("Save Game")]
     [SerializeField] private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-    private bool isLoaded = false;
+    [SerializeField] private bool isLoaded = false;
 
     [Header("Achivement")]
     [SerializeField] private AchivementLog achivementLog;
 
     [Header("Sound")]
     [SerializeField] private SoundScipt soundScipt;
+
+    [Header("Placeables React")]
+    [SerializeField] private float fireplaceDist = 3f;
 
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
@@ -269,6 +272,8 @@ public class PlayerScript : MonoBehaviour {
                 Debug.Log(_hash["Health"].ToString());
                 isLoaded = true;
             }
+
+            if (_hash["NotFound"] != null) isLoaded = true;
             
 
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
@@ -544,7 +549,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void GotBitten(float amount) { health -= amount; }
-    public void addHealth(float amount) { health += amount; }
+    public void addHealth(float amount) { if (health < 100.0f) health += amount; else if (health > 100.0f) health = 100.0f; }
     public void addThirst(float amount) { thirst += amount; }
     public void addHunger(float amount) { hunger += amount; }
 
@@ -563,8 +568,19 @@ public class PlayerScript : MonoBehaviour {
         return closestNPC;
     }
 
+    private void FireplaceHandler() {
+        GameObject[] fireplaces = GameObject.FindGameObjectsWithTag("Fireplace");
+        for (int i = 0; i < fireplaces.Length; ++i) {
+            Vector3 ajuda = transform.position - fireplaces[i].transform.position;
+            if (ajuda.magnitude < fireplaceDist) {
+                addHealth(1.5f);
+            }
+        }
+    }
+
     IEnumerator UpdateNPCNear() {
         while (true) {
+            FireplaceHandler();
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;

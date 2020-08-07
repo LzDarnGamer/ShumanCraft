@@ -150,14 +150,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         if (PhotonNetwork.IsMasterClient) {
             // Check JSON file
             AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+            bool a1 = false;
             if (everything != null) {
                 foreach (PlayerData p in everything.data) {
                     // Check if player has data stored
                     if (p.nickname.Equals(newPlayer.NickName)) {
                         // Load JSON to Player CustomProperties
                         LoadPlayerInfo(p, newPlayer);
+                        a1 = true;
                     }
                 }
+            }
+            if (!a1) {
+                ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+                hash1["NotFound"] = 1;
+                newPlayer.SetCustomProperties(hash1);
             }
         }
     }
@@ -240,6 +247,28 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         if (MultiplayerSettings.multiplayerSettings.delayStart) {
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
+
+        // Check JSON file
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+
+        bool a2 = false;
+        if (everything != null) {
+            foreach (PlayerData p in everything.data) {
+                // Check if player has data stored
+                if (p.nickname.Equals(PhotonNetwork.LocalPlayer.NickName)) {
+                    // Load JSON to Player CustomProperties
+                    LoadPlayerInfo(p, PhotonNetwork.LocalPlayer);
+                    a2 = true;
+                }
+            }
+        }
+
+        if (!a2) {
+            ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+            hash1["NotFound"] = 1;
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash1);
+        }
+
         PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene); 
     }
 
