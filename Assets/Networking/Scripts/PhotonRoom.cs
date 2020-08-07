@@ -148,7 +148,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
 
         // Check JSON file
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>("");
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
         if (everything != null) {
             foreach (PlayerData p in everything.data) {
                 // Check if player has data stored
@@ -172,6 +172,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         newPlayer.SetCustomProperties(hash);
 
+        Debug.Log("Loaded new player...");
         Debug.Log(hash["Health"].ToString());
         Debug.Log(hash["Nickname"].ToString());
     }
@@ -187,7 +188,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     private void SaveIntoJson(string nickname, int health) {
         PlayerData pd = new PlayerData(nickname, health);
 
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>("");
+        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
         int counter = 1;
 
         PlayerData[] ajuda;
@@ -206,6 +207,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
         AllPlayerData elFinal = new AllPlayerData(ajuda);
         string player = JsonUtility.ToJson(elFinal);
+
         File.WriteAllText(playerDataFile, player);
     }
 
