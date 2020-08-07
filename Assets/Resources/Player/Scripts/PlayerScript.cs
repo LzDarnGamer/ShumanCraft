@@ -260,7 +260,7 @@ public class PlayerScript : MonoBehaviour {
     void LoadSaveGame() {
         ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
         if (_hash != null) {
-            health = Int32.Parse(_hash["Health"].ToString());
+            health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
         }
 
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
