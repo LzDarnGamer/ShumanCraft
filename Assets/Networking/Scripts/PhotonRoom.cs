@@ -147,14 +147,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             }
         }
 
-        // Check JSON file
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
-        if (everything != null) {
-            foreach (PlayerData p in everything.data) {
-                // Check if player has data stored
-                if (p.nickname.Equals(newPlayer.NickName)) {
-                    // Load JSON to Player CustomProperties
-                    LoadPlayerInfo(p, newPlayer);
+        if (PhotonNetwork.IsMasterClient) {
+            // Check JSON file
+            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+            if (everything != null) {
+                foreach (PlayerData p in everything.data) {
+                    // Check if player has data stored
+                    if (p.nickname.Equals(newPlayer.NickName)) {
+                        // Load JSON to Player CustomProperties
+                        LoadPlayerInfo(p, newPlayer);
+                    }
                 }
             }
         }
@@ -172,9 +174,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         newPlayer.SetCustomProperties(hash);
 
-        Debug.Log("Loaded new player...");
+        Debug.Log("Loaded new player: " + player.nickname);
         Debug.Log(hash["Health"].ToString());
         Debug.Log(hash["Nickname"].ToString());
+        Debug.Log("--------------------------");
     }
 
     void SavePlayerInfo(Player player) {

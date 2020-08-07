@@ -261,7 +261,10 @@ public class PlayerScript : MonoBehaviour {
         ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
         Debug.Log("LOAD SAVE GAME PLAYERSCRIPT");
         if (_hash != null) {
-            Debug.Log("--SUCCESS");
+            Debug.Log("--SUCCESS, isnull = ");
+            Debug.Log(_hash["Health"] == null);
+            if (_hash["Health"] != null) Debug.Log(_hash["Health"].ToString());
+
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
         }
 
@@ -559,6 +562,7 @@ public class PlayerScript : MonoBehaviour {
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
+            LoadSaveGame();
             yield return new WaitForSeconds(1);
         }
     }
