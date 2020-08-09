@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561dff518c335e84a979efaeccaa63c6, type: 3}
   m_Name: FirePlace
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: eb5f6e2757c821940b69cf1456f7865a, type: 3}
+  icon: {fileID: 21300000, guid: 5084822f9b6bd2a44a8e99f3d0ad5183, type: 3}
   type: 5
   itemID: 800
   isStackable: 0

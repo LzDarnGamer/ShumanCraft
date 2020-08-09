@@ -3011,6 +3011,7 @@ MonoBehaviour:
   achivementLog: {fileID: 6639102478278925428}
   soundScipt: {fileID: 8796840111837463673}
   fireplaceDist: 1
+  pitDist: 3
   inventory: {fileID: 11400000, guid: 874c695d1a43a924b89cb7d8f52770c6, type: 2}
   hotbarManager: {fileID: 4749199178792713427}
   displayInventory: {fileID: 4749199178730530794}
