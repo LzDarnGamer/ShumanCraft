@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1374596837937883140}
   - component: {fileID: 1374596837937883141}
   - component: {fileID: 1374596837937883192}
-  - component: {fileID: 1504280673103900412}
+  - component: {fileID: 2431722955716248294}
+  - component: {fileID: 8829169661784213762}
+  - component: {fileID: 6317303600447320500}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -67,11 +69,11 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 3
+  m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -116,7 +118,7 @@ MonoBehaviour:
   _IsFileEnabled: 0
   _FilePath: .\Log.txt
   _FileFlushPerWrite: 0
---- !u!114 &1504280673103900412
+--- !u!114 &2431722955716248294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,57 +127,271 @@ MonoBehaviour:
   m_GameObject: {fileID: 1374596837937883142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8c208e531a26a41a4629789f4a706a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 1374596837937883193}
-  volumeLayer:
+  m_maskTexture: {fileID: 0}
+  m_targetTexture: {fileID: 0}
+  m_showDebugMessages: 1
+  m_softMaxdownscales: 6
+  m_debugToScreen: 0
+  m_highPrecision: 0
+  m_bloomRange: {x: 500, y: 0.002, z: 0, w: 0}
+  m_overallThreshold: 0.78
+  m_bloomParams: {x: 0.2, y: 0.78, z: 1, w: 1}
+  m_temporalFilteringActive: 0
+  m_temporalFilteringValue: 0.05
+  m_bloomDownsampleCount: 6
+  m_temporalFilteringCurve:
     serializedVersion: 2
-    m_Bits: 512
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 1
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 1
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.999
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_separateFeaturesThreshold: 0
+  m_featuresThreshold: 0.05
+  m_lensFlare:
+    m_overallIntensity: 1
+    m_normalizedGhostIntensity: 0.8
+    m_normalizedHaloIntensity: 0.1
+    m_applyLensFlare: 0
+    m_lensFlareGhostAmount: 3
+    m_lensFlareGhostsParams: {x: 0.8, y: 0.228, z: 1, w: 4}
+    m_lensFlareGhostChrDistortion: 2
+    m_lensGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    m_lensFlareGradTexture: {fileID: 0}
+    m_lensFlareHaloParams: {x: 0.1, y: 0.573, z: 1, w: 128}
+    m_lensFlareHaloChrDistortion: 1.51
+    m_lensFlareGaussianBlurAmount: 1
+  m_applyLensDirt: 0
+  m_lensDirtStrength: 2
+  m_lensDirtTexture: {fileID: 2800000, guid: 7825356d1f1778140ad12b5dfe6b4d41, type: 3}
+  m_applyLensStardurst: 0
+  m_lensStardurstTex: {fileID: 2800000, guid: c2216a0fed1c98742b826a85db28021c, type: 3}
+  m_lensStarburstStrength: 2
+  m_anamorphicGlare:
+    m_customGlareDef: []
+    m_customGlareDefIdx: 0
+    m_customGlareDefAmount: 0
+    m_applyGlare: 1
+    _overallTint: {r: 1, g: 1, b: 1, a: 1}
+    m_cromaticAberrationGrad:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    m_glareMaxPassCount: 4
+    m_currentWidth: 762
+    m_currentHeight: 429
+    m_currentGlareType: 0
+    m_currentGlareIdx: 0
+    m_perPassDisplacement: 3.64
+    m_intensity: 0.18
+    m_overallStreakScale: 1
+  m_bokehFilter:
+    m_isActive: 0
+    m_applyOnBloomSource: 0
+    m_bokehSampleRadius: 0.5
+    m_bokehCameraProperties: {x: 0.05, y: 0.018, z: 1.34, w: 0.18}
+    m_offsetRotation: 0
+    m_apertureShape: 1
+  m_upscaleWeights:
+  - 0.0842
+  - 0.1282
+  - 0.1648
+  - 0.2197
+  - 0.2197
+  - 0.1831
+  m_gaussianRadius:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  m_gaussianSteps: 010000000100000001000000010000000100000001000000
+  m_lensDirtWeights:
+  - 0.067
+  - 0.102
+  - 0.1311
+  - 0.1749
+  - 0.2332
+  - 0.3
+  m_lensStarburstWeights:
+  - 0.067
+  - 0.102
+  - 0.1311
+  - 0.1749
+  - 0.2332
+  - 0.3
+  m_downscaleSettingsFoldout: 000000000000
+  m_featuresSourceId: 0
+  m_upscaleQuality: 1
+  m_mainThresholdSize: 0
+--- !u!114 &8829169661784213762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374596837937883142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a879e317c20b0d41a9a56f1a97f4cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyMethod: 0
+  SampleCount: 1
+  PerPixelNormals: 1
+  Intensity: 1
+  Tint: {r: 0, g: 0, b: 0, a: 1}
+  Radius: 2
+  PowerExponent: 2.77
+  Bias: 0.05
+  Thickness: 1
+  Downsample: 1
+  CacheAware: 1
+  FadeEnabled: 0
+  FadeStart: 100
+  FadeLength: 50
+  FadeToIntensity: 0
+  FadeToTint: {r: 0, g: 0, b: 0, a: 1}
+  FadeToRadius: 2
+  FadeToPowerExponent: 1
+  FadeToThickness: 1
+  BlurEnabled: 1
+  BlurRadius: 3
+  BlurPasses: 1
+  BlurSharpness: 15
+  FilterEnabled: 1
+  FilterDownsample: 1
+  FilterBlending: 0.8
+  FilterResponse: 0.5
+--- !u!114 &6317303600447320500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374596837937883142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e31fdf962e3e4ca3b62ec3ecc2f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tonemapper: 1
+  Exposure: 1
+  LinearWhitePoint: 11.2
+  ApplyDithering: 0
+  QualityLevel: 1
+  BlendAmount: 0
+  LutTexture: {fileID: 0}
+  LutBlendTexture: {fileID: 0}
+  MaskTexture: {fileID: 0}
+  UseDepthMask: 0
+  DepthMaskCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  UseVolumes: 0
+  ExitVolumeBlendTime: 1
+  TriggerVolumeProxy: {fileID: 0}
+  VolumeCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  EffectFlags:
+    components: []
+  sharedInstanceID: 20402c96-c2dc-464e-a37c-c234c6c0cbf5
 --- !u!1 &1374596839805319218
 GameObject:
   m_ObjectHideFlags: 0
