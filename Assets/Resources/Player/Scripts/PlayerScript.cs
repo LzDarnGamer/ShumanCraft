@@ -203,9 +203,29 @@ public class PlayerScript : MonoBehaviour {
                     PhotonNetwork.Destroy(instantiatedObject);
                 }
 
-                instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
-                                                                        playerHand.transform.position,
-                                                                        Quaternion.identity, 0);
+                if(objectInHand.GetType() == typeof(WeaponObject)) {
+                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name),
+                                                        playerHand.transform.position,
+                                                        Quaternion.identity, 0);
+                }else if(objectInHand.GetType() == typeof(FoodObject)) {
+                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
+                                                        playerHand.transform.position,
+                                                        Quaternion.identity, 0);
+                } else if (objectInHand.GetType() == typeof(ToolObject)) {
+                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
+                                                        playerHand.transform.position,
+                                                        Quaternion.identity, 0);
+                } else if (objectInHand.GetType() == typeof(MaterialObject)) {
+                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
+                                                        playerHand.transform.position,
+                                                        Quaternion.identity, 0);
+                } else if (objectInHand.GetType() == typeof(PlaceableObject)) {
+                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", objectInHand.name),
+                                                        playerHand.transform.position,
+                                                        Quaternion.identity, 0);
+                }
+
+
                 float[] p = {   
                                 objectInHand.transform.position.x,
                                 objectInHand.transform.position.y,
