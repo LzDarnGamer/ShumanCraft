@@ -19,7 +19,8 @@ MonoBehaviour:
   maxStackSize: 16
   recipeItems: []
   recipeAmount: 
-  inGameObject: {fileID: 0}
+  inGameObject: {fileID: 782078294941709259, guid: b9b0c42e659208f418444886734e292d,
+    type: 3}
   description: Droped by dead animals
   hungerRestore: 4
   thirstRestore: 0
