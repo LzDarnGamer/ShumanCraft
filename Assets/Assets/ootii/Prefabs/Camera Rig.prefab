@@ -391,7 +391,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: 20402c96-c2dc-464e-a37c-c234c6c0cbf5
+  sharedInstanceID: 8932dbe3-88c1-476a-b179-42ce96edb080
 --- !u!1 &1374596839805319218
 GameObject:
   m_ObjectHideFlags: 0
