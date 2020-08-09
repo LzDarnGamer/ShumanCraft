@@ -40,6 +40,7 @@ public class PlayerScript : MonoBehaviour {
 
     [Header("Placeables React")]
     [SerializeField] private float fireplaceDist = 3f;
+    [SerializeField] private float pitDist = 3f;
 
     [Header("Cenas de inventario")]
     [SerializeField] private MatrixInventory inventory;
@@ -550,7 +551,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void GotBitten(float amount) { health -= amount; }
     public void addHealth(float amount) { if (health < 100.0f) health += amount; else if (health > 100.0f) health = 100.0f; }
-    public void addThirst(float amount) { thirst += amount; }
+    public void addThirst(float amount) { if (thirst < 100.0f) thirst += amount; else if (thirst > 100.0f) thirst = 100.0f; }
     public void addHunger(float amount) { hunger += amount; }
 
     private GameObject GetClosestNPC() {
@@ -578,13 +579,24 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
+    private void PitHandler() {
+        GameObject[] pits = GameObject.FindGameObjectsWithTag("Pit");
+        for (int i = 0; i < pits.Length; ++i) {
+            Vector3 ajuda = transform.position - pits[i].transform.position;
+            if (ajuda.magnitude < pitDist) {
+                addThirst(1.5f);
+            }
+        }
+    }
     IEnumerator UpdateNPCNear() {
         while (true) {
             FireplaceHandler();
+            PitHandler();
             GameObject n = GetClosestNPC();
             if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
             if (!isLoaded) LoadSaveGame();
+
             HashUpdate();
             yield return new WaitForSeconds(1);
         }
