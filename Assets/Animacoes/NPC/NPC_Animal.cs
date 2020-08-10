@@ -11,7 +11,7 @@ public class NPC_Animal : MonoBehaviour {
 
     [SerializeField] private Canvas canvas;
 
-    [SerializeField] private Transform[] waypoints;
+    //[SerializeField] private Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
 
     public int currentTarget;
@@ -62,8 +62,6 @@ public class NPC_Animal : MonoBehaviour {
                 GameObject closestPlayer = GetClosestPlayerDistance();
                 Vector3 dist = (transform.position - closestPlayer.transform.position);
                 anim.SetFloat("DistToPlayer", dist.magnitude);
-
-
             }
             
             worldDeltaPosition = navMeshAgent.nextPosition - transform.position;
@@ -140,7 +138,7 @@ public class NPC_Animal : MonoBehaviour {
     public void MoveToNextWaypoint() {
 
         for (;;) {
-            Vector3 nextPos = RandomNavmeshLocation(1.5f);
+            Vector3 nextPos = RandomNavmeshLocation(50f);
 
             NavMeshPath path = new NavMeshPath();
             navMeshAgent.CalculatePath(nextPos, path);
