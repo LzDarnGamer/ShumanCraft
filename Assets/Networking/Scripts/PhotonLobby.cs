@@ -44,16 +44,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         lobby = this;
         roomNames = new List<string>();
 
-
-
-
         float savedVol = PlayerPrefs.GetFloat("volume", 1);
         SetVolume(savedVol);
         int value = PlayerPrefs.GetInt("quality", 3);
         setQuality(value);
-
-        
-
     }
 
     void Start() {
