@@ -183,12 +183,18 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         hash["Nickname"] = player.nickname;
         hash["Health"] = player.health;
+        hash["PosX"] = player.x;
+        hash["PosY"] = player.y;
+        hash["PosZ"] = player.z;
+
 
         newPlayer.SetCustomProperties(hash);
 
         Debug.Log("Loaded new player: " + player.nickname);
-        Debug.Log(hash["Health"].ToString());
-        Debug.Log(hash["Nickname"].ToString());
+        Debug.Log("----- Health: " + hash["Health"].ToString());
+        Debug.Log("----- Position X: " + hash["PosX"].ToString());
+        Debug.Log("----- Position Y: " + hash["PosY"].ToString());
+        Debug.Log("----- Position Z: " + hash["PosZ"].ToString());
         Debug.Log("--------------------------");
     }
 
@@ -198,11 +204,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         Debug.Log(_info["Health"].ToString());
         Debug.Log(_info["Nickname"].ToString());
 
-        SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()));
+        // Positions
+        float x = float.Parse(_info["posX"].ToString()); ;
+        float y = float.Parse(_info["posY"].ToString());
+        float z = float.Parse(_info["posZ"].ToString());
+
+        SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()), x, y, z);
     }
 
-    private void SaveIntoJson(string nickname, int health) {
-        PlayerData pd = new PlayerData(nickname, health);
+    private void SaveIntoJson(string nickname, int health, float x, float y, float z) {
+        PlayerData pd = new PlayerData(nickname, health, x, y, z);
 
         AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
         int counter = 1;
@@ -216,10 +227,14 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             // Search for duplicates
             foreach (PlayerData p in everything.data) {
                 if (p.nickname.Equals(pd.nickname)) {
-                    hasAlready = true;
-
                     // Atualizar valores do player
                     p.health = pd.health;
+                    
+                    p.x = pd.x;
+                    p.y = pd.y;
+                    p.z = pd.z;
+
+                    hasAlready = true;
                 }
             }
 
@@ -309,10 +324,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 public class PlayerData {
     public string nickname;
     public int health;
+    public float x, y, z;
 
-    public PlayerData (string nickname, int health) {
+    public PlayerData (string nickname, int health, float x, float y, float z) {
         this.nickname = nickname;
         this.health = health;
+        
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 }
 

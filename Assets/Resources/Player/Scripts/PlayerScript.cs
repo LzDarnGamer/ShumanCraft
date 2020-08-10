@@ -275,29 +275,43 @@ public class PlayerScript : MonoBehaviour {
         if (isLoaded) {
             if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
             if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
-            if (hash.ContainsKey("Stamina")) { hash["Stamina"] = stamina; } else { hash.Add("Stamina", stamina); }
+            if (hash.ContainsKey("posX")) { hash["posX"] = this.transform.position.x; } else { hash.Add("posX", this.transform.position.x); }
+            if (hash.ContainsKey("posY")) { hash["posY"] = this.transform.position.y; } else { hash.Add("posY", this.transform.position.y); }
+            if (hash.ContainsKey("posZ")) { hash["posZ"] = this.transform.position.z; } else { hash.Add("posZ", this.transform.position.z); }
+            
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
-        //if (!PhotonNetwork.IsMasterClient)
-        //    auxRPC.runDebugger(PhotonNetwork.LocalPlayer.CustomProperties["Health"].ToString());
     }
 
     void LoadSaveGame() {
         ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
-        Debug.Log("LOAD SAVE GAME PLAYERSCRIPT");
+       //Debug.Log("LOAD SAVE GAME PLAYERSCRIPT");
         if (_hash != null) {
-            Debug.Log("--SUCCESS, isnull = ");
-            Debug.Log(_hash["Health"] == null);
+            if (_hash["NotFound"] != null) {
+                isLoaded = true;
+                return;
+            }
+            //Debug.Log("--SUCCESS, isnull = ");
+            //Debug.Log(_hash["Health"] == null);
             if (_hash["Health"] != null) {
-                Debug.Log(_hash["Health"].ToString());
+                Debug.Log("Load Game");
+                Debug.Log("----- Health: " + _hash["Health"].ToString());
+                Debug.Log("----- Position X" + _hash["PosX"].ToString());
+                Debug.Log("----- Potition Y" + _hash["PosY"].ToString());
+                Debug.Log("----- Position Z" + _hash["PosZ"].ToString());
                 isLoaded = true;
             }
 
-            if (_hash["NotFound"] != null) isLoaded = true;
+            
             
 
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
+            if ((_hash["PosX"] != null) && (_hash["PosY"] != null) && (_hash["PosZ"] != null)) {
+                transform.position = new Vector3(   Int32.Parse(_hash["PosX"].ToString()),
+                                                    Int32.Parse(_hash["PosY"].ToString()),
+                                                    Int32.Parse(_hash["PosZ"].ToString())   );
+            }
         }
 
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
