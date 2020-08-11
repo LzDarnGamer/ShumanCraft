@@ -11,6 +11,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
+using Boo.Lang;
 
 public class PlayerScript : MonoBehaviour {
 
@@ -53,6 +54,8 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private GameObject playerHand;
     [SerializeField] private bool isToolOn;
     [SerializeField] private PlayerAux auxRPC;
+    ItemObject aux;
+    List<GameObject> objectsAlreadyHere = new List<GameObject>();
 
     [Header("Movimentos")]
     private float x, y;
@@ -181,16 +184,26 @@ public class PlayerScript : MonoBehaviour {
             PlayerManager();
         }
     }
-
+    
     private void PlayerManager() {
         hotbarIndex = hotbarManager.getIndex();
-
-        if (inventory.getHotbar()[hotbarIndex].item != null)
+        
+        if (inventory.getHotbar()[hotbarIndex].item != null) {
             objectInHand = inventory.getHotbar()[hotbarIndex].item.inGameObject;
-        else {
+            aux = inventory.getHotbar()[hotbarIndex].item;
+        } else {
             objectInHand = null;
             if (instantiatedObject != null) {
-                PhotonNetwork.Destroy(instantiatedObject);
+                //PhotonNetwork.Destroy(instantiatedObject);
+                instantiatedObject.SetActive(false);
+
+                bool has = false;
+                foreach (GameObject aa in objectsAlreadyHere) {
+                    if (aa.name.Equals(instantiatedObject.name)) {
+                        has = true;
+                    }
+                }
+                if (!has) { objectsAlreadyHere.Add(instantiatedObject); }
             }
         }
 
@@ -200,31 +213,51 @@ public class PlayerScript : MonoBehaviour {
             isToolOn = true;
             if (isOnline) {
                 if (instantiatedObject != null) {
-                    PhotonNetwork.Destroy(instantiatedObject);
+                    instantiatedObject.SetActive(false);
+
+                    bool has1 = false;
+                    foreach (GameObject aa in objectsAlreadyHere) {
+                        if (aa.name.Equals(instantiatedObject.name)) {
+                            has1 = true;
+                        }
+                    }
+                    if (!has1) { objectsAlreadyHere.Add(instantiatedObject); }
+                    //PhotonNetwork.Destroy(instantiatedObject);
                 }
 
-                if(objectInHand.GetType() == typeof(WeaponObject)) {
-                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name),
-                                                        playerHand.transform.position,
-                                                        Quaternion.identity, 0);
-                }else if(objectInHand.GetType() == typeof(FoodObject)) {
-                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
-                                                        playerHand.transform.position,
-                                                        Quaternion.identity, 0);
-                } else if (objectInHand.GetType() == typeof(ToolObject)) {
-                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
-                                                        playerHand.transform.position,
-                                                        Quaternion.identity, 0);
-                } else if (objectInHand.GetType() == typeof(MaterialObject)) {
-                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
-                                                        playerHand.transform.position,
-                                                        Quaternion.identity, 0);
-                } else if (objectInHand.GetType() == typeof(PlaceableObject)) {
-                    instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", objectInHand.name),
-                                                        playerHand.transform.position,
-                                                        Quaternion.identity, 0);
-                }
+                bool has2 = false;
+                foreach (GameObject aa in objectsAlreadyHere) {
+                    if (aa.name.Equals(objectInHand.name)) {
+                        has2 = true;
 
+                        aa.SetActive(true);
+                        
+                        break;
+                    }
+                }
+                if (!has2) {
+                    if (aux != null && aux.type == ItemType.Weapons) {
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name),
+                                                            playerHand.transform.position,
+                                                            Quaternion.identity, 0);
+                    } else if (aux != null && aux.type == ItemType.Foods) {
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
+                                                            playerHand.transform.position,
+                                                            Quaternion.identity, 0);
+                    } else if (aux != null && aux.type == ItemType.Tools) {
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
+                                                            playerHand.transform.position,
+                                                            Quaternion.identity, 0);
+                    } else if (aux != null && aux.type == ItemType.Materials) {
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
+                                                            playerHand.transform.position,
+                                                            Quaternion.identity, 0);
+                    } else if (aux != null && aux.type == ItemType.Placeables) {
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", objectInHand.name),
+                                                            playerHand.transform.position,
+                                                            Quaternion.identity, 0);
+                    }
+                }                 
 
                 float[] p = {   
                                 objectInHand.transform.position.x,
@@ -275,10 +308,10 @@ public class PlayerScript : MonoBehaviour {
         if (isLoaded) {
             if (hash.ContainsKey("Nickname")) { hash["Nickname"] = PhotonNetwork.LocalPlayer.NickName; } else { hash.Add("Nickname", PhotonNetwork.LocalPlayer.NickName); }
             if (hash.ContainsKey("Health")) { hash["Health"] = health; } else { hash.Add("Health", health); }
+            if (hash.ContainsKey("Hunger")) { hash["Hunger"] = hunger; } else { hash.Add("Hunger", hunger); }
             if (hash.ContainsKey("posX")) { hash["posX"] = this.transform.position.x; } else { hash.Add("posX", this.transform.position.x); }
             if (hash.ContainsKey("posY")) { hash["posY"] = this.transform.position.y; } else { hash.Add("posY", this.transform.position.y); }
-            if (hash.ContainsKey("posZ")) { hash["posZ"] = this.transform.position.z; } else { hash.Add("posZ", this.transform.position.z); }
-            
+            if (hash.ContainsKey("posZ")) { hash["posZ"] = this.transform.position.z; } else { hash.Add("posZ", this.transform.position.z); }            
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
@@ -286,32 +319,30 @@ public class PlayerScript : MonoBehaviour {
 
     void LoadSaveGame() {
         ExitGames.Client.Photon.Hashtable _hash = PhotonNetwork.LocalPlayer.CustomProperties;
-       //Debug.Log("LOAD SAVE GAME PLAYERSCRIPT");
         if (_hash != null) {
             if (_hash["NotFound"] != null) {
                 isLoaded = true;
                 return;
             }
-            //Debug.Log("--SUCCESS, isnull = ");
-            //Debug.Log(_hash["Health"] == null);
             if (_hash["Health"] != null) {
                 Debug.Log("Load Game");
                 Debug.Log("----- Health: " + _hash["Health"].ToString());
+                Debug.Log("----- Hunger: " + _hash["Hunger"].ToString());
                 Debug.Log("----- Position X" + _hash["PosX"].ToString());
                 Debug.Log("----- Potition Y" + _hash["PosY"].ToString());
                 Debug.Log("----- Position Z" + _hash["PosZ"].ToString());
                 isLoaded = true;
             }
 
-            
-            
-
+            // Apply load game to this character
             health = (_hash["Health"] != null) ? Int32.Parse(_hash["Health"].ToString()) : 100.0f;
+            hunger = (_hash["Hunger"] != null) ? float.Parse(_hash["Hunger"].ToString()) : 100.0f;
             if ((_hash["PosX"] != null) && (_hash["PosY"] != null) && (_hash["PosZ"] != null)) {
-                transform.position = new Vector3(   Int32.Parse(_hash["PosX"].ToString()),
-                                                    Int32.Parse(_hash["PosY"].ToString()),
-                                                    Int32.Parse(_hash["PosZ"].ToString())   );
+                transform.position = new Vector3(   float.Parse(_hash["PosX"].ToString()),
+                                                    float.Parse(_hash["PosY"].ToString()),
+                                                    float.Parse(_hash["PosZ"].ToString())   );
             }
+
         }
 
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);

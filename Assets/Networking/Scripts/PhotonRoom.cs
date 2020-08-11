@@ -183,6 +183,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         hash["Nickname"] = player.nickname;
         hash["Health"] = player.health;
+        hash["Hunger"] = player.hunger;
         hash["PosX"] = player.x;
         hash["PosY"] = player.y;
         hash["PosZ"] = player.z;
@@ -192,6 +193,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         Debug.Log("Loaded new player: " + player.nickname);
         Debug.Log("----- Health: " + hash["Health"].ToString());
+        Debug.Log("----- Hunger: " + hash["Hunger"].ToString());
         Debug.Log("----- Position X: " + hash["PosX"].ToString());
         Debug.Log("----- Position Y: " + hash["PosY"].ToString());
         Debug.Log("----- Position Z: " + hash["PosZ"].ToString());
@@ -201,19 +203,23 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     void SavePlayerInfo(Player player) {
         ExitGames.Client.Photon.Hashtable _info = player.CustomProperties;
 
-        Debug.Log(_info["Health"].ToString());
         Debug.Log(_info["Nickname"].ToString());
 
         // Positions
-        float x = float.Parse(_info["posX"].ToString()); ;
+        float x = float.Parse(_info["posX"].ToString());
         float y = float.Parse(_info["posY"].ToString());
         float z = float.Parse(_info["posZ"].ToString());
 
-        SaveIntoJson(_info["Nickname"].ToString(), Int32.Parse(_info["Health"].ToString()), x, y, z);
+        // Player characteristics
+        int health = Int32.Parse(_info["Health"].ToString());
+        float hunger = float.Parse(_info["Hunger"].ToString());
+
+        SaveIntoJson(_info["Nickname"].ToString(), health, x, y, z, hunger);
+        
     }
 
-    private void SaveIntoJson(string nickname, int health, float x, float y, float z) {
-        PlayerData pd = new PlayerData(nickname, health, x, y, z);
+    private void SaveIntoJson(string nickname, int health, float x, float y, float z, float hunger) {
+        PlayerData pd = new PlayerData(nickname, health, x, y, z, hunger);
 
         AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
         int counter = 1;
@@ -229,7 +235,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
                 if (p.nickname.Equals(pd.nickname)) {
                     // Atualizar valores do player
                     p.health = pd.health;
-                    
+                    p.hunger = pd.hunger;
+
                     p.x = pd.x;
                     p.y = pd.y;
                     p.z = pd.z;
@@ -325,11 +332,14 @@ public class PlayerData {
     public string nickname;
     public int health;
     public float x, y, z;
+    public float hunger;
 
-    public PlayerData (string nickname, int health, float x, float y, float z) {
+    public PlayerData (string nickname, int health, float x, float y, float z, float hunger) {
         this.nickname = nickname;
-        this.health = health;
         
+        this.health = health;
+        this.hunger = hunger;
+
         this.x = x;
         this.y = y;
         this.z = z;
