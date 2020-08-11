@@ -16,6 +16,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
     [SerializeField] string gamerTag;
 
     private string playerDataFile;
+    private string instanceDataFile;
 
     public bool isGameLoaded;
     public int currentScene;
@@ -43,6 +44,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
             }
         }
         playerDataFile = Application.persistentDataPath + "/PlayersData.json";
+        instanceDataFile = Application.persistentDataPath + "/InstanceData.json";
+
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -215,7 +218,50 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         float hunger = float.Parse(_info["Hunger"].ToString());
 
         SaveIntoJson(_info["Nickname"].ToString(), health, x, y, z, hunger);
+
+        String n = _info["iName"].ToString();
+
+        float ix = float.Parse(_info["iposX"].ToString());
+        float iy = float.Parse(_info["iposY"].ToString());
+        float iz = float.Parse(_info["iposZ"].ToString());
+
+        SaveInstancesToJSON(n, ix, iy, iz);
         
+    }
+
+    private void SaveInstancesToJSON(string n, float ix, float iy, float iz) {
+        InstanceData id = new InstanceData(n, ix, iy, iz);
+
+        AllInstanceData ev = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
+        int counter = 1;
+
+        InstanceData[] ajuda;
+
+        if (ev != null) {
+            counter += ev.data.Length;
+            bool hasAlready = false;
+
+            // Search for duplicates
+            foreach (InstanceData p in ev.data) {
+                if (p.x == id.x && p.y == id.y && p.y == id.y) {
+                    // Atualizar valores da instancia
+                    p.x = id.x;
+                    p.y = id.y;
+                    p.z = id.z;
+
+                    hasAlready = true;
+                }
+            }
+
+            // Fill the array
+            if (hasAlready) { counter--; ajuda = new InstanceData[counter]; } else { ajuda = new InstanceData[counter]; ajuda[counter - 1] = id; }
+
+            for (int i = 0; i < ev.data.Length; ++i) { ajuda[i] = ev.data[i]; }
+        } else { ajuda = new InstanceData[counter]; ajuda[0] = id; }
+        AllInstanceData elFinal = new AllInstanceData(ajuda);
+        string instance = JsonUtility.ToJson(elFinal);
+
+        File.WriteAllText(instanceDataFile, instance);
     }
 
     private void SaveIntoJson(string nickname, int health, float x, float y, float z, float hunger) {
@@ -354,3 +400,29 @@ public class AllPlayerData {
         this.data = data;
     }
 }
+
+[Serializable]
+public class InstanceData {
+    public string name;
+    public float x, y, z;
+
+    public InstanceData (string name, float x, float y, float z) {
+        this.name = name;
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+}
+
+[Serializable]
+public class AllInstanceData {
+    public InstanceData[] data;
+
+    public AllInstanceData(InstanceData[] data) {
+        this.data = data;
+    }
+}
+
+
+

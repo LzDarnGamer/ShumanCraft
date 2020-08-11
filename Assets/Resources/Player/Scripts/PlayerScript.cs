@@ -11,7 +11,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
-using Boo.Lang;
+using System.Collections.Generic;
 
 public class PlayerScript : MonoBehaviour {
 

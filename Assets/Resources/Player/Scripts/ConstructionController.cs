@@ -20,7 +20,9 @@ public class ConstructionController : MonoBehaviour {
     private GameObject currentPlaceableObject;
 
     private float angle = 0f;
-    private float angleInc = 2.2f; 
+    private float angleInc = 2.2f;
+
+    private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
 
     void Update() {
         if (cam != null) {
@@ -49,6 +51,16 @@ public class ConstructionController : MonoBehaviour {
     private void SetColliders(bool active) {
         foreach (Collider c in currentPlaceableObject.GetComponents<Collider>()) {
             c.enabled = active;
+        }
+        if (active) {
+            hash = PhotonNetwork.LocalPlayer.CustomProperties;
+            // Save position
+            if (hash.ContainsKey("iposX")) { hash["iposX"] = currentPlaceableObject.transform.position.x; } else { hash.Add("iposX", currentPlaceableObject.transform.position.x); }
+            if (hash.ContainsKey("iposY")) { hash["iposY"] = currentPlaceableObject.transform.position.y; } else { hash.Add("iposY", currentPlaceableObject.transform.position.y); }
+            if (hash.ContainsKey("iposZ")) { hash["iposZ"] = currentPlaceableObject.transform.position.z; } else { hash.Add("iposZ", currentPlaceableObject.transform.position.z); }
+            // Save name
+            if (hash.ContainsKey("iName")) { hash["iName"] = placeableObjectPrefab.name; } else { hash.Add("iName", placeableObjectPrefab.name); }
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
     }
 
