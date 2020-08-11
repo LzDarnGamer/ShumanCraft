@@ -110,11 +110,13 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private PhotonView chatPublic;
     [SerializeField] private float chatCounter;
 
+    private String instanceDataFile;
 
     private int PlayerMask = 1 << 8;
 
     private void Awake() {
         LoadSaveGame();
+        instanceDataFile = Application.persistentDataPath + "/InstanceData.json";
     }
 
     void Start() {
@@ -137,6 +139,16 @@ public class PlayerScript : MonoBehaviour {
         colliderCenterY = playerCollider.center.y;
 
         if (isOnline) {
+            if (PhotonNetwork.IsMasterClient) {
+                AllInstanceData instances = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
+
+                if (instances != null) {
+                    foreach (InstanceData i in instances.data) {
+                        PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", i.name), new Vector3(i.x, i.y, i.z), Quaternion.identity, 0);
+                    }
+                }
+            }
+
             if (PV.IsMine) {
                 StartManager();
             } else {

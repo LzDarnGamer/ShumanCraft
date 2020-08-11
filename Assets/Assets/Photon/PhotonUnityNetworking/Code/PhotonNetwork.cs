@@ -2912,6 +2912,7 @@ namespace Photon.Pun
         /// </param>
         public static void LoadLevel(int levelNumber)
         {
+
             if (PhotonNetwork.AutomaticallySyncScene)
             {
                 SetLevelInPropsIfSynced(levelNumber);
