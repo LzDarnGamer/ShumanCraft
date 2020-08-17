@@ -999,8 +999,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: Saw
+  - Type: 1
+    SynchronizeType: 0
+    Name: DistToPlayer
+  - Type: 1
+    SynchronizeType: 0
+    Name: DistToWp
+  - Type: 4
+    SynchronizeType: 0
+    Name: Eating
+  - Type: 4
+    SynchronizeType: 0
+    Name: ajuda
+  - Type: 9
+    SynchronizeType: 0
+    Name: dead
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!114 &6792648564119021939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,16 +1049,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 3115708751867505663}
-  navMeshAgent: {fileID: 0}
+  navMeshAgent: {fileID: 1342246605903464880}
   currentTarget: 0
   maxDistancetoCheck: 30
   health: 100
   dead: 0
   deadH: 0
-  anim: {fileID: 0}
+  anim: {fileID: 8636360201499512986}
   players: []
   isChasing: 0
-  PV: {fileID: 0}
+  PV: {fileID: 5266614145534208048}
   thuderUI: {fileID: 8815745351605127402}
   scaleValueUI: 0.44
   climbValueUI: 9.35
