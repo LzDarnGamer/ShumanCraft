@@ -18,6 +18,12 @@
 			"itemID":[5],
 			"minValue":[1],
 			"maxValue":[2]
+		},
+		{
+			"tablename": "animal",
+			"itemID":[604],
+			"minValue":[1],
+			"maxValue":[4]
 		}
 	]
 }

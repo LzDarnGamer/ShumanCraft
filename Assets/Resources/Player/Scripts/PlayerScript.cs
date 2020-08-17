@@ -33,8 +33,6 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
     [SerializeField] private bool isLoaded = false;
 
-    [Header("Achivement")]
-    [SerializeField] private AchivementLog achivementLog;
 
     [Header("Sound")]
     [SerializeField] private SoundScipt soundScipt;
@@ -317,7 +315,6 @@ public class PlayerScript : MonoBehaviour {
         Attributes();
         UseHand();
         PickUpItem();
-        TakeDamage();
         ChatSystem();
     }
 
@@ -427,15 +424,8 @@ public class PlayerScript : MonoBehaviour {
 
     public Camera getCamera() { return cam.GetComponentInChildren<Camera>(); }
 
-    private void TakeDamage() {
-        if(transform.position.y < 1) {
-            isOutsideMap = true;
-            if(health <= 0 && firstTime) {
-                firstTime = false;
-                StartCoroutine(achivementLog.deadAchivement());
-            }
-        }
-    }
+
+
 
 
     private void Attributes() {
@@ -600,7 +590,6 @@ public class PlayerScript : MonoBehaviour {
                     if (hitObj.CompareTag("Pickupable")) {
                         ItemObject it = ray.transform.GetComponent<Item>().item;
                         if (displayInventory.PickupItem(it, 1)) {
-                            achivementLog.advanceAchivement(it);
                             Destroy(hitObj);
                         }
                     }
