@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/GAS/Editor.meta
+Assets/GAS/Example.meta
