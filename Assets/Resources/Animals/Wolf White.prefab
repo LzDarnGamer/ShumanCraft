@@ -1456,7 +1456,7 @@ MonoBehaviour:
   players: []
   isChasing: 0
   PV: {fileID: 5830699694270452169}
-  thuderUI: {fileID: 0}
+  thuderUI: {fileID: 7463642586092946290}
   scaleValueUI: 0.066322
   climbValueUI: 1.45
 --- !u!114 &5830699694270452171
@@ -9940,6 +9940,12 @@ PrefabInstance:
 --- !u!4 &5895060985954873697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e3416715b82b84a47b96a998fa831a13,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492312660325374587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7463642586092946290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: e3416715b82b84a47b96a998fa831a13,
     type: 3}
   m_PrefabInstance: {fileID: 1492312660325374587}
   m_PrefabAsset: {fileID: 0}
