@@ -114,6 +114,7 @@ public class NPC_Animal : MonoBehaviour {
         float closestPlayerdistance = float.MaxValue;
         GameObject closestPlayer = null;
         for (int i = 0; i < players.Length; ++i) {
+            // TODO Verify if player exists here
             Vector3 ajuda = transform.position - players[i].transform.position;
             //distToPlayers.Add(ajuda);
             if (ajuda.magnitude < closestPlayerdistance) {

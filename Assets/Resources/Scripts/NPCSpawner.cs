@@ -16,13 +16,15 @@ public class NPCSpawner : MonoBehaviour {
 
     public GameObject[] instances;
 
+    private void Awake() { DontDestroyOnLoad(this); }
+
     private void Start() {
         switch (area) {
             case "Forest":
-                animal = new string[] {"Sheep", "Wolf Black", "Cat"};
+                animal = new string[] {"Sheep", "Wolf Black", "Cat", "Cat"};
                 break;
             case "Ice":
-                animal = new string[] { "Wolf White", "Cat" };
+                animal = new string[] { "Wolf White", "Wolf White", "Wolf White", "Wolf White", "Cat" };
                 break;
             case "Desert":
                 animal = new string[] { "Deer" };
