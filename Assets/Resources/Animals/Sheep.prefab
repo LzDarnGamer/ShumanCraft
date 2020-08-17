@@ -890,7 +890,7 @@ MonoBehaviour:
   canvas: {fileID: 7559345640934255415}
   navMeshAgent: {fileID: 1659397460849260811}
   currentTarget: 0
-  maxDistancetoCheck: 30
+  maxDistancetoCheck: 29
   health: 100
   dead: 0
   deadH: 0
