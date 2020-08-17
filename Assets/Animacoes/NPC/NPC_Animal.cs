@@ -52,12 +52,13 @@ public class NPC_Animal : MonoBehaviour {
         navMeshAgent.updateRotation = true;
 
         //canvas.transform.GetChild(2).GetComponent<Text>().text = gameObject.name;
+        StartCoroutine(UpdatePlayersList());
     }
 
     void Update() {
         if (dead) navMeshAgent.isStopped = true;
 
-        StartCoroutine(UpdatePlayersList());
+        
         
 
         if (health > 0.0f) {
