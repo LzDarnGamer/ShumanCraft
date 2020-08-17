@@ -140,13 +140,18 @@ public class PlayerScript : MonoBehaviour {
 
         if (isOnline) {
             if (PhotonNetwork.IsMasterClient) {
-                AllInstanceData instances = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
+                if (File.Exists(instanceDataFile)) {
+                    AllInstanceData instances = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
 
-                if (instances != null) {
-                    foreach (InstanceData i in instances.data) {
-                        PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", i.name), new Vector3(i.x, i.y, i.z), Quaternion.identity, 0);
+                    if (instances != null) {
+                        foreach (InstanceData i in instances.data) {
+                            PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", i.name), new Vector3(i.x, i.y, i.z), Quaternion.identity, 0);
+                        }
                     }
+                } else {
+                    File.CreateText(instanceDataFile);
                 }
+                
             }
 
             if (PV.IsMine) {

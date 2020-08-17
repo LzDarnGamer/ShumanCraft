@@ -37,11 +37,15 @@ public class NPC_Animal : MonoBehaviour {
 
     public PhotonView PV;
 
+    private void Awake() {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
     void Start() {
         initHeightUI = thuderUI.transform.localScale.x;
         //distToPlayers = new List<Vector3>();
         players = GameObject.FindGameObjectsWithTag("Player");
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        
         PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;

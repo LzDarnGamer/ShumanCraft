@@ -720,9 +720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 6485184223071632784}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
   navMeshAgent: {fileID: 4663873295472319663}
   currentTarget: 0
   maxDistancetoCheck: 30
@@ -732,7 +729,7 @@ MonoBehaviour:
   anim: {fileID: 4663873295472319658}
   players: []
   isChasing: 0
-  PV: {fileID: 0}
+  PV: {fileID: 4663873295472319659}
   thuderUI: {fileID: 0}
   scaleValueUI: 0.3007674
   climbValueUI: 8.98

@@ -1446,9 +1446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 6838047083627400753}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
   navMeshAgent: {fileID: 5830699694270452181}
   currentTarget: 0
   maxDistancetoCheck: 30
@@ -1458,7 +1455,7 @@ MonoBehaviour:
   anim: {fileID: 5830699695133227974}
   players: []
   isChasing: 0
-  PV: {fileID: 0}
+  PV: {fileID: 5830699694270452169}
   thuderUI: {fileID: 0}
   scaleValueUI: 0.066322
   climbValueUI: 1.45
@@ -9866,7 +9863,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: e3416715b82b84a47b96a998fa831a13,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e3416715b82b84a47b96a998fa831a13,
         type: 3}

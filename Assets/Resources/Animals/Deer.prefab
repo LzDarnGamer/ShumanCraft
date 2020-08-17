@@ -4099,17 +4099,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 4782439419806298503}
-  waypoints: []
-  navMeshAgent: {fileID: 0}
+  navMeshAgent: {fileID: 1839355098645578004}
   currentTarget: 0
   maxDistancetoCheck: 30
   health: 100
   dead: 0
   deadH: 0
-  anim: {fileID: 0}
+  anim: {fileID: 1326201109389498690}
   players: []
   isChasing: 0
-  PV: {fileID: 0}
+  PV: {fileID: 6397621988663751053}
   thuderUI: {fileID: 6326893473543918793}
   scaleValueUI: 0.07530061
   climbValueUI: 2.402
