@@ -157,23 +157,31 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         if (PhotonNetwork.IsMasterClient) {
             // Check JSON file
-            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
-            bool a1 = false;
-            if (everything != null) {
-                foreach (PlayerData p in everything.data) {
-                    // Check if player has data stored
-                    if (p.nickname.Equals(newPlayer.NickName)) {
-                        // Load JSON to Player CustomProperties
-                        LoadPlayerInfo(p, newPlayer);
-                        a1 = true;
+            if (File.Exists(playerDataFile)) {
+                AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+                bool a1 = false;
+                if (everything != null) {
+                    foreach (PlayerData p in everything.data) {
+                        // Check if player has data stored
+                        if (p.nickname.Equals(newPlayer.NickName)) {
+                            // Load JSON to Player CustomProperties
+                            LoadPlayerInfo(p, newPlayer);
+                            a1 = true;
+                        }
                     }
                 }
-            }
-            if (!a1) {
+                if (!a1) {
+                    ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+                    hash1["NotFound"] = 1;
+                    newPlayer.SetCustomProperties(hash1);
+                }
+            } else {
+                File.CreateText(playerDataFile);
                 ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
                 hash1["NotFound"] = 1;
-                newPlayer.SetCustomProperties(hash1);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hash1);
             }
+            
         }
     }
 
@@ -219,89 +227,115 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
 
         SaveIntoJson(_info["Nickname"].ToString(), health, x, y, z, hunger);
 
-        String n = _info["iName"].ToString();
+        if (_info["iName"] != null) {
+            String n = _info["iName"].ToString();
 
-        float ix = float.Parse(_info["iposX"].ToString());
-        float iy = float.Parse(_info["iposY"].ToString());
-        float iz = float.Parse(_info["iposZ"].ToString());
+            float ix = float.Parse(_info["iposX"].ToString());
+            float iy = float.Parse(_info["iposY"].ToString());
+            float iz = float.Parse(_info["iposZ"].ToString());
 
-        SaveInstancesToJSON(n, ix, iy, iz);
-        
+            SaveInstancesToJSON(n, ix, iy, iz);
+        }
     }
 
     private void SaveInstancesToJSON(string n, float ix, float iy, float iz) {
         InstanceData id = new InstanceData(n, ix, iy, iz);
 
-        AllInstanceData ev = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
-        int counter = 1;
 
-        InstanceData[] ajuda;
+        if (File.Exists(instanceDataFile)) {
+            AllInstanceData ev = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
 
-        if (ev != null) {
-            counter += ev.data.Length;
-            bool hasAlready = false;
+            int counter = 1;
 
-            // Search for duplicates
-            foreach (InstanceData p in ev.data) {
-                if (p.x == id.x && p.y == id.y && p.y == id.y) {
-                    // Atualizar valores da instancia
-                    p.x = id.x;
-                    p.y = id.y;
-                    p.z = id.z;
+            InstanceData[] ajuda;
 
-                    hasAlready = true;
+            if (ev != null) {
+                counter += ev.data.Length;
+                bool hasAlready = false;
+
+                // Search for duplicates
+                foreach (InstanceData p in ev.data) {
+                    if (p.x == id.x && p.y == id.y && p.y == id.y) {
+                        // Atualizar valores da instancia
+                        p.x = id.x;
+                        p.y = id.y;
+                        p.z = id.z;
+
+                        hasAlready = true;
+                    }
                 }
-            }
 
-            // Fill the array
-            if (hasAlready) { counter--; ajuda = new InstanceData[counter]; } else { ajuda = new InstanceData[counter]; ajuda[counter - 1] = id; }
+                // Fill the array
+                if (hasAlready) { counter--; ajuda = new InstanceData[counter]; } else { ajuda = new InstanceData[counter]; ajuda[counter - 1] = id; }
 
-            for (int i = 0; i < ev.data.Length; ++i) { ajuda[i] = ev.data[i]; }
-        } else { ajuda = new InstanceData[counter]; ajuda[0] = id; }
-        AllInstanceData elFinal = new AllInstanceData(ajuda);
-        string instance = JsonUtility.ToJson(elFinal);
+                for (int i = 0; i < ev.data.Length; ++i) { ajuda[i] = ev.data[i]; }
+            } else { ajuda = new InstanceData[counter]; ajuda[0] = id; }
+            AllInstanceData elFinal = new AllInstanceData(ajuda);
+            string instance = JsonUtility.ToJson(elFinal);
 
-        File.WriteAllText(instanceDataFile, instance);
+            File.WriteAllText(instanceDataFile, instance);
+        } else {
+            File.CreateText(instanceDataFile);
+            InstanceData[] ajuda = new InstanceData[1];
+            ajuda[0] = id;
+
+            AllInstanceData elFinal = new AllInstanceData(ajuda);
+            string instance = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(instanceDataFile, instance);
+        }
+        
     }
 
     private void SaveIntoJson(string nickname, int health, float x, float y, float z, float hunger) {
         PlayerData pd = new PlayerData(nickname, health, x, y, z, hunger);
 
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
-        int counter = 1;
+        if (File.Exists(playerDataFile)) {
+            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+            int counter = 1;
 
-        PlayerData[] ajuda;
+            PlayerData[] ajuda;
 
-        if (everything != null) {
-            counter += everything.data.Length;
-            bool hasAlready = false;
+            if (everything != null) {
+                counter += everything.data.Length;
+                bool hasAlready = false;
 
-            // Search for duplicates
-            foreach (PlayerData p in everything.data) {
-                if (p.nickname.Equals(pd.nickname)) {
-                    // Atualizar valores do player
-                    p.health = pd.health;
-                    p.hunger = pd.hunger;
+                // Search for duplicates
+                foreach (PlayerData p in everything.data) {
+                    if (p.nickname.Equals(pd.nickname)) {
+                        // Atualizar valores do player
+                        p.health = pd.health;
+                        p.hunger = pd.hunger;
 
-                    p.x = pd.x;
-                    p.y = pd.y;
-                    p.z = pd.z;
+                        p.x = pd.x;
+                        p.y = pd.y;
+                        p.z = pd.z;
 
-                    hasAlready = true;
+                        hasAlready = true;
+                    }
                 }
-            }
 
-            // Fill the array
-            if (hasAlready) { counter--; ajuda = new PlayerData[counter]; }
-            else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
+                // Fill the array
+                if (hasAlready) { counter--; ajuda = new PlayerData[counter]; } else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
 
-            for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
+                for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
 
-        } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
-        AllPlayerData elFinal = new AllPlayerData(ajuda);
-        string player = JsonUtility.ToJson(elFinal);
+            } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
+            AllPlayerData elFinal = new AllPlayerData(ajuda);
+            string player = JsonUtility.ToJson(elFinal);
 
-        File.WriteAllText(playerDataFile, player);
+            File.WriteAllText(playerDataFile, player);
+        } else {
+            File.CreateText(playerDataFile);
+            PlayerData[] ajuda = new PlayerData[1];
+            ajuda[0] = pd;
+
+            AllPlayerData elFinal = new AllPlayerData(ajuda);
+            string player = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(playerDataFile, player);
+        }
+        
     }
 
     private void RestartTimer() {
@@ -322,25 +356,35 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks {
         }
 
         // Check JSON file
-        AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+        string read = "";
+        if (File.Exists(playerDataFile)) {
+            read = File.ReadAllText(playerDataFile);
+            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(read);
 
-        bool a2 = false;
-        if (everything != null) {
-            foreach (PlayerData p in everything.data) {
-                // Check if player has data stored
-                if (p.nickname.Equals(PhotonNetwork.LocalPlayer.NickName)) {
-                    // Load JSON to Player CustomProperties
-                    LoadPlayerInfo(p, PhotonNetwork.LocalPlayer);
-                    a2 = true;
+            bool a2 = false;
+            if (everything != null) {
+                foreach (PlayerData p in everything.data) {
+                    // Check if player has data stored
+                    if (p.nickname.Equals(PhotonNetwork.LocalPlayer.NickName)) {
+                        // Load JSON to Player CustomProperties
+                        LoadPlayerInfo(p, PhotonNetwork.LocalPlayer);
+                        a2 = true;
+                    }
                 }
             }
-        }
 
-        if (!a2) {
+            if (!a2) {
+                ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
+                hash1["NotFound"] = 1;
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hash1);
+            }
+        } else {
+            File.CreateText(playerDataFile);
             ExitGames.Client.Photon.Hashtable hash1 = new ExitGames.Client.Photon.Hashtable();
             hash1["NotFound"] = 1;
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash1);
         }
+        
 
         PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene); 
     }
