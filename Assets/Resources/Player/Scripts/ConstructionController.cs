@@ -76,7 +76,7 @@ public class ConstructionController : MonoBehaviour {
         RaycastHit hitInfo;
         Debug.DrawRay(cam.transform.position, ray.direction, Color.green);
         if (Physics.Raycast(ray, out hitInfo)) {
-            if (hitInfo.collider.gameObject.tag.Equals("Terrain")) {
+            if (hitInfo.collider.gameObject.tag.Equals("Sand")) {
                 //Debug.Log("CONSTRUCTION ~ Hit Info: " + hitInfo.point);
                 currentPlaceableObject.transform.position = hitInfo.point;
                 currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);

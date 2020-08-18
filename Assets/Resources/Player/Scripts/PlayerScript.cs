@@ -211,14 +211,6 @@ public class PlayerScript : MonoBehaviour {
             if (instantiatedObject != null) {
                 //PhotonNetwork.Destroy(instantiatedObject);
                 instantiatedObject.SetActive(false);
-
-                bool has = false;
-                foreach (GameObject aa in objectsAlreadyHere) {
-                    if (aa.name.Equals(instantiatedObject.name)) {
-                        has = true;
-                    }
-                }
-                if (!has) { objectsAlreadyHere.Add(instantiatedObject); }
             }
         }
 
@@ -228,28 +220,12 @@ public class PlayerScript : MonoBehaviour {
             isToolOn = true;
             if (isOnline) {
                 if (instantiatedObject != null) {
-                    instantiatedObject.SetActive(false);
-
-                    bool has1 = false;
-                    foreach (GameObject aa in objectsAlreadyHere) {
-                        if (aa.name.Equals(instantiatedObject.name)) {
-                            has1 = true;
-                        }
-                    }
-                    if (!has1) { objectsAlreadyHere.Add(instantiatedObject); }
                     //PhotonNetwork.Destroy(instantiatedObject);
+                    instantiatedObject.SetActive(false);
                 }
 
                 bool has2 = false;
-                foreach (GameObject aa in objectsAlreadyHere) {
-                    if (aa.name.Equals(objectInHand.name)) {
-                        has2 = true;
-
-                        aa.SetActive(true);
-                        
-                        break;
-                    }
-                }
+                
                 if (!has2) {
                     if (aux != null && aux.type == ItemType.Weapons) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name),

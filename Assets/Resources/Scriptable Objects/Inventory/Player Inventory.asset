@@ -62,8 +62,8 @@ MonoBehaviour:
     amount: 0
   - item: {fileID: 11400000, guid: 51a700bc1a9637f4783c5516c39aa786, type: 2}
     amount: 1
-  - item: {fileID: 11400000, guid: 4dbea1c61e9027445a90d7936656998e, type: 2}
-    amount: 1
+  - item: {fileID: 0}
+    amount: 0
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}

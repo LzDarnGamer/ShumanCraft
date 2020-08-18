@@ -3008,7 +3008,6 @@ MonoBehaviour:
   construction: {fileID: 2832949667078301452}
   interact: {fileID: 0}
   isLoaded: 0
-  achivementLog: {fileID: 6639102478278925428}
   soundScipt: {fileID: 8796840111837463673}
   fireplaceDist: 1
   pitDist: 3
