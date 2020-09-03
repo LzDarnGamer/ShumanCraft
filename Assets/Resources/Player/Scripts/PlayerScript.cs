@@ -149,7 +149,12 @@ public class PlayerScript : MonoBehaviour {
                 } else {
                     File.CreateText(instanceDataFile);
                 }
-                
+
+                // Spawn NPCs
+                PhotonNetwork.Instantiate(Path.Combine("NPC Spawner", "NPC Handler Isle 1"), new Vector3(87.25554f, 96.97235f, -79.15379f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(Path.Combine("NPC Spawner", "NPC Handler Isle Ice (1)"), new Vector3(42.8f, 96.97235f, -1068.2f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(Path.Combine("NPC Spawner", "NPC Handler Isle Ice"), new Vector3(87.25554f, 96.97235f, -79.15379f), Quaternion.identity, 0);
+
             }
 
             if (PV.IsMine) {
@@ -199,7 +204,7 @@ public class PlayerScript : MonoBehaviour {
             PlayerManager();
         }
     }
-    
+    bool canspawn = false;
     private void PlayerManager() {
         hotbarIndex = hotbarManager.getIndex();
         
@@ -207,38 +212,43 @@ public class PlayerScript : MonoBehaviour {
             objectInHand = inventory.getHotbar()[hotbarIndex].item.inGameObject;
             aux = inventory.getHotbar()[hotbarIndex].item;
         } else {
+            canspawn = true;
             objectInHand = null;
             if (instantiatedObject != null) {
                 //PhotonNetwork.Destroy(instantiatedObject);
-                instantiatedObject.SetActive(false);
+                //instantiatedObject.SetActive(false);
+                Destroy(instantiatedObject);
             }
         }
 
-        if (objectInHand != null &&
-            (prevHotbarIndex == -999 || hotbarIndex != prevHotbarIndex)) {
 
+        if (objectInHand != null &&
+            (prevHotbarIndex == -999 || hotbarIndex != prevHotbarIndex || canspawn)) {
+
+            canspawn = false;
             isToolOn = true;
             if (isOnline) {
                 if (instantiatedObject != null) {
-                    //PhotonNetwork.Destroy(instantiatedObject);
-                    instantiatedObject.SetActive(false);
+                    PhotonNetwork.Destroy(instantiatedObject);
+                    //instantiatedObject.SetActive(false);
+                    //Destroy(instantiatedObject);
                 }
 
                 bool has2 = false;
                 
                 if (!has2) {
                     if (aux != null && aux.type == ItemType.Weapons) {
-                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name),
-                                                            playerHand.transform.position,
-                                                            Quaternion.identity, 0);
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
+                        //instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
+                        //Debug.Log("Object Instantiated!");
+                    
                     } else if (aux != null && aux.type == ItemType.Foods) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
                     } else if (aux != null && aux.type == ItemType.Tools) {
-                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name),
-                                                            playerHand.transform.position,
-                                                            Quaternion.identity, 0);
+                        //instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
+                        instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
                     } else if (aux != null && aux.type == ItemType.Materials) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
                                                             playerHand.transform.position,

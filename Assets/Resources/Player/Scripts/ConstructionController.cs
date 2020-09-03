@@ -104,7 +104,6 @@ public class ConstructionController : MonoBehaviour {
                 PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", placeableObjectPrefab.name), transform.position, Quaternion.identity, 0);
                 
             SetColliders(false);
-
             isUsing = true;
             //} else {
             //    Destroy(currentPlaceableObject);
