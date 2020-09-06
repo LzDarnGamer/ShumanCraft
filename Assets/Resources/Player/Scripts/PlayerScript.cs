@@ -578,7 +578,7 @@ public class PlayerScript : MonoBehaviour {
                 if (Eat()) {
                     displayInventory.UpdateDisplay();
                 } else if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray
-                     , 20f, ~PlayerMask)) {
+                     , 6f, ~PlayerMask)) {
                     GameObject hitObj = ray.transform.gameObject;
                     Debug.Log(hitObj.name);
                     if (hitObj.CompareTag("Pickupable")) {
