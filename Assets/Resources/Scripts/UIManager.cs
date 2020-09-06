@@ -12,11 +12,12 @@ public class UIManager : MonoBehaviour {
 
     private KeyCode currentActive = KeyCode.Pipe;
 
-    private bool isMouseActive;
+    
     private bool isEscActive;
     private bool isTabActive;
     private bool isInvEActive;
     private bool isQuestBookActive;
+    public bool isMouseActive { get; private set; }
 
     [SerializeField] GameObject Infobook;
     [SerializeField] GameObject BackgroundPanel;

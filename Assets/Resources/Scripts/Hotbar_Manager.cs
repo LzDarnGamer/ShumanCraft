@@ -9,6 +9,8 @@ public class Hotbar_Manager : MonoBehaviour
     [SerializeField] Sprite defaultIcon;
     [SerializeField] Sprite selectedIcon;
 
+    [SerializeField] UIManager uiManager;
+
     private KeyCode[] keyCodes = {
          KeyCode.Alpha0,
          KeyCode.Alpha1,
@@ -42,34 +44,40 @@ public class Hotbar_Manager : MonoBehaviour
     }
 
     void Update() {
-        for (int i = 0; i < keyCodes.Length; i++) {
-            if (Input.GetKeyDown(keyCodes[i])) {
-                if (i == 0) {
+        if (!uiManager.isMouseActive) {
+            if (Input.anyKey) {
+                for (int i = 0; i < keyCodes.Length; i++) {
+                    if (Input.GetKeyDown(keyCodes[i])) {
+                        if (i == 0) {
+                            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
+                            hotbarslots[9].transform.GetComponent<Image>().sprite = selectedIcon;
+                            scrollPosition = 9;
+                        } else {
+                            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
+                            hotbarslots[i - 1].transform.GetComponent<Image>().sprite = selectedIcon;
+                            scrollPosition = i - 1;
+                        }
+                    }
+                }
+            }
+
+            if (Input.mouseScrollDelta.y != 0) {
+                if (Input.mouseScrollDelta.y >= 1) {
                     hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
-                    hotbarslots[9].transform.GetComponent<Image>().sprite = selectedIcon;
-                    scrollPosition = 9;
-                } else {
+                    scrollPosition++;
+                    scrollPosition = (scrollPosition % 10);
+                    hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
+                } else if (Input.mouseScrollDelta.y <= -1) {
                     hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
-                    hotbarslots[i-1].transform.GetComponent<Image>().sprite = selectedIcon;
-                    scrollPosition = i-1;
+                    scrollPosition--;
+                    if (scrollPosition < 0) {
+                        scrollPosition = 9;
+                    }
+                    hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
                 }
             }
         }
 
-
-        if (Input.mouseScrollDelta.y >= 1) {
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
-            scrollPosition++;
-            scrollPosition = (scrollPosition % 10);
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
-        } else if (Input.mouseScrollDelta.y <= -1) {
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = defaultIcon;
-            scrollPosition--;
-            if (scrollPosition < 0) {
-                scrollPosition = 9;
-            }
-            hotbarslots[scrollPosition].transform.GetComponent<Image>().sprite = selectedIcon;
-        }
     }
 
     public int getIndex() { return scrollPosition; }
