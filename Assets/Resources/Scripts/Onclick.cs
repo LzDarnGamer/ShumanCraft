@@ -42,6 +42,8 @@ public class Onclick : MonoBehaviour
             ConstructionController construct = player.construction;
             construct.SetObject(_id.inGameObject);            
             construct.HandleNewObject();
+        } else if (_id.itemID == 900) {
+            player.InstantiateBridge();
         }
         //inventory.CraftItem(_id);
     }

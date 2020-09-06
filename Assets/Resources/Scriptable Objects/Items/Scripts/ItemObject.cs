@@ -8,7 +8,8 @@ public enum ItemType {
     Armour,
     Materials,
     Weapons,
-    Placeables
+    Placeables,
+    Story
 }
 
 public abstract class ItemObject : ScriptableObject {

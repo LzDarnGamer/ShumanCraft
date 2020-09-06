@@ -47,7 +47,7 @@ public class QuestbookGenerator : MonoBehaviour
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
         PlaceableObject[] Placeableitems = Resources.LoadAll<PlaceableObject>("Scriptable Objects/Items/Categories/Placeables");
-
+        StoryLineObject[] StoryItems = Resources.LoadAll<StoryLineObject>("Scriptable Objects/Items/Categories/StoryLine");
 
         contentFood = BookContentFood.transform;
         contentArmour = BookContentArmour.transform;
@@ -55,6 +55,19 @@ public class QuestbookGenerator : MonoBehaviour
         contentWeapon = BookContentWeapons.transform;
         contentMaterial = BookContentMaterial.transform;
         contentCraftings = BookContentCrafting.transform;
+
+        foreach (var story in StoryItems) {
+            string name = story.name;
+            string itemID = story.itemID.ToString();
+            string description = story.description;
+            Sprite icon = story.icon;
+
+            if (story.recipeItems != null && story.recipeItems.Length > 0) {
+
+                fillCreaftingInfo(craftingExamplePanel, name, description, icon,
+                    story.recipeItems, story.recipeAmount, story.itemID);
+            }
+        }
 
         foreach (var food in Fooditems) {
             string name = food.name;

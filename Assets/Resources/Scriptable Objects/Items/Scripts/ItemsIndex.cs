@@ -15,12 +15,15 @@ public class ItemsIndex : MonoBehaviour
         WeaponObject[] Weaponsitems = Resources.LoadAll<WeaponObject>("Scriptable Objects/Items/Categories/Weapons");
         MaterialObject[] Materialitems = Resources.LoadAll<MaterialObject>("Scriptable Objects/Items/Categories/Material");
         PlaceableObject[] Placeableitems = Resources.LoadAll<PlaceableObject>("Scriptable Objects/Items/Categories/Placeables");
+        StoryLineObject[] StoryItems = Resources.LoadAll<StoryLineObject>("Scriptable Objects/Items/Categories/StoryLine");
+
         initializeItems(Fooditems);
         initializeItems(Armouritems);
         initializeItems(Toolitems);
         initializeItems(Weaponsitems);
         initializeItems(Materialitems);
         initializeItems(Placeableitems);
+        initializeItems(StoryItems);
 
     }
     public static ItemObject getItem(int itemId) {

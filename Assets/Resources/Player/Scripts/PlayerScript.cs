@@ -247,8 +247,8 @@ public class PlayerScript : MonoBehaviour {
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
                     } else if (aux != null && aux.type == ItemType.Tools) {
-                        //instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
-                        instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
+                        instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
+                        //instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
                     } else if (aux != null && aux.type == ItemType.Materials) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
                                                             playerHand.transform.position,
@@ -315,6 +315,12 @@ public class PlayerScript : MonoBehaviour {
 
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
+    }
+
+    public void InstantiateBridge() {
+        PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\StoryLine", "bridge"),
+                                                            new Vector3 (57.6f, 115.77f, -66.4f),
+                                                            new Quaternion (-70.11f, 26.494f, 90.00001f, 1), 0);
     }
 
     void LoadSaveGame() {
