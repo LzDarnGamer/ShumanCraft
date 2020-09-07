@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 33000010401829940}
   - component: {fileID: 23000013853888684}
   - component: {fileID: 136000011676873426}
+  - component: {fileID: 5490453132456458934}
+  - component: {fileID: 1733250898607383155}
   m_Layer: 0
   m_Name: tree-birch02
   m_TagString: Untagged
@@ -96,3 +98,47 @@ CapsuleCollider:
   m_Height: 5.9834466
   m_Direction: 1
   m_Center: {x: 0.06, y: 2.9946907, z: -0.11052945}
+--- !u!114 &5490453132456458934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013691819444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3f020d3a56010408d8d37f30625e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects: {fileID: 0}
+  HitsNeeded: 20
+  HitsTaken: 0
+  minTimeToRespawn: 15
+  maxTimeToRespawn: 25
+  SoundOnHit: []
+  SoundOnRespawn: {fileID: 0}
+  SoundOnDestroy: {fileID: 0}
+--- !u!114 &1733250898607383155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013691819444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3f020d3a56010408d8d37f30625e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects: {fileID: 5561371207748593630, guid: dad67dc748985544aa893b477bb41b20,
+    type: 3}
+  HitsNeeded: 10
+  HitsTaken: 0
+  minTimeToRespawn: 10
+  maxTimeToRespawn: 20
+  SoundOnHit:
+  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  SoundOnRespawn: {fileID: 0}
+  SoundOnDestroy: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}

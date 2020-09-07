@@ -46,28 +46,8 @@ public class DisplayInventory : MonoBehaviour {
 
 
     public void UpdateDisplay() {
-
         SyncronizeInventories();
         ReloadTextures();
-        /*
-        for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
-            if (RealInventory[0][i].ArraySlot.item != null) {
-                RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                    = AbstractInventory.getHotbar()[i].item.icon;
-                LoadAmount(i, AbstractInventory.getHotbar(), 0);
-            }
-        }
-
-        for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
-            if (RealInventory[1][i].ArraySlot.item != null) {
-                RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                    = AbstractInventory.getInventory()[i].item.icon;
-                LoadAmount(i, AbstractInventory.getInventory(), 1);
-            }
-        }
-        */
-
- 
     }
 
     private void LoadAmount(int position, InventorySlot[] type, int inv) {
@@ -75,6 +55,11 @@ public class DisplayInventory : MonoBehaviour {
         GameObject amountpan = Instantiate(amountPanel);
         amountpan.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
         amountpan.transform.SetParent(RealInventory[inv][position].InGameSlot.transform.GetChild(0).transform, false);
+    }
+
+    private void updateAmount(int position, InventorySlot[] type, GameObject panel) {
+        int amount = type[position].amount;
+        panel.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = amount.ToString();
     }
 
     public void UpdatePostion(int PosOld, int PosNew) {
@@ -120,6 +105,8 @@ public class DisplayInventory : MonoBehaviour {
                     = RealInventory[0][i].ArraySlot.item.icon;
                 if(RealInventory[0][i].InGameSlot.transform.GetChild(0).childCount == 0) {
                     LoadAmount(i, AbstractInventory.getHotbar(), 0);
+                } else {
+                    updateAmount(i, AbstractInventory.getHotbar(), RealInventory[0][i].InGameSlot.transform.GetChild(0).gameObject);
                 }
                 
             } else {
@@ -137,6 +124,8 @@ public class DisplayInventory : MonoBehaviour {
                     = RealInventory[1][i].ArraySlot.item.icon;
                 if (RealInventory[1][i].InGameSlot.transform.GetChild(0).childCount == 0) {
                     LoadAmount(i, AbstractInventory.getInventory(), 1);
+                } else {
+                    updateAmount(i, AbstractInventory.getInventory(), RealInventory[1][i].InGameSlot.transform.GetChild(0).gameObject);
                 }
             } else {
                 RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
