@@ -109,6 +109,7 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private float chatCounter;
 
     private String instanceDataFile;
+    private bool nearboat = false;
 
     private int PlayerMask = 1 << 8;
 
@@ -196,6 +197,10 @@ public class PlayerScript : MonoBehaviour {
         if (isOnline) {
             if (PV.IsMine) {
                 PlayerManager();
+                if (Input.GetKeyUp(KeyCode.H) && nearboat) {
+                    // Teleport
+                    transform.position = new Vector3(54.47f, 122.73f, -721.6f);
+                }
             } else if (!PV.IsMine) {
                 DestroyImmediate(instCam, true);
                 DestroyImmediate(instSource, true);
@@ -677,6 +682,14 @@ public class PlayerScript : MonoBehaviour {
 
             HashUpdate();
             yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.tag.Equals("Boat")) {
+            Debug.Log("Player - Near boat");
+            nearboat = true;
+
         }
     }
 }

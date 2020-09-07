@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2005987272224586178}
   - component: {fileID: 2005987272220275546}
   - component: {fileID: 2738850934062854029}
+  - component: {fileID: 1402726233093384333}
   m_Layer: 0
   m_Name: boat
   m_TagString: Boat
@@ -118,3 +119,16 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &1402726233093384333
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005987272222554928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.766179, y: 3.2477896, z: 2.5375035}
+  m_Center: {x: -2.4617615, y: 1.6096557, z: -0.027563216}
