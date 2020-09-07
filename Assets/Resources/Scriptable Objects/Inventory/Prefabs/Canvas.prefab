@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultIcon: {fileID: 0}
   selectedIcon: {fileID: 0}
+  uiManager: {fileID: 7960737888414247793}
   hotbar: {fileID: 7960737889537301967}
   scrollPosition: 0
   hotbarslots: []
