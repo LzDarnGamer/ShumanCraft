@@ -21,6 +21,9 @@ TagManager:
   - Ore
   - Fireplace
   - Pit
+  - Boat
+  - Bridge
+  - BoatBack
   layers:
   - Default
   - TransparentFX

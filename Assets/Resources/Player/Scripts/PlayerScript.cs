@@ -318,9 +318,22 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void InstantiateBridge() {
-        PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\StoryLine", "bridge"),
-                                                            new Vector3 (57.6f, 115.77f, -66.4f),
-                                                            new Quaternion (-70.11f, 26.494f, 90.00001f, 1), 0);
+        if (GameObject.FindGameObjectWithTag("Bridge") == null) {
+            PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\StoryLine", "bridge"),
+                                                            new Vector3(57.6f, 115.77f, -66.4f),
+                                                            Quaternion.Euler(-70.11f, 26.494f, 90.00001f), 0);
+        }
+    }
+
+    public void InstantiateBoat() {
+        if (GameObject.FindGameObjectWithTag("Boat") == null) {
+            PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\StoryLine", "boat"),
+                                                                new Vector3(47.43024f, 118.0576f, -255.4927f),
+                                                                Quaternion.Euler(0.0f, 90.0f, 0.0f), 0);
+            PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\StoryLine", "boatBack"),
+                                                                new Vector3(47.43024f, 118.0576f, -714.6508f),
+                                                                Quaternion.Euler(0.0f, -90.0f, 0.0f), 0);
+        }
     }
 
     void LoadSaveGame() {

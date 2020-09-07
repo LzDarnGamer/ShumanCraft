@@ -40,10 +40,12 @@ public class Onclick : MonoBehaviour
              * 3. Set the construction mode on
              */
             ConstructionController construct = player.construction;
-            construct.SetObject(_id.inGameObject);            
+            construct.SetObject(_id.inGameObject);
             construct.HandleNewObject();
         } else if (_id.itemID == 900) {
             player.InstantiateBridge();
+        } else if (_id.itemID == 901) {
+            player.InstantiateBoat();
         }
         //inventory.CraftItem(_id);
     }
