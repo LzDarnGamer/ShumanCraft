@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4682275932477764}
   - component: {fileID: 33976024129027142}
   - component: {fileID: 23611223179119066}
-  - component: {fileID: 6707375163680784336}
+  - component: {fileID: 64763423259686818}
   m_Layer: 0
   m_Name: Vegetation_Fern_Large_01
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6707375163680784336
-BoxCollider:
+--- !u!64 &64763423259686818
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,6 +92,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0, z: 0.1}
-  m_Center: {x: 0.00000023841858, y: 0, z: 0.00000047683716}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: ac518ca1515062746b9d490222a36c65, type: 3}
