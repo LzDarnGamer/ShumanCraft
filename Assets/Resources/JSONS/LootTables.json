@@ -1,0 +1,29 @@
+{
+	"lootTables":
+	[
+		{
+			"tablename": "tree",
+			"itemID":[1,6],
+			"minValue":[1,1],
+			"maxValue":[3,4]
+		},
+		{
+			"tablename": "ironore",
+			"itemID":[4],
+			"minValue":[1],
+			"maxValue":[2]
+		},
+		{
+			"tablename": "cooperore",
+			"itemID":[5],
+			"minValue":[1],
+			"maxValue":[2]
+		},
+		{
+			"tablename": "animal",
+			"itemID":[604],
+			"minValue":[1],
+			"maxValue":[4]
+		}
+	]
+}
