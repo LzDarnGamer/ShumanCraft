@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 727736378501621931}
   - component: {fileID: 660117794458900305}
   - component: {fileID: -4308721874753371981}
+  - component: {fileID: -8906032795572740425}
   m_Layer: 0
   m_Name: stone particles
   m_TagString: Untagged
@@ -4767,3 +4768,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0641ff851cd15b40848e7cc4eb97878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8906032795572740425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5561371207748593630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

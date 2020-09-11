@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23851209726784060}
   - component: {fileID: 95891165828435158}
   - component: {fileID: 64763966273692812}
+  - component: {fileID: 1754702550529479078}
   m_Layer: 0
   m_Name: Prop_Ore_Node_Yellow_03
   m_TagString: Untagged
@@ -116,3 +117,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8211eaddc4c4a4a44b288a094cacac3b, type: 3}
+--- !u!114 &1754702550529479078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233700917535082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a00f628a1650e4799d7721ab4214c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects: {fileID: 5561371207748593630, guid: 9e5446708a30eae4db1a5ab17ffe746f,
+    type: 3}
+  HitsNeeded: 20
+  HitsTaken: 0
+  minTimeToRespawn: 15
+  maxTimeToRespawn: 25
+  SoundOnHit:
+  - {fileID: 8300000, guid: 1ba8faef2d3768045a9e9496491ca3e6, type: 3}
+  - {fileID: 8300000, guid: cf5605172db8cc644bcba8f8acdffc1a, type: 3}
+  - {fileID: 8300000, guid: 5435d4916c372e440a5035dcdd83bd3d, type: 3}
+  - {fileID: 8300000, guid: dff01badcf00dd24c8c445d150cc3d57, type: 3}
+  SoundOnRespawn: {fileID: 0}
+  SoundOnDestroy: {fileID: 8300000, guid: e85ba26aaccd3064f9ba77057b0b6ca0, type: 3}
+  oreType: goldore

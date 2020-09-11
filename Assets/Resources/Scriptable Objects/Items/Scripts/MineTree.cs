@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class MineTree : MineObject {
 
     AudioSource aud;
@@ -16,7 +17,7 @@ public class MineTree : MineObject {
         LootTable l = JSONLoader.lootTables["tree"];
         for (int i = 0; i < l.itemID.Length; i++) {
             for (int j = 0; j < UnityEngine.Random.Range(l.minValue[i],l.maxValue[i]); j++) {
-                Instantiate(ItemsIndex.getItem(l.itemID[i]).inGameObject, transform.position + Vector3.up, Quaternion.identity);
+                PhotonNetwork.Instantiate(l.pathName[i], transform.position + Vector3.up, Quaternion.identity);
             }
         }
     }
@@ -24,7 +25,7 @@ public class MineTree : MineObject {
 
     public override void RaycastHit(Item it, Vector3 hitPos) {
         aud.PlayOneShot(SoundOnHit[UnityEngine.Random.Range(0, SoundOnHit.Length - 1)], 0.05f);
-        Instantiate(particleEffects, hitPos, Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs\\" + particleEffects.name, hitPos, Quaternion.identity);
         ToolObject tool = (ToolObject)it.item;
         if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
 

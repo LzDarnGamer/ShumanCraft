@@ -3,24 +3,35 @@
 	[
 		{
 			"tablename": "tree",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\leaf","Scriptable Objects\\Items\\Prefabs\\Material\\wood"],
 			"itemID":[1,6],
 			"minValue":[1,1],
 			"maxValue":[3,4]
 		},
 		{
 			"tablename": "ironore",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\iron_ingot"],
 			"itemID":[4],
 			"minValue":[1],
 			"maxValue":[2]
 		},
 		{
 			"tablename": "cooperore",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\copper_ingot"],
 			"itemID":[5],
 			"minValue":[1],
 			"maxValue":[2]
 		},
 		{
+			"tablename": "goldore",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\gold_ingot"],
+			"itemID":[8],
+			"minValue":[1],
+			"maxValue":[2]
+		},
+		{
 			"tablename": "animal",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Food\\meat"],
 			"itemID":[604],
 			"minValue":[1],
 			"maxValue":[4]

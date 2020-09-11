@@ -19,8 +19,6 @@ MonoBehaviour:
     amount: 48
   - item: {fileID: 11400000, guid: ae93273d4c2a41b4c803b9df5c506971, type: 2}
     amount: 56
-  - item: {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
-    amount: 50
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
@@ -49,25 +47,27 @@ MonoBehaviour:
     amount: 0
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 11400000, guid: 4bfc038bbcc8b2542bc6c3219e0283ee, type: 2}
-    amount: 1
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
   - item: {fileID: 0}
     amount: 0
   hotbar:
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 4bfc038bbcc8b2542bc6c3219e0283ee, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 819171813fc64ac4593f21ab153b73ea, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 4cabe3ff927d74f458b66a4ebb4d0a90, type: 2}
+    amount: 4
   - item: {fileID: 11400000, guid: 51a700bc1a9637f4783c5516c39aa786, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 1826ab9e7ce64d04dbda24752b3b14ac, type: 2}
     amount: 1
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
+    amount: 53
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}

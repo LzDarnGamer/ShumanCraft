@@ -78,6 +78,7 @@ public class NPC_Animal : MonoBehaviour {
         } else {
             health = 0.0f;
             if (!dead) {
+                dropItems();
                 anim.SetTrigger("dead");
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
                 StartCoroutine(die());
@@ -133,6 +134,7 @@ public class NPC_Animal : MonoBehaviour {
         yield return new WaitForSeconds(5);
         // Sistema de particulas
         PV.RPC("RPC_DestroyMe", RpcTarget.AllBuffered, PV.ViewID);
+        
     }
 
     [PunRPC]
@@ -224,5 +226,13 @@ public class NPC_Animal : MonoBehaviour {
 
     public bool IsChaser() { return (thuderUI != null) ? true : false; }
 
+    private void dropItems() {
+        LootTable l = JSONLoader.lootTables["animal"];
+        for (int i = 0; i < l.itemID.Length; i++) {
+            for (int j = 0; j < Random.Range(l.minValue[i], l.maxValue[i]); j++) {
+                PhotonNetwork.Instantiate(l.pathName[i], transform.position + Vector3.up, Quaternion.identity);
+            }
+        }
+    }
 
 }

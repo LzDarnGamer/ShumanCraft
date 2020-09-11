@@ -4,9 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - SoundOnHit: {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
-  - OnRespawn: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}
-  - OnDestroy: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}
+  - particleEffects: {fileID: 5561371207748593630, guid: dad67dc748985544aa893b477bb41b20,
+      type: 3}
+  - SoundOnRespawn: {instanceID: 0}
+  - SoundOnDestroy: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

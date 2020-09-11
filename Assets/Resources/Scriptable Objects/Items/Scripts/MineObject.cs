@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class MineObject : MonoBehaviour{
+    
     [SerializeField] protected GameObject particleEffects;
     [SerializeField] protected int HitsNeeded = 20;
     [SerializeField] protected int HitsTaken;

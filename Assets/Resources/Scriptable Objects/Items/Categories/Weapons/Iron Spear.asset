@@ -22,5 +22,5 @@ MonoBehaviour:
   inGameObject: {fileID: 3725465688555768825, guid: 67cc1e5ff7ba04c4695ec24b9e59270c,
     type: 3}
   description: Basic spear to protect youserf
-  damagePoints: 10
+  damagePoints: 100
   durability: 64

@@ -404,7 +404,7 @@ public class PlayerScript : MonoBehaviour {
                     ray.collider.gameObject.GetComponent<MineTree>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
                     break;
                 case "Ore":
-                    ray.collider.gameObject.GetComponent<MineIronOre>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
+                    ray.collider.gameObject.GetComponent<MineOre>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
                     break;
             }
         }
