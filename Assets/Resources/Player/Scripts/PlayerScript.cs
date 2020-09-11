@@ -590,13 +590,15 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void PickUpItem() {
-        if (Input.anyKeyDown) { 
+        if (Input.anyKeyDown) {
+
             if (Input.GetKeyDown(KeyCode.Mouse1)) {
                 if (Eat()) {
                     displayInventory.UpdateDisplay();
-                } else if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out RaycastHit ray
+                } else if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray
                      , 6f, ~PlayerMask)) {
                     GameObject hitObj = ray.transform.gameObject;
+                    Debug.Log(hitObj.name);
                     if (hitObj.CompareTag("Pickupable")) {
                         ItemObject it = ray.transform.GetComponent<Item>().item;
                         if (displayInventory.PickupItem(it, 1)) {
@@ -606,6 +608,7 @@ public class PlayerScript : MonoBehaviour {
 
                 }
             }
+
         }
     }
     public void activateCollider() {

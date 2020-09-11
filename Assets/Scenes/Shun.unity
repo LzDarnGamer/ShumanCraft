@@ -3904,9 +3904,9 @@ MonoBehaviour:
   minTimeToRespawn: 10
   maxTimeToRespawn: 20
   SoundOnHit:
-  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
-  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
-  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   SoundOnRespawn: {fileID: 0}
   SoundOnDestroy: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}
 --- !u!64 &1359624475
