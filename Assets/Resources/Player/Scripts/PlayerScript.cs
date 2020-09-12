@@ -252,6 +252,8 @@ public class PlayerScript : MonoBehaviour {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
+                        instantiatedObject.GetComponent<MeshCollider>().enabled = false;
+                        instantiatedObject.GetComponent<Rigidbody>().isKinematic = true;
 
                     } else if (aux != null && aux.type == ItemType.Placeables) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", objectInHand.name),
