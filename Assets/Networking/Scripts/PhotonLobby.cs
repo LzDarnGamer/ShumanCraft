@@ -13,6 +13,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     [SerializeField] private List<string> roomNames;
 
+    [Header("Welcome Panel")]
+    public GameObject welcomePanel;
+    public TMP_Text welcomeText;
+
     [Header("Login System")]
     public GameObject loginSystem;
     public TMP_InputField loginField;
@@ -68,7 +72,23 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
 
     public void loginBtnClicked() {
         PhotonNetwork.NickName = loginField.text;
+        // Disable login panel
+        LeanTween.scale(loginSystem, new Vector3(0, 0, 0), 0.3f);
+        // Enable Welcome panel
+        welcomePanel.SetActive(true);
+        welcomeText.SetText("Welcome " + loginField.text);
+
         setOnlineUI();
+    }
+
+    public GameObject createUIII;
+
+    public void backCreate() {
+        createUIII.SetActive(false);
+    }
+
+    public void backJoin() {
+        joinUI.SetActive(false);
     }
 
     private void setOnlineUI() {
