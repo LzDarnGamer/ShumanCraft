@@ -17,8 +17,11 @@ MonoBehaviour:
   itemID: 703
   isStackable: 0
   maxStackSize: 0
-  recipeItems: []
-  recipeAmount: 
+  recipeItems:
+  - {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
+  - {fileID: 11400000, guid: ae93273d4c2a41b4c803b9df5c506971, type: 2}
+  - {fileID: 11400000, guid: 6409eebec7afee0499e78cc4f4634af5, type: 2}
+  recipeAmount: 030000000100000001000000
   inGameObject: {fileID: 751660856773013148, guid: 9f106c5a89195ea46afea409862e4126,
     type: 3}
   description: "\t\t\t"
