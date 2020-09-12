@@ -39,7 +39,7 @@ public class AchivementLog : MonoBehaviour {
         k.CopyTo(keys, 0);
         v.CopyTo(values, 0);
 
-        achivementdonePanel.transform.localScale = Vector3.zero;
+        //achivementdonePanel.transform.localScale = Vector3.zero;
     }
 
     public void advanceAchivement(ItemObject it) {

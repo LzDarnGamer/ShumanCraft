@@ -158,6 +158,8 @@ public class DisplayInventory : MonoBehaviour {
 
     }
 
+
+    
     public void updateAchivement() {
         if (achivementChapter.activeSelf) {
             Debug.Log("Update");
