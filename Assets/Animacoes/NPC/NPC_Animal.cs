@@ -216,14 +216,16 @@ public class NPC_Animal : MonoBehaviour {
     private float initHeightUI;
 
     public void ShowIconGameObject (bool goingUp) {
-
-        if (goingUp) {
-            thuderUI.transform.LeanMoveLocalY(climbValueUI, .5f);
-            LeanTween.scale(thuderUI, new Vector3(scaleValueUI, scaleValueUI, scaleValueUI), .5f);
-        } else {
-            thuderUI.transform.LeanMoveLocalY(initHeightUI, .5f);
-            LeanTween.scale(thuderUI, Vector3.zero, .5f);
+        if (thuderUI != null) {
+            if (goingUp) {
+                thuderUI.transform.LeanMoveLocalY(climbValueUI, .5f);
+                LeanTween.scale(thuderUI, new Vector3(scaleValueUI, scaleValueUI, scaleValueUI), .5f);
+            } else {
+                thuderUI.transform.LeanMoveLocalY(initHeightUI, .5f);
+                LeanTween.scale(thuderUI, Vector3.zero, .5f);
+            }
         }
+        
     }
 
     public bool IsChaser() { return (thuderUI != null) ? true : false; }
