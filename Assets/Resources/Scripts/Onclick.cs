@@ -46,8 +46,9 @@ public class Onclick : MonoBehaviour
             player.InstantiateBridge();
         } else if (_id.itemID == 901) {
             player.InstantiateBoat();
+        } else {
+            inventory.CraftItem(_id);
         }
-        //inventory.CraftItem(_id);
     }
 
 

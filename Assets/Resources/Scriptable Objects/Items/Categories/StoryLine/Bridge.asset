@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb915fff1539b244b145d324b4ad4c3, type: 3}
   m_Name: Bridge
   m_EditorClassIdentifier: Assembly-CSharp::StoryLine
-  icon: {fileID: 21300000, guid: 0216c518331079d4faf46ade7e6e4e5f, type: 3}
+  icon: {fileID: 21300000, guid: 658bd44cdb8dbb648a176422400ce526, type: 3}
   type: 6
   itemID: 900
   isStackable: 0
