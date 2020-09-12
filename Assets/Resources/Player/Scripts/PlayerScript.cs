@@ -220,8 +220,6 @@ public class PlayerScript : MonoBehaviour {
             canspawn = true;
             objectInHand = null;
             if (instantiatedObject != null) {
-                //PhotonNetwork.Destroy(instantiatedObject);
-                //instantiatedObject.SetActive(false);
                 Destroy(instantiatedObject);
             }
         }
@@ -235,8 +233,6 @@ public class PlayerScript : MonoBehaviour {
             if (isOnline) {
                 if (instantiatedObject != null) {
                     PhotonNetwork.Destroy(instantiatedObject);
-                    //instantiatedObject.SetActive(false);
-                    //Destroy(instantiatedObject);
                 }
 
                 bool has2 = false;
@@ -244,8 +240,6 @@ public class PlayerScript : MonoBehaviour {
                 if (!has2) {
                     if (aux != null && aux.type == ItemType.Weapons) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Weapons", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
-                        //instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
-                        //Debug.Log("Object Instantiated!");
                     
                     } else if (aux != null && aux.type == ItemType.Foods) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
@@ -253,11 +247,12 @@ public class PlayerScript : MonoBehaviour {
                                                             Quaternion.identity, 0);
                     } else if (aux != null && aux.type == ItemType.Tools) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
-                        //instantiatedObject = Instantiate(objectInHand, playerHand.transform.position, Quaternion.identity);
+
                     } else if (aux != null && aux.type == ItemType.Materials) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Material", objectInHand.name),
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
+
                     } else if (aux != null && aux.type == ItemType.Placeables) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Placeables", objectInHand.name),
                                                             playerHand.transform.position,
@@ -290,17 +285,12 @@ public class PlayerScript : MonoBehaviour {
             prevHotbarIndex = hotbarIndex;
         } else if (objectInHand == null) {
             isToolOn = false;
-            //if (instantiatedObject != null) DestroyImmediate(instantiatedObject);
         }
 
         if (instCam != null && isCamFixed) { 
             facing = instCam.transform.eulerAngles.y;
             transform.eulerAngles = new Vector3(0, facing, 0);
-
-            //Vector3 look = new Vector3(0, facing, 0);
-            //transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, look, .2f);
         }
-
         UIControl();
         Movement();
         Attributes();
@@ -564,10 +554,10 @@ public class PlayerScript : MonoBehaviour {
         if (instantiatedObject != null) {
             if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
                 anim.SetBool("IsHoldingSpear", true);
+            } else {
+                anim.SetBool("IsHoldingSpear", false);
             }
-        } else {
-            anim.SetBool("IsHoldingSpear", false);
-        }
+        } 
         if (isWalking) {
             float newX = (float)(this.x * .5);
             float newY = (float)(this.y * .5);
