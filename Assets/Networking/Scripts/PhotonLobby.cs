@@ -81,6 +81,16 @@ public class PhotonLobby : MonoBehaviourPunCallbacks {
         setOnlineUI();
     }
 
+    public GameObject createUIII;
+
+    public void backCreate() {
+        createUIII.SetActive(false);
+    }
+
+    public void backJoin() {
+        joinUI.SetActive(false);
+    }
+
     private void setOnlineUI() {
         battleButton.GetComponent<Button>().interactable = true;
         createButton.GetComponent<Button>().interactable = true;
