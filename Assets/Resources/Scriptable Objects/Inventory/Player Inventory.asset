@@ -64,12 +64,12 @@ MonoBehaviour:
     amount: 1
   - item: {fileID: 11400000, guid: 1826ab9e7ce64d04dbda24752b3b14ac, type: 2}
     amount: 1
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
+    amount: 1
   - item: {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
     amount: 53
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 4dbea1c61e9027445a90d7936656998e, type: 2}
+    amount: 1
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
