@@ -116,11 +116,13 @@ public class NPC_Animal : MonoBehaviour {
         GameObject closestPlayer = null;
         for (int i = 0; i < players.Length; ++i) {
             // TODO Verify if player exists here
-            Vector3 ajuda = transform.position - players[i].transform.position;
-            //distToPlayers.Add(ajuda);
-            if (ajuda.magnitude < closestPlayerdistance) {
-                closestPlayerdistance = ajuda.magnitude;
-                closestPlayer = players[i];
+            if (players[i] != null) {
+                Vector3 ajuda = transform.position - players[i].transform.position;
+                //distToPlayers.Add(ajuda);
+                if (ajuda.magnitude < closestPlayerdistance) {
+                    closestPlayerdistance = ajuda.magnitude;
+                    closestPlayer = players[i];
+                }
             }
         }
         return closestPlayer;
