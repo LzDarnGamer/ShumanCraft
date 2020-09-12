@@ -1687,7 +1687,7 @@ Transform:
   m_Children:
   - {fileID: 5648777543738935066}
   - {fileID: 5648777543738933568}
-  - {fileID: 3625033064849240081}
+  - {fileID: 2592091781702528144}
   - {fileID: 4737513548754303937}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1745,7 +1745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b41c8244d5c7246bc1a6cc9879ba46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 3625033064849240390}
+  canvas: {fileID: 7206286336415430790}
   navMeshAgent: {fileID: 5648777543806436079}
   currentTarget: 0
   maxDistancetoCheck: 30
@@ -9937,13 +9937,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b307fc97107bd74a9bf317e348a92ed, type: 3}
---- !u!224 &3625033064849240081 stripped
+--- !u!224 &2592091781702528144 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1276279975555952896, guid: 8b307fc97107bd74a9bf317e348a92ed,
     type: 3}
   m_PrefabInstance: {fileID: 3625033064849235344}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &3625033064849240390 stripped
+--- !u!223 &7206286336415430790 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 6219307686835037462, guid: 8b307fc97107bd74a9bf317e348a92ed,
     type: 3}
