@@ -45,6 +45,7 @@ MonoBehaviour:
   - RPC_UpdateChat
   - RPC_UpdateObject
   - RPC_delete
+  - RPC_disableMesh
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

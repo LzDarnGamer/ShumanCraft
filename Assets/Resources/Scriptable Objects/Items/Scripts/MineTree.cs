@@ -30,9 +30,8 @@ public class MineTree : MineObject {
         if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
 
         if (CheckIfAliveAfterHit(tool.hitPower)) {
-            float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
             dropItems();
-            RespawnCountDown(rt, gameObject);
+            disableMesh(gameObject.GetComponent<PhotonView>().ViewID);
         }
     }
 
@@ -49,6 +48,18 @@ public class MineTree : MineObject {
         g.GetComponent<MeshRenderer>().enabled = true;
         g.GetComponent<MeshCollider>().enabled = true;
         aud.PlayOneShot(SoundOnRespawn, 0.05f);
+    }
+
+
+    [PunRPC]
+    private void RPC_disableMesh(int id) {
+        GameObject a = PhotonView.Find(id).gameObject;
+        float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
+        RespawnCountDown(rt, a);
+    }
+
+    public void disableMesh(int id) {
+        gameObject.GetComponent<PhotonView>().RPC("RPC_disableMesh", RpcTarget.AllBuffered, id);
     }
 }
 
