@@ -391,12 +391,16 @@ public class PlayerScript : MonoBehaviour {
 
     private void mineObject() {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
+            Debug.Log(ray.collider.gameObject.tag);
             switch (ray.collider.gameObject.tag) {
                 case "Tree":
                     ray.collider.gameObject.GetComponent<MineTree>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
                     break;
                 case "Ore":
                     ray.collider.gameObject.GetComponent<MineOre>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
+                    break;
+                case "Log":
+                    ray.collider.gameObject.GetComponent<MineLog>().RaycastHit(instantiatedObject.GetComponent<Item>(), ray.point);
                     break;
             }
         }

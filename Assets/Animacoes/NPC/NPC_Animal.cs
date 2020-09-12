@@ -216,6 +216,7 @@ public class NPC_Animal : MonoBehaviour {
     private float initHeightUI;
 
     public void ShowIconGameObject (bool goingUp) {
+        /*
         if (thuderUI != null) {
             if (goingUp) {
                 thuderUI.transform.LeanMoveLocalY(climbValueUI, .5f);
@@ -225,7 +226,7 @@ public class NPC_Animal : MonoBehaviour {
                 LeanTween.scale(thuderUI, Vector3.zero, .5f);
             }
         }
-        
+        */
     }
 
     public bool IsChaser() { return (thuderUI != null) ? true : false; }
