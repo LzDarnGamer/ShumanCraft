@@ -22,6 +22,6 @@ MonoBehaviour:
   inGameObject: {fileID: 782078294941709259, guid: b9b0c42e659208f418444886734e292d,
     type: 3}
   description: Droped by dead animals
-  hungerRestore: 4
-  thirstRestore: 0
-  healthRestore: 3
+  hungerRestore: 10
+  thirstRestore: 2
+  healthRestore: 10

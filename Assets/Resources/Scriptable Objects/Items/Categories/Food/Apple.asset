@@ -22,6 +22,6 @@ MonoBehaviour:
   inGameObject: {fileID: 4224288619876726249, guid: d444fa602420e9448aa8ec8cb724173c,
     type: 3}
   description: An apple a day...
-  hungerRestore: 20
-  thirstRestore: 20
-  healthRestore: 20
+  hungerRestore: 5
+  thirstRestore: 10
+  healthRestore: 5
