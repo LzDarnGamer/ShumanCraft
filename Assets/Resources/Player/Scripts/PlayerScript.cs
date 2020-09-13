@@ -245,6 +245,11 @@ public class PlayerScript : MonoBehaviour {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Food", objectInHand.name),
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
+                        if (instantiatedObject.GetComponent<MeshCollider>() != null && instantiatedObject.GetComponent<Rigidbody>() != null) {
+                            instantiatedObject.GetComponent<MeshCollider>().enabled = false;
+                            instantiatedObject.GetComponent<Rigidbody>().isKinematic = true;
+                        }
+
                     } else if (aux != null && aux.type == ItemType.Tools) {
                         instantiatedObject = PhotonNetwork.Instantiate(Path.Combine("Scriptable Objects\\Items\\Prefabs\\Tool", objectInHand.name), playerHand.transform.position, Quaternion.identity, 0);
 
@@ -613,6 +618,7 @@ public class PlayerScript : MonoBehaviour {
     public bool Eat() {
         if (inventory.getHotbar()[hotbarManager.scrollPosition].item != null && typeof(FoodObject).IsInstanceOfType
               (inventory.getHotbar()[hotbarManager.scrollPosition].item)) {
+            soundScipt.PlayEatSound();
             FoodObject Foodobj = (FoodObject)inventory.getHotbar()[hotbarManager.scrollPosition].item;
             addHealth(Foodobj.healthRestore);
             addHunger(Foodobj.hungerRestore);

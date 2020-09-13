@@ -3,10 +3,10 @@
 	[
 		{
 			"tablename": "tree",
-			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\leaf","Scriptable Objects\\Items\\Prefabs\\Material\\wood"],
-			"itemID":[1,6],
-			"minValue":[1,1],
-			"maxValue":[3,4]
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\leaf","Scriptable Objects\\Items\\Prefabs\\Material\\wood","Scriptable Objects\\Items\\Prefabs\\Material\\apple"],
+			"itemID":[1,6,603],
+			"minValue":[1,1,0],
+			"maxValue":[3,4,2]
 		},
 		{
 			"tablename": "stone",

@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Fatest
+    - m_Text: Fastest
       m_Image: {fileID: 0}
     - m_Text: Fast
       m_Image: {fileID: 0}

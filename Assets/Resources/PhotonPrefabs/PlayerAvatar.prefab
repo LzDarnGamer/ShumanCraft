@@ -3333,6 +3333,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d91be05878085e6428a38ba2b5fc24d8, type: 3}
   - {fileID: 8300000, guid: 0faf69da56f529c4c979260ecfbd5f2b, type: 3}
   tired: {fileID: 8300000, guid: 5247c7092fe2b884bb5807afda755775, type: 3}
+  eatSound: {fileID: 8300000, guid: f65ae1f4474fce643bd41ae15ee41cde, type: 3}
   pageTurn: {fileID: 8300000, guid: eb29d7e6a68defb4bb2c6732b67bc0c5, type: 3}
   audioPlayer: {fileID: 5757599731452791003}
 --- !u!114 &-5715990438160176153

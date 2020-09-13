@@ -16,10 +16,15 @@ public class SoundScipt : MonoBehaviour
     [Header("Tired")] [SerializeField] AudioClip tired;
     private bool tiredBool;
 
+    [Header("Eat")]
+    [SerializeField] AudioClip eatSound;
+    
     [Header("Turning page")] [SerializeField] AudioClip pageTurn;
 
     [Header("Audio Player")]
     [SerializeField] AudioSource audioPlayer;
+
+
 
     public void playFootStep() {
         if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out RaycastHit hit, 2)) {
@@ -53,4 +58,7 @@ public class SoundScipt : MonoBehaviour
         audioPlayer.PlayOneShot(pageTurn, 0.1f);
     }
 
+    public void PlayEatSound() {
+        audioPlayer.PlayOneShot(eatSound, 0.1f);
+    }
 }
