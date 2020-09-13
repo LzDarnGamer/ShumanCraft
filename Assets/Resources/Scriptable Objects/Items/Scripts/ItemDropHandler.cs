@@ -7,8 +7,12 @@ using UnityEngine.UI;
 
 public class ItemDropHandler : MonoBehaviour, IDropHandler
 {
-    [SerializeField]
-    DisplayInventory DisplayInv;
+    private DisplayInventory DisplayInv;
+
+
+    private void Start() {
+        DisplayInv = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<DisplayInventory>();
+    }
     public void OnDrop(PointerEventData eventData) {
         
         if (eventData.pointerDrag != null 
@@ -23,12 +27,6 @@ public class ItemDropHandler : MonoBehaviour, IDropHandler
             DisplayInv.UpdatePostion(int.Parse(PosOld)-1, int.Parse(Posnew)-1);
             
 
-            /*
-            Sprite i = GetComponent<Image>().sprite;
-            GetComponent<Image>().sprite = eventData.pointerDrag.GetComponent<Image>().sprite;
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-            eventData.pointerDrag.GetComponent<Image>().sprite = i;
-            */    
     } 
     }
 }
