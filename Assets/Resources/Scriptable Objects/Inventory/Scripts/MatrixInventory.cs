@@ -67,17 +67,14 @@ public class MatrixInventory : ScriptableObject
     public bool canCraft(int itemID, int amount) {
         for (int i = 0; i < hotbar.Length; i++) {
             if (hotbar[i].item != null) {
-
-                if (hotbar[i].item.itemID == itemID &&
-                    hotbar[i].amount >= amount) {
+                if (hotbar[i].item.itemID == itemID && hotbar[i].amount >= amount) {
                     return true;
                 }
             }
         }
         for (int i = 0; i < inventory.Length; i++) {
             if (inventory[i].item != null) {
-                if (inventory[i].item.itemID == itemID &&
-                    inventory[i].amount >= amount) {
+                if (inventory[i].item.itemID == itemID && inventory[i].amount >= amount) {
                     return true;
                 }
             }
@@ -91,14 +88,17 @@ public class MatrixInventory : ScriptableObject
      */
     public void CraftItem(ItemObject item) {
         bool hasFound = false;
+        bool alreadyAdded = false;
         for (int i = 0; i < item.recipeItems.Length; i++) {
             // Pesquisa na hotbar
             for (int j = 0; j < hotbar.Length; j++) {
                 if (hotbar[j].item != null) {
-                    if (hotbar[j].item.itemID == item.recipeItems[i].itemID &&
-                        hotbar[j].amount >= item.recipeAmount[i]) {
+                    if (hotbar[j].item.itemID == item.recipeItems[i].itemID && hotbar[j].amount >= item.recipeAmount[i]) {
                         hotbar[j].RemoveAmount(item.recipeAmount[i]);
-                        if (!(item.itemID >= 800 && item.itemID <= 850)) AddItem(item, 1);
+                        if (!(item.itemID >= 800 && item.itemID <= 850) && !alreadyAdded) {
+                            alreadyAdded = true;
+                            AddItem(item, 1);
+                        }
                         hasFound = !hasFound;
                         break;
                     }
@@ -115,7 +115,10 @@ public class MatrixInventory : ScriptableObject
                     if (inventory[j].item.itemID == item.recipeItems[i].itemID &&
                         inventory[j].amount >= item.recipeAmount[i]) {
                         inventory[j].RemoveAmount(item.recipeAmount[i]);
-                        if (!(item.itemID >= 800 && item.itemID <= 850)) AddItem(item, 1);
+                        if (!(item.itemID >= 800 && item.itemID <= 850) && !alreadyAdded) {
+                            alreadyAdded = true;
+                            AddItem(item, 1);
+                        }
                     }
                 }
             }
