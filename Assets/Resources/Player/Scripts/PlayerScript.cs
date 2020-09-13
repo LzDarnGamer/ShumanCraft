@@ -518,7 +518,7 @@ public class PlayerScript : MonoBehaviour {
     private IEnumerator thirstCoroutine() {
         while (true) {
             if (thirst > 0) {
-                thirst -= thirstDecay;
+                thirst -= thirstLoss;
                 yield return new WaitForSeconds(1);
             } else {
                 yield return null;
