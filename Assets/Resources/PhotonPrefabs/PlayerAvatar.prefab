@@ -3036,14 +3036,14 @@ MonoBehaviour:
   isOutsideMap: 0
   firstTime: 1
   hunger: 100
-  hungerLoss: 0
+  hungerLoss: 0.1
   hungerThreshold: 10
-  starvingDecay: 0
+  starvingDecay: 0.8
   isStarving: 0
   thirst: 100
-  thirstLoss: 0
+  thirstLoss: 0.2
   thirstThreshold: 30
-  thirstDecay: 0
+  thirstDecay: 1
   needsWater: 0
   voidDamage: 0
   walkRunKey: 304
