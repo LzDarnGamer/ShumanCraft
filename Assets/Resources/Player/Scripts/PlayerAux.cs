@@ -26,7 +26,14 @@ public class PlayerAux : MonoBehaviour {
 
     public void runRPC(string name, int handID, int instatiatedID, float[] position, float[] rotation) {
         PV.RPC("RPC_UpdateObject", RpcTarget.AllBuffered, name, handID, instatiatedID, position, rotation);
-    } 
+    }
+    public void deleteObj(int id) {
+        gameObject.GetComponent<PhotonView>().RPC("RPC_delete", RpcTarget.AllBuffered, id);
+    }
+
+    public void disableMaterialProperties(int id) {
+        gameObject.GetComponent<PhotonView>().RPC("RPC_disableMaterialProperties", RpcTarget.AllBuffered, id);
+    }
 
     [PunRPC]
     private void RPC_UpdateObject(string name, int handID, int instatiatedID, float[] position, float[] rotation) {
@@ -73,4 +80,21 @@ public class PlayerAux : MonoBehaviour {
     private void RPC_Debugger(string ajuda) {
         Debug.Log("DEBUG OF PLAYER DISCONNECTING: \"" + ajuda + "\"");
     }
+
+
+    [PunRPC]
+    private void RPC_delete(int id) {
+        GameObject a = PhotonView.Find(id).gameObject;
+        Destroy(a);
+    }
+
+
+    [PunRPC]
+    private void RPC_disableMaterialProperties(int id) {
+        GameObject a = PhotonView.Find(id).gameObject;
+        a.GetComponent<MeshCollider>().enabled = false;
+        a.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+
 }

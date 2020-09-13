@@ -246,8 +246,7 @@ public class PlayerScript : MonoBehaviour {
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
                         if (instantiatedObject.GetComponent<MeshCollider>() != null && instantiatedObject.GetComponent<Rigidbody>() != null) {
-                            instantiatedObject.GetComponent<MeshCollider>().enabled = false;
-                            instantiatedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            auxRPC.disableMaterialProperties(instantiatedObject.GetComponent<PhotonView>().ViewID);
                         }
 
                     } else if (aux != null && aux.type == ItemType.Tools) {
@@ -258,8 +257,7 @@ public class PlayerScript : MonoBehaviour {
                                                             playerHand.transform.position,
                                                             Quaternion.identity, 0);
                         if (instantiatedObject.GetComponent<MeshCollider>() != null && instantiatedObject.GetComponent<Rigidbody>() != null) {
-                            instantiatedObject.GetComponent<MeshCollider>().enabled = false;
-                            instantiatedObject.GetComponent<Rigidbody>().isKinematic = true;
+                            auxRPC.disableMaterialProperties(instantiatedObject.GetComponent<PhotonView>().ViewID);
                         }
 
                     } else if (aux != null && aux.type == ItemType.Placeables) {
@@ -589,7 +587,6 @@ public class PlayerScript : MonoBehaviour {
 
     private void PickUpItem() {
         if (Input.anyKeyDown) {
-
             if (Input.GetKeyDown(KeyCode.Mouse1)) {
                 if (Eat()) {
                     displayInventory.UpdateDisplay();
@@ -599,7 +596,7 @@ public class PlayerScript : MonoBehaviour {
                     if (hitObj.CompareTag("Pickupable")) {
                         ItemObject it = ray.transform.GetComponent<Item>().item;
                         if (displayInventory.PickupItem(it, 1)) {
-                            Destroy(hitObj);
+                            auxRPC.deleteObj(hitObj.GetComponent<PhotonView>().ViewID);
                         }
                     }
 
@@ -690,4 +687,7 @@ public class PlayerScript : MonoBehaviour {
 
         }
     }
+
+
+
 }

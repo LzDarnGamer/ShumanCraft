@@ -36,8 +36,8 @@ public class MineOre : MineObject {
 
         if (CheckIfAliveAfterHit(tool.hitPower)) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
-            dropItems();
-            RespawnCountDown(rt, gameObject);
+            dropItems(); 
+            disableMesh(gameObject.GetComponent<PhotonView>().ViewID);
         }
     }
 
@@ -54,6 +54,17 @@ public class MineOre : MineObject {
         g.GetComponent<MeshRenderer>().enabled = true;
         g.GetComponent<MeshCollider>().enabled = true;
         aud.PlayOneShot(SoundOnRespawn, 0.05f);
+    }
+
+    [PunRPC]
+    private void RPC_disableMesh(int id) {
+        GameObject a = PhotonView.Find(id).gameObject;
+        float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);
+        RespawnCountDown(rt, a);
+    }
+
+    public void disableMesh(int id) {
+        gameObject.GetComponent<PhotonView>().RPC("RPC_disableMesh", RpcTarget.AllBuffered, id);
     }
 }
 
