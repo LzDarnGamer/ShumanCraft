@@ -621,9 +621,9 @@ public class PlayerScript : MonoBehaviour {
     }
 
     public void GotBitten(float amount) { health -= amount; }
-    public void addHealth(float amount) { if (health < 100.0f) health += amount; else if (health > 100.0f) health = 100.0f; }
-    public void addThirst(float amount) { if (thirst < 100.0f) thirst += amount; else if (thirst > 100.0f) thirst = 100.0f; }
-    public void addHunger(float amount) { hunger += amount; }
+    public void addHealth(float amount) { health += amount; if (health >= 100.0f) health = 100.0f;}
+    public void addThirst(float amount) { thirst += amount; if (thirst > 100.0f) thirst = 100.0f; }
+    public void addHunger(float amount) { hunger += amount; if (hunger > 100.0f) hunger = 100.0f; }
 
     private GameObject GetClosestNPC() {
         float closestNPCdistance = float.MaxValue;
