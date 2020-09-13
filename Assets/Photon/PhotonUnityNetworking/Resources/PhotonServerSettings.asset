@@ -46,6 +46,7 @@ MonoBehaviour:
   - RPC_UpdateObject
   - RPC_delete
   - RPC_disableMesh
+  - RPC_disableMaterialProperties
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

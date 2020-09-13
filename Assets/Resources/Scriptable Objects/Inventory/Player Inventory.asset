@@ -54,12 +54,12 @@ MonoBehaviour:
   - item: {fileID: 0}
     amount: 0
   hotbar:
-  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: b4bef718a2a07a546b1983a7cc4542c7, type: 2}
-    amount: 1
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
