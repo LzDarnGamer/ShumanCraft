@@ -20,17 +20,19 @@ public class MineOre : MineObject {
         for (int i = 0; i < l.itemID.Length; i++) {
             for (int j = 0; j < UnityEngine.Random.Range(l.minValue[i], l.maxValue[i]); j++) {
                 Debug.Log(l.pathName[i]);
-                PhotonNetwork.Instantiate(l.pathName[i], transform.position + Vector3.up, Quaternion.identity);
+                PhotonNetwork.Instantiate(l.pathName[i], transform.position + (Vector3.up * 2), Quaternion.identity);
             }
         }
     }
 
 
     public override void RaycastHit(Item it, Vector3 hitPos) {
+
+        if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
+
         aud.PlayOneShot(SoundOnHit[UnityEngine.Random.Range(0, SoundOnHit.Length - 1)], 0.05f);
         PhotonNetwork.Instantiate("Prefabs\\" + particleEffects.name, hitPos, Quaternion.identity);
         ToolObject tool = (ToolObject)it.item;
-        if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
 
         if (CheckIfAliveAfterHit(tool.hitPower)) {
             float rt = GetRandomNumber(minTimeToRespawn, maxTimeToRespawn);

@@ -13,9 +13,12 @@ GameObject:
   - component: {fileID: 23514414678838648}
   - component: {fileID: 95984668222085480}
   - component: {fileID: 64141234986150194}
+  - component: {fileID: 806799197457411851}
+  - component: {fileID: 7525083194229978490}
+  - component: {fileID: 3486310971197853931}
   m_Layer: 0
   m_Name: Vegetation_Modular_Tree_Trunk_Common_23
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,3 +117,62 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 24f8882eb5fdb0749a618b2f5acfeecd, type: 3}
+--- !u!114 &806799197457411851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077619810878746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7525083194229978490}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &7525083194229978490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077619810878746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+--- !u!114 &3486310971197853931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077619810878746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3f020d3a56010408d8d37f30625e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects: {fileID: 5561371207748593630, guid: dad67dc748985544aa893b477bb41b20,
+    type: 3}
+  HitsNeeded: 20
+  HitsTaken: 0
+  minTimeToRespawn: 20
+  maxTimeToRespawn: 30
+  SoundOnHit:
+  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  SoundOnRespawn: {fileID: 0}
+  SoundOnDestroy: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}

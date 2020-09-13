@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cb3697b1cd628fe4fafad5d0b21a7023
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - particleEffects: {fileID: 5561371207748593630, guid: dad67dc748985544aa893b477bb41b20,
+      type: 3}
+  - SoundOnRespawn: {instanceID: 0}
+  - SoundOnDestroy: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

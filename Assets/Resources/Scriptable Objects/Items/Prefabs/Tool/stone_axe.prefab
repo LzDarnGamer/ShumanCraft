@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 751660856776241820}
   - component: {fileID: 751660856775274588}
   - component: {fileID: 751660857704283763}
-  - component: {fileID: 9117199154841936909}
   - component: {fileID: -161018341270099967}
+  - component: {fileID: -1372440763652378286}
   m_Layer: 0
   m_Name: stone_axe
   m_TagString: Pickupable
@@ -96,19 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 4dbea1c61e9027445a90d7936656998e, type: 2}
---- !u!65 &9117199154841936909
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751660856773013148}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.071143284, y: 0.27791232, z: 0.3813872}
-  m_Center: {x: 0.030399032, y: 0.790586, z: 0.10392432}
 --- !u!114 &-161018341270099967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,9 +111,25 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -1372440763652378286}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-1372440763652378286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751660856773013148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

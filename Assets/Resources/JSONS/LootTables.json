@@ -9,6 +9,13 @@
 			"maxValue":[3,4]
 		},
 		{
+			"tablename": "stone",
+			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\stone"],
+			"itemID":[3],
+			"minValue":[1],
+			"maxValue":[3]
+		},
+		{
 			"tablename": "ironore",
 			"pathName": ["Scriptable Objects\\Items\\Prefabs\\Material\\iron_ingot"],
 			"itemID":[4],

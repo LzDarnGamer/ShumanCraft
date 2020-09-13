@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6977796124512923047}
   - component: {fileID: 7139554912460689026}
   - component: {fileID: 8935042324725232362}
-  - component: {fileID: 1545753915489061853}
+  - component: {fileID: -7301672872448585874}
+  - component: {fileID: -9170433284952599326}
   m_Layer: 0
   m_Name: stone_pickaxe
   m_TagString: Pickupable
@@ -95,16 +96,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: fb47dd5f7f1e0d34ebf7608cfcb03fa2, type: 2}
---- !u!65 &1545753915489061853
-BoxCollider:
+--- !u!114 &-7301672872448585874
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6209813316652310520}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.87485313, y: 0.2454465, z: 0.13673796}
-  m_Center: {x: -0.00012795322, y: 0.8812354, z: 0.0000016290088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: -9170433284952599326}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-9170433284952599326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209813316652310520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

@@ -24,11 +24,12 @@ public class MineTree : MineObject {
 
 
     public override void RaycastHit(Item it, Vector3 hitPos) {
+
+        if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
+
         aud.PlayOneShot(SoundOnHit[UnityEngine.Random.Range(0, SoundOnHit.Length - 1)], 0.05f);
         PhotonNetwork.Instantiate("Prefabs\\" + particleEffects.name, hitPos, Quaternion.identity);
         ToolObject tool = (ToolObject)it.item;
-        if (!Array.Exists(ToolNeeded, element => element == it.item.itemID)) return;
-
         if (CheckIfAliveAfterHit(tool.hitPower)) {
             dropItems();
             disableMesh(gameObject.GetComponent<PhotonView>().ViewID);

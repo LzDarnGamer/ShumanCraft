@@ -24,7 +24,7 @@ TagManager:
   - Boat
   - Bridge
   - BoatBack
-  - Log
+  - Breakable
   layers:
   - Default
   - TransparentFX

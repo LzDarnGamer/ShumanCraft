@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 23429057020932762}
   - component: {fileID: 95502735748263044}
   - component: {fileID: 64021814188065928}
+  - component: {fileID: 2198130535330348535}
+  - component: {fileID: 8893283620637848806}
+  - component: {fileID: 170798016233679901}
   m_Layer: 0
   m_Name: Vegetation_Tree_Palm_Coconuts_01
   m_TagString: Untagged
@@ -117,3 +120,62 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 598a761cf39917a40867167cd5e3ec99, type: 3}
+--- !u!114 &2198130535330348535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798570411836688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3f020d3a56010408d8d37f30625e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleEffects: {fileID: 5561371207748593630, guid: dad67dc748985544aa893b477bb41b20,
+    type: 3}
+  HitsNeeded: 20
+  HitsTaken: 0
+  minTimeToRespawn: 20
+  maxTimeToRespawn: 30
+  SoundOnHit:
+  - {fileID: 8300000, guid: 941a73fffa7996142a5b2dd3ef8980d5, type: 3}
+  SoundOnRespawn: {fileID: 0}
+  SoundOnDestroy: {fileID: 8300000, guid: 48d0cd16e1ab82145ac5739c3f2c7854, type: 3}
+--- !u!114 &8893283620637848806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798570411836688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 170798016233679901}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &170798016233679901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798570411836688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0

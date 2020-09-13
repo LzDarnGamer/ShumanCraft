@@ -56,18 +56,18 @@ MonoBehaviour:
   hotbar:
   - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
     amount: 1
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 0}
-    amount: 0
+  - item: {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: ae93273d4c2a41b4c803b9df5c506971, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: b4bef718a2a07a546b1983a7cc4542c7, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: fb47dd5f7f1e0d34ebf7608cfcb03fa2, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
+    amount: 7
+  - item: {fileID: 11400000, guid: 1f27764d1a8d40546b38d8e31437c46d, type: 2}
+    amount: 1
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
