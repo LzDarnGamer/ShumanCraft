@@ -19,9 +19,8 @@ MonoBehaviour:
   maxStackSize: 0
   recipeItems:
   - {fileID: 11400000, guid: 589ae03eb7762bb4f8ae363b2479db1d, type: 2}
-  - {fileID: 11400000, guid: 589ae03eb7762bb4f8ae363b2479db1d, type: 2}
   - {fileID: 11400000, guid: 6409eebec7afee0499e78cc4f4634af5, type: 2}
-  recipeAmount: 030000000100000001000000
+  recipeAmount: 0300000001000000
   inGameObject: {fileID: 2383132299548289514, guid: 2dcfc25fc0073a74793a040655de4c6a,
     type: 3}
   description: 
