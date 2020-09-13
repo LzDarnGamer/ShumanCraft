@@ -13,57 +13,57 @@ MonoBehaviour:
   m_Name: Player Inventory
   m_EditorClassIdentifier: 
   inventory:
-  - item: {fileID: 11400000, guid: 1826ab9e7ce64d04dbda24752b3b14ac, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1f27764d1a8d40546b38d8e31437c46d, type: 2}
-    amount: 1
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 11400000, guid: b4bef718a2a07a546b1983a7cc4542c7, type: 2}
-    amount: 2
-  - item: {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
-    amount: 1
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 11400000, guid: 73ba07414a52eab458fb9cdf1632900a, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: fb47dd5f7f1e0d34ebf7608cfcb03fa2, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
-    amount: 1
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 6409eebec7afee0499e78cc4f4634af5, type: 2}
-    amount: 13
-  - item: {fileID: 11400000, guid: 589ae03eb7762bb4f8ae363b2479db1d, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 4bfc038bbcc8b2542bc6c3219e0283ee, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 1f27764d1a8d40546b38d8e31437c46d, type: 2}
-    amount: 1
-  - item: {fileID: 11400000, guid: 4bfc038bbcc8b2542bc6c3219e0283ee, type: 2}
-    amount: 1
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
+  - item: {fileID: 0}
+    amount: 0
   hotbar:
   - item: {fileID: 11400000, guid: 1aa96eeb26a721b409bc0cde99fa3152, type: 2}
     amount: 1
+  - item: {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: b4bef718a2a07a546b1983a7cc4542c7, type: 2}
+    amount: 1
   - item: {fileID: 0}
     amount: 0
-  - item: {fileID: 11400000, guid: ae93273d4c2a41b4c803b9df5c506971, type: 2}
-    amount: 28
-  - item: {fileID: 11400000, guid: 0abea9f84ce71024d877ea53de2c2df9, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: e11bc87ca1582b94d87dc96ea4559bc1, type: 2}
-    amount: 10
+  - item: {fileID: 0}
+    amount: 0
   - item: {fileID: 0}
     amount: 0
   - item: {fileID: 0}
