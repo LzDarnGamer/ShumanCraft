@@ -444,6 +444,10 @@ public class PlayerScript : MonoBehaviour {
         if (thirst < thirstThreshold) needsWater = true; else needsWater = false;
 
         // [FALTA] Mostrar Alerta no ecra
+
+        if (health <= 0.0f) {
+            transform.position = new Vector3(-16.42f, 122.42f, 12.18f);
+        }
     }
 
 
