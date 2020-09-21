@@ -911,7 +911,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.3809524
     m_Position: {x: 0, y: 1}
-    m_TimeScale: 1
+    m_TimeScale: 1.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -920,7 +920,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.4571429
     m_Position: {x: 0, y: -1}
-    m_TimeScale: 1
+    m_TimeScale: 1.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -929,7 +929,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.53333336
     m_Position: {x: -1, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 1.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -938,7 +938,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.60952383
     m_Position: {x: 1, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 1.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
