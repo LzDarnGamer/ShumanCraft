@@ -8,6 +8,10 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class NPC_Animal : MonoBehaviour {
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField] AudioClip[] hitsound;
+    [SerializeField] AudioClip[] deathsound;
 
     [SerializeField] private Canvas canvas;
 
@@ -18,7 +22,7 @@ public class NPC_Animal : MonoBehaviour {
     public float maxDistancetoCheck = 30.0f;
 
     [SerializeField] private float health = 100.0f;
-    public bool dead = false;
+    public bool dead = false, canDamage = true;
     [SerializeField] private bool deadH = false;
 
     public GameObject playerSeen;
@@ -45,7 +49,9 @@ public class NPC_Animal : MonoBehaviour {
         initHeightUI = thuderUI.transform.localScale.x;
         //distToPlayers = new List<Vector3>();
         players = GameObject.FindGameObjectsWithTag("Player");
-        
+
+        canvas.worldCamera = Camera.main;
+
         PV = GetComponent<PhotonView>();
         anim = GetComponent<Animator>();
         navMeshAgent.updatePosition = true;
@@ -80,6 +86,7 @@ public class NPC_Animal : MonoBehaviour {
             if (!dead) {
                 dropItems();
                 anim.SetTrigger("dead");
+                audioSource.PlayOneShot(deathsound[Random.Range(0, deathsound.Length - 1)]);
                 if (!navMeshAgent.isStopped) navMeshAgent.isStopped = true;
                 StartCoroutine(die());
                 dead = true;
@@ -89,7 +96,19 @@ public class NPC_Animal : MonoBehaviour {
 
     }
 
-    public void gotHit(int amount) { health -= amount; if (health < 0.0f) { health = 0.0f; }  anim.SetBool("Saw", true); }
+    public void gotHit(int amount) {
+        if (canDamage) {
+            canDamage = false;
+            health -= amount;
+            if (health < 0.0f) {
+                health = 0.0f;
+            }
+            audioSource.PlayOneShot(hitsound[Random.Range(0, hitsound.Length - 1)]);
+            anim.SetBool("Saw", true);
+            StartCoroutine(WaitForDamage());
+        }
+        
+    }
 
     private void setCanvas() {
         if (players != null && players.Length > 0) {
@@ -99,13 +118,19 @@ public class NPC_Animal : MonoBehaviour {
                 canvas.gameObject.SetActive(true);
                 canvas.transform.LookAt(closestPlayer.transform);
                 canvas.transform.Rotate(0, 180, 0);
-                canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health;
+                canvas.transform.GetChild(0).GetComponent<UnityEngine.UI.Slider>().value = health/100f;
                 canvas.transform.GetChild(1).GetComponent<Text>().text = health.ToString();
             } else {
                 canvas.gameObject.SetActive(false);
             }
         }
     }
+
+    IEnumerator WaitForDamage() {
+        yield return new WaitForSeconds(0.7f);
+        canDamage = true;
+    }
+
     IEnumerator UpdatePlayersList() {
         while (true) {
             players = GameObject.FindGameObjectsWithTag("Player");
