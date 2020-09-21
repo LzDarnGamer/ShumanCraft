@@ -459,9 +459,10 @@ public class PlayerScript : MonoBehaviour {
 
         if (health <= 0.0f) {
             transform.position = new Vector3(-16.42f, 122.42f, 12.18f);
+            health = 100.0f;
         }
     }
-
+        
 
     private IEnumerator healthOutsideMap() {
         while (true) {
@@ -543,6 +544,14 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void Movement() {
+
+        if (this.gameObject.transform.position.y < 110) { anim.SetBool("falling", true); }
+        if (this.gameObject.transform.position.y < 10) {
+            anim.SetBool("falling", false);
+            transform.position = new Vector3(-16.42f, 122.42f, 12.18f);
+            health = 100.0f;
+        }
+
         int jumpState = Animator.StringToHash("Base Layer.JumpRunning");
         currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
         if (currentBaseState.nameHash == jumpState) {
