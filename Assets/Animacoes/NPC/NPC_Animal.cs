@@ -21,7 +21,7 @@ public class NPC_Animal : MonoBehaviour {
     public bool dead = false;
     [SerializeField] private bool deadH = false;
 
-    private GameObject playerSeen;
+    public GameObject playerSeen;
 
     public Animator anim;
     //Vector3 disttoPlayer;
@@ -88,6 +88,8 @@ public class NPC_Animal : MonoBehaviour {
         setCanvas();
 
     }
+
+    public void gotHit(int amount) { health -= amount; if (health < 0.0f) { health = 0.0f; }  anim.SetBool("Saw", true); }
 
     private void setCanvas() {
         if (players != null && players.Length > 0) {

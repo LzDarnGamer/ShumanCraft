@@ -378,6 +378,15 @@ public class PlayerScript : MonoBehaviour {
                 anim.SetTrigger("Punch");
             } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Tools) {
                 anim.SetTrigger("Use");
+                GameObject n = GetClosestNPC();
+                //Debug.Log("CENAS n == null ");
+                //Debug.Log(n==null);
+                //if (n != null) { Debug.Log("distance: " + Vector3.Distance(transform.position, n.transform.position)); }
+                if (n != null && Vector3.Distance(transform.position, n.transform.position) < 2f) {
+                    auxRPC.hit(n.GetComponent<PhotonView>().ViewID, 5, this.gameObject.GetComponent<PhotonView>().ViewID);
+                    //n.GetComponent<NPC_Animal>().gotHit(5);
+                    //print("hithithit");
+                }
             } else if (instantiatedObject.GetComponent<Item>().item.type == ItemType.Weapons) {
                 anim.SetTrigger("Stab");
             }
@@ -388,8 +397,8 @@ public class PlayerScript : MonoBehaviour {
     private void atackNPC() {
         if (Physics.Raycast(Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit ray, 5f, ~PlayerMask)) {
             if (ray.collider.gameObject.CompareTag("NPC")) {
-                int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
-                ray.collider.gameObject.GetComponent<NPC_Animal>().TakeDamage(damage);
+                //int damage = ((WeaponObject)instantiatedObject.GetComponent<Item>().item).damagePoints;
+                //ray.collider.gameObject.GetComponent<NPC_Animal>().TakeDamage(damage);
             }
         }
     }
@@ -502,7 +511,7 @@ public class PlayerScript : MonoBehaviour {
     private IEnumerator staminaCoroutineMinus() {
         while (true) {
             if (isUsingStamina && stamina > 0) {
-                stamina -= staminaLoss;
+                //stamina -= staminaLoss;
                 yield return new WaitForSeconds(0.2f);
             } else {
                 yield return null;
@@ -671,7 +680,7 @@ public class PlayerScript : MonoBehaviour {
             FireplaceHandler();
             PitHandler();
             GameObject n = GetClosestNPC();
-            if (n != null && Vector3.Distance(transform.position, n.transform.position) < 3f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
+            if (n != null && Vector3.Distance(transform.position, n.transform.position) < 1f && n.GetComponent<NPC_Animal>().IsChaser()) GotBitten(4f);
             if (chatPublic != null && chatPublic.GetComponent<TMP_Text>()!= null) chatMsgTxt.text = chatPublic.GetComponent<TMP_Text>().text;
             if (!isLoaded) LoadSaveGame();
 

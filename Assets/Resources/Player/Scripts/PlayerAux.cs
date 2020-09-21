@@ -35,6 +35,17 @@ public class PlayerAux : MonoBehaviour {
         gameObject.GetComponent<PhotonView>().RPC("RPC_disableMaterialProperties", RpcTarget.AllBuffered, id);
     }
 
+    public void hit(int id, int amount, int idMe) {
+        PV.RPC("RPC_hitNPC", RpcTarget.AllBuffered, id, amount, idMe);
+    }
+    [PunRPC]
+    private void RPC_hitNPC(int id, int amount, int idMe) {
+        GameObject a = PhotonView.Find(id).gameObject;
+        a.GetComponent<NPC_Animal>().gotHit(amount);
+        a.GetComponent<NPC_Animal>().playerSeen = PhotonView.Find(idMe).gameObject;
+    }
+
+
     [PunRPC]
     private void RPC_UpdateObject(string name, int handID, int instatiatedID, float[] position, float[] rotation) {
 
@@ -95,6 +106,5 @@ public class PlayerAux : MonoBehaviour {
         a.GetComponent<MeshCollider>().enabled = false;
         a.GetComponent<Rigidbody>().isKinematic = true;
     }
-
 
 }

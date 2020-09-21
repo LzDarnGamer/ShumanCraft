@@ -22,11 +22,11 @@ public class Chase : StateMachineBehaviour {
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         float distance = Vector3.Distance(playerPos.position, npc.transform.position);
-        Debug.Log("Distance: " + distance);
+        //Debug.Log("Distance: " + distance);
         if (distance > 10f)
             animator.SetBool("Saw", false);
-        else if (distance < 3.5f) {
-            
+        else if (distance < 1.2f) {
+            animator.SetBool("idle", true);
         }
 
         animator.transform.LookAt(playerPos, Vector3.up);

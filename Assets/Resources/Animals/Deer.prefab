@@ -4042,9 +4042,10 @@ GameObject:
   - component: {fileID: 6397621988663751053}
   - component: {fileID: -887210118351135597}
   - component: {fileID: -6914716411057553478}
+  - component: {fileID: 8910394112153858295}
   m_Layer: 0
   m_Name: Deer
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4205,9 +4206,25 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: dead
+  - Type: 4
+    SynchronizeType: 0
+    Name: idle
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!65 &8910394112153858295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326201109382081166}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.66053295, y: 2.4027042, z: 2.2297683}
+  m_Center: {x: 0.0032019615, y: 1.2329702, z: 0.14731622}
 --- !u!1 &1326201109382081168
 GameObject:
   m_ObjectHideFlags: 0

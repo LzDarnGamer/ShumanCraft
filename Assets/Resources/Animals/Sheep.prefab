@@ -831,9 +831,10 @@ GameObject:
   - component: {fileID: 1659397460849260813}
   - component: {fileID: 1659397460849260810}
   - component: {fileID: 1659397460849260811}
+  - component: {fileID: 8152036884325975910}
   m_Layer: 0
   m_Name: Sheep
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -934,6 +935,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: dead
+  - Type: 4
+    SynchronizeType: 0
+    Name: idle
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -997,6 +1001,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &8152036884325975910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216649124398987291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.436487, y: 4.5087385, z: 6.0394087}
+  m_Center: {x: 0.01177408, y: 2.3430831, z: 0.5180809}
 --- !u!1 &7598536592912177182
 GameObject:
   m_ObjectHideFlags: 0

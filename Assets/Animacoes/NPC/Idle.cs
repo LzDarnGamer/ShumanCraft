@@ -10,6 +10,7 @@ public class Idle : StateMachineBehaviour
 
         NPC_Animal npc = animator.GetComponent<NPC_Animal>();
         if (npc.IsChaser()) { npc.ShowIconGameObject(false); npc.isChasing = false; }
+        animator.SetBool("idle", false);
 
     }
 

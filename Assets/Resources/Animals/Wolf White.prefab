@@ -1367,9 +1367,10 @@ GameObject:
   - component: {fileID: 5830699694270452171}
   - component: {fileID: 5830699694270452170}
   - component: {fileID: 5830699694270452169}
+  - component: {fileID: 3304634294446181867}
   m_Layer: 0
   m_Name: Wolf White
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1492,6 +1493,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: dead
+  - Type: 4
+    SynchronizeType: 0
+    Name: idle
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -1533,6 +1537,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &3304634294446181867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830699695142700632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.47010803, y: 1.2445638, z: 1.8016281}
+  m_Center: {x: 0.006790161, y: 0.6453773, z: -0.04076004}
 --- !u!1 &5830699695142700634
 GameObject:
   m_ObjectHideFlags: 0
