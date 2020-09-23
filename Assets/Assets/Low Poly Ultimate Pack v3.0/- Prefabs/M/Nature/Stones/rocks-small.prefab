@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4000010702317224}
   - component: {fileID: 33000012680363624}
   - component: {fileID: 23000013364077184}
-  - component: {fileID: 7971280374831967076}
-  - component: {fileID: 4494676837073264503}
   m_Layer: 0
   m_Name: rocks-small
   m_TagString: Pickupable
@@ -81,29 +79,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7971280374831967076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012376307238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983869dd81aa7454fa63db86b0b60a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 5d29d1157d0908946a5a99d4da76a524, type: 2}
---- !u!65 &4494676837073264503
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000012376307238}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1137662, y: 0.01, z: 1.0488367}
-  m_Center: {x: 0.017763644, y: 0.01749757, z: -0.052948385}
