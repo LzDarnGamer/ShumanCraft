@@ -109,13 +109,16 @@ public class PlayerScript : MonoBehaviour {
     [SerializeField] private float chatCounter;
 
     private String instanceDataFile;
+    private String playerDataFile;
     private bool nearboat = false;
+    private bool nearboatback = false;
 
     private int PlayerMask = 1 << 8;
 
     private void Awake() {
         LoadSaveGame();
         instanceDataFile = Application.persistentDataPath + "/InstanceData.json";
+        playerDataFile = Application.persistentDataPath + "/PlayersData.json";
     }
 
     void Start() {
@@ -200,6 +203,11 @@ public class PlayerScript : MonoBehaviour {
                 if (Input.GetKeyUp(KeyCode.H) && nearboat) {
                     // Teleport
                     transform.position = new Vector3(54.47f, 122.73f, -721.6f);
+                    nearboat = false;
+                } else if(Input.GetKeyUp(KeyCode.H) && nearboatback) {
+                    // Teleport
+                    transform.position = new Vector3(58.39f, 123.46f, -248.42f);
+                    nearboatback = false;
                 }
             } else if (!PV.IsMine) {
                 DestroyImmediate(instCam, true);
@@ -702,11 +710,140 @@ public class PlayerScript : MonoBehaviour {
         if (other.gameObject.tag.Equals("Boat")) {
             Debug.Log("Player - Near boat");
             nearboat = true;
-
+        } else if (other.gameObject.tag.Equals("BoatBack")) {
+            Debug.Log("Player - Near boat");
+            nearboatback = true;
         }
     }
 
     public void SaveGame() {
+        SavePlayerInfo();
+    }
+
+    void SavePlayerInfo() {
+        ExitGames.Client.Photon.Hashtable _info = PhotonNetwork.LocalPlayer.CustomProperties;
+
+        Debug.Log(_info["Nickname"].ToString());
+
+        // Positions
+        float x = float.Parse(_info["posX"].ToString());
+        float y = float.Parse(_info["posY"].ToString());
+        float z = float.Parse(_info["posZ"].ToString());
+
+        // Player characteristics
+        int health = Int32.Parse(_info["Health"].ToString());
+        float hunger = float.Parse(_info["Hunger"].ToString());
+
+        SaveIntoJson(_info["Nickname"].ToString(), health, x, y, z, hunger);
+
+        if (_info["iName"] != null) {
+            String n = _info["iName"].ToString();
+
+            float ix = float.Parse(_info["iposX"].ToString());
+            float iy = float.Parse(_info["iposY"].ToString());
+            float iz = float.Parse(_info["iposZ"].ToString());
+
+            SaveInstancesToJSON(n, ix, iy, iz);
+        }
+    }
+
+    private void SaveInstancesToJSON(string n, float ix, float iy, float iz) {
+        InstanceData id = new InstanceData(n, ix, iy, iz);
+
+
+        if (File.Exists(instanceDataFile)) {
+            AllInstanceData ev = JsonUtility.FromJson<AllInstanceData>(File.ReadAllText(instanceDataFile));
+
+            int counter = 1;
+
+            InstanceData[] ajuda;
+
+            if (ev != null) {
+                counter += ev.data.Length;
+                bool hasAlready = false;
+
+                // Search for duplicates
+                foreach (InstanceData p in ev.data) {
+                    if (p.x == id.x && p.y == id.y && p.y == id.y) {
+                        // Atualizar valores da instancia
+                        p.x = id.x;
+                        p.y = id.y;
+                        p.z = id.z;
+
+                        hasAlready = true;
+                    }
+                }
+
+                // Fill the array
+                if (hasAlready) { counter--; ajuda = new InstanceData[counter]; } else { ajuda = new InstanceData[counter]; ajuda[counter - 1] = id; }
+
+                for (int i = 0; i < ev.data.Length; ++i) { ajuda[i] = ev.data[i]; }
+            } else { ajuda = new InstanceData[counter]; ajuda[0] = id; }
+            AllInstanceData elFinal = new AllInstanceData(ajuda);
+            string instance = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(instanceDataFile, instance);
+        } else {
+            File.CreateText(instanceDataFile);
+            InstanceData[] ajuda = new InstanceData[1];
+            ajuda[0] = id;
+
+            AllInstanceData elFinal = new AllInstanceData(ajuda);
+            string instance = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(instanceDataFile, instance);
+        }
+
+    }
+
+    private void SaveIntoJson(string nickname, int health, float x, float y, float z, float hunger) {
+        PlayerData pd = new PlayerData(nickname, health, x, y, z, hunger);
+
+        if (File.Exists(playerDataFile)) {
+            AllPlayerData everything = JsonUtility.FromJson<AllPlayerData>(File.ReadAllText(playerDataFile));
+            int counter = 1;
+
+            PlayerData[] ajuda;
+
+            if (everything != null) {
+                counter += everything.data.Length;
+                bool hasAlready = false;
+
+                // Search for duplicates
+                foreach (PlayerData p in everything.data) {
+                    if (p.nickname.Equals(pd.nickname)) {
+                        // Atualizar valores do player
+                        p.health = pd.health;
+                        p.hunger = pd.hunger;
+
+                        p.x = pd.x;
+                        p.y = pd.y;
+                        p.z = pd.z;
+
+                        hasAlready = true;
+                    }
+                }
+
+                // Fill the array
+                if (hasAlready) { counter--; ajuda = new PlayerData[counter]; } else { ajuda = new PlayerData[counter]; ajuda[counter - 1] = pd; }
+
+                for (int i = 0; i < everything.data.Length; ++i) { ajuda[i] = everything.data[i]; }
+
+            } else { ajuda = new PlayerData[counter]; ajuda[0] = pd; }
+            AllPlayerData elFinal = new AllPlayerData(ajuda);
+            string player = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(playerDataFile, player);
+        } else {
+            File.CreateText(playerDataFile);
+            PlayerData[] ajuda = new PlayerData[1];
+            ajuda[0] = pd;
+
+            AllPlayerData elFinal = new AllPlayerData(ajuda);
+            string player = JsonUtility.ToJson(elFinal);
+
+            File.WriteAllText(playerDataFile, player);
+        }
 
     }
 
