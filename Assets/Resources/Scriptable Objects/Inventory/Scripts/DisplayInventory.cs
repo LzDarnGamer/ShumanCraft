@@ -46,28 +46,8 @@ public class DisplayInventory : MonoBehaviour {
 
 
     public void UpdateDisplay() {
-
         SyncronizeInventories();
         ReloadTextures();
-        /*
-        for (int i = 0; i < AbstractInventory.getHotbar().Length; i++) {
-            if (RealInventory[0][i].ArraySlot.item != null) {
-                RealInventory[0][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                    = AbstractInventory.getHotbar()[i].item.icon;
-                LoadAmount(i, AbstractInventory.getHotbar(), 0);
-            }
-        }
-
-        for (int i = 0; i < AbstractInventory.getInventory().Length; i++) {
-            if (RealInventory[1][i].ArraySlot.item != null) {
-                RealInventory[1][i].InGameSlot.transform.GetChild(0).GetComponent<Image>().sprite
-                    = AbstractInventory.getInventory()[i].item.icon;
-                LoadAmount(i, AbstractInventory.getInventory(), 1);
-            }
-        }
-        */
-
- 
     }
 
     private void LoadAmount(int position, InventorySlot[] type, int inv) {
